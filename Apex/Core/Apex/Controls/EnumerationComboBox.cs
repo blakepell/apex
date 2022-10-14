@@ -73,11 +73,7 @@ namespace Apex.Controls
         {
             //  Set the display member path and selected value path.
             this.DisplayMemberPath = "Name";
-
-#if !WINDOWS_PHONE
-            //  TODO: Check what we can do for WP7.
             this.SelectedValuePath = "Value";
-#endif
 
             //  If we have enumerations and a selected enumeration, set the selected item.
             if (enumerations != null && this.SelectedEnumeration != null)
@@ -97,12 +93,8 @@ namespace Apex.Controls
         /// </summary>
         public static readonly DependencyProperty SelectedEnumerationProperty =
             DependencyProperty.Register("SelectedEnumeration", typeof(object), typeof(EnumerationComboBox),
-#if !SILVERLIGHT
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                     OnSelectedEnumerationChanged));
-#else
-        new PropertyMetadata(null, new PropertyChangedCallback(OnSelectedEnumerationChanged)));
-#endif
 
         /// <summary>
         /// Gets or sets the selected enumeration.
@@ -143,11 +135,7 @@ namespace Apex.Controls
     /// A name-value pair.
     /// If we're in Silverlight, we must make this class public so that it can be reflected properly.
     /// </summary>
-#if SILVERLIGHT
-    public class NameValue
-#else
     internal class NameValue
-#endif
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NameValue"/> class.

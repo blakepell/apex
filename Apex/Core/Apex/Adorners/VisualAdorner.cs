@@ -17,13 +17,7 @@ namespace Apex.Adorners
         public VisualAdorner(FrameworkElement visual)
         {
             //  Create a brush that draws the visual.
-#if !SILVERLIGHT
-            //VisualBrush _brush = new VisualBrush(visual);
-
-            var _brush = new ImageBrush(visual.RenderBitmap());
-#else
-            SolidColorBrush _brush = new SolidColorBrush(Colors.Red);
-#endif
+            var brush = new ImageBrush(visual.RenderBitmap());
 
             //  Create a rectangle that will be painted with the visual.
             var r = new Rectangle
@@ -31,7 +25,7 @@ namespace Apex.Adorners
                 //  Set the rectangle dimensions to the be the same as the visual.
                 Width = visual.ActualWidth,
                 Height = visual.ActualHeight,
-                Fill = _brush,
+                Fill = brush,
                 Opacity = 1,
                 IsHitTestVisible = false
             };

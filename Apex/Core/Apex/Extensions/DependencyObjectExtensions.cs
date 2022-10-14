@@ -6,9 +6,6 @@ using System.Windows.Media;
 using System.Windows.Data;
 using System.ComponentModel;
 
-#if !SILVERLIGHT
-#endif
-
 namespace Apex.Extensions
 {
     /// <summary>
@@ -89,11 +86,7 @@ namespace Apex.Extensions
         /// <returns>All children of type T of the dependency object.</returns>
         public static IEnumerable<T> GetLogicalChildren<T>(this DependencyObject me) where T : DependencyObject
         {
-#if SILVERLIGHT
-            foreach (var child in Apex.Consistency.LogicalTreeHelper.GetChildren(me))
-#else
             foreach (var child in LogicalTreeHelper.GetChildren(me))
-#endif
             {
                 //  If the child is not a dependency object, we can't use it.
                 if (!(child is DependencyObject childDependencyObject))
@@ -168,9 +161,6 @@ namespace Apex.Extensions
             return foundChild;
         }
 
-
-#if !SILVERLIGHT
-
         /// <summary>
         /// Gets the binding objects.
         /// </summary>
@@ -203,49 +193,5 @@ namespace Apex.Extensions
                    where dpd != null
                    select dpd.DependencyProperty;
         }
-#endif
-
-#if SILVERLIGHT
-    /// <summary>
-    /// Retrieves all the logical children of a framework element using a 
-    /// depth-first search.  A visual element is assumed to be a logical 
-    /// child of another visual element if they are in the same namescope.
-    /// For performance reasons this method manually manages the stack 
-    /// instead of using recursion.
-    /// </summary>
-    /// <param name="parent">The parent framework element.</param>
-    /// <returns>The logical children of the framework element.</returns>
-        internal static IEnumerable<FrameworkElement> GetLogicalChildren(FrameworkElement parent)
-        {
-            EnsureName(parent);
-
-            string parentName = parent.Name;
-            Stack<FrameworkElement> stack =
-                new Stack<FrameworkElement>(parent.GetVisualChildren<FrameworkElement>());
-
-            while (stack.Count > 0)
-            {
-                FrameworkElement element = stack.Pop();
-                if (element.FindName(parentName) == parent)
-                {
-                    yield return element;
-                }
-                else
-                {
-                    foreach (FrameworkElement visualChild in element.GetVisualChildren<FrameworkElement>())
-                    {
-                        stack.Push(visualChild);
-                    }
-                }
-            }
-        }
-
-    internal static void EnsureName(FrameworkElement parent)
-    {
-        if (string.IsNullOrEmpty(parent.Name))
-            parent.Name = Guid.NewGuid().ToString();
-    }
-
-#endif
     }
 }

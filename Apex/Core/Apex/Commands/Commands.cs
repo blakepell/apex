@@ -69,17 +69,10 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void Control_LeftClickMouseDown(object sender, MouseButtonEventArgs e)
         {
-            //  TODO Silverlight 5 actually provides the click count, we should use it.
-            //  Silverlight doesn't give us quite as much help here as WPF does.
-#if SILVERLIGHT
-            if (MouseClickDetector.IsDoubleClick(sender, e) || element == null /* TODO Ensure it's left button */)
-                return;
-#else
             if (e.ClickCount != 1 || e.LeftButton != MouseButtonState.Pressed || !(sender is FrameworkElement element))
             {
                 return;
             }
-#endif
 
             var command = GetLeftClickCommand(element);
             object param = GetLeftClickCommandParameter(element);
@@ -208,12 +201,6 @@ namespace Apex.Commands
         {
             if (d is UIElement element)
             {
-#if SILVERLIGHT
-                if (e.OldValue == null && e.NewValue != null)
-                    element.MouseLeftButtonDown += new MouseButtonEventHandler(Control_LeftClickMouseDown);
-                else if (e.OldValue != null && e.NewValue == null)
-                    element.MouseLeftButtonDown -= new MouseButtonEventHandler(Control_LeftClickMouseDown);
-#else
                 if (e.OldValue == null && e.NewValue != null)
                 {
                     element.MouseDown += Control_LeftClickMouseDown;
@@ -222,7 +209,6 @@ namespace Apex.Commands
                 {
                     element.MouseDown -= Control_LeftClickMouseDown;
                 }
-#endif
             }
         }
 
@@ -289,12 +275,6 @@ namespace Apex.Commands
         {
             if (d is UIElement element)
             {
-#if SILVERLIGHT
-                if (e.OldValue == null && e.NewValue != null)
-                    element.MouseLeftButtonDown += new MouseButtonEventHandler(Control_LeftDoubleClickMouseDown);
-                else if (e.OldValue != null && e.NewValue == null)
-                    element.MouseLeftButtonDown -= new MouseButtonEventHandler(Control_LeftDoubleClickMouseDown);
-#else
                 if (e.OldValue == null && e.NewValue != null)
                 {
                     element.MouseDown += Control_LeftDoubleClickMouseDown;
@@ -303,7 +283,6 @@ namespace Apex.Commands
                 {
                     element.MouseDown -= Control_LeftDoubleClickMouseDown;
                 }
-#endif
             }
         }
 
@@ -384,12 +363,6 @@ namespace Apex.Commands
         {
             if (d is UIElement element)
             {
-#if SILVERLIGHT
-                if (e.OldValue == null && e.NewValue != null)
-                    element.MouseLeftButtonDown += new MouseButtonEventHandler(Control_RightClickMouseDown);
-                else if (e.OldValue != null && e.NewValue == null)
-                    element.MouseLeftButtonDown -= new MouseButtonEventHandler(Control_RightClickMouseDown);
-#else
                 if (e.OldValue == null && e.NewValue != null)
                 {
                     element.MouseDown += Control_RightClickMouseDown;
@@ -398,7 +371,6 @@ namespace Apex.Commands
                 {
                     element.MouseDown -= Control_RightClickMouseDown;
                 }
-#endif
             }
         }
 
@@ -466,12 +438,6 @@ namespace Apex.Commands
         {
             if (d is UIElement element)
             {
-#if SILVERLIGHT
-                if (e.OldValue == null && e.NewValue != null)
-                    element.MouseLeftButtonDown += new MouseButtonEventHandler(Control_RightDoubleClickMouseDown);
-                else if (e.OldValue != null && e.NewValue == null)
-                    element.MouseLeftButtonDown -= new MouseButtonEventHandler(Control_RightDoubleClickMouseDown);
-#else
                 if (e.OldValue == null && e.NewValue != null)
                 {
                     element.MouseDown += Control_RightDoubleClickMouseDown;
@@ -480,7 +446,6 @@ namespace Apex.Commands
                 {
                     element.MouseDown -= Control_RightDoubleClickMouseDown;
                 }
-#endif
             }
         }
 

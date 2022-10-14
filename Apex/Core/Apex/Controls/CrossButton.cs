@@ -10,7 +10,6 @@ namespace Apex.Controls
     /// </summary>
     public class CrossButton : Button
     {
-#if !SILVERLIGHT
         /// <summary>
         /// Initializes the <see cref="CrossButton"/> class.
         /// </summary>
@@ -20,15 +19,6 @@ namespace Apex.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CrossButton),
                 new FrameworkPropertyMetadata(typeof(CrossButton)));
         }
-#else
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CrossButton"/> class.
-        /// </summary>
-        public CrossButton()
-        {
-            this.DefaultStyleKey = typeof(CrossButton);
-        }
-#endif
 
         /// <summary>
         /// The DependencyProperty for the NormalBackgroundBrush property.

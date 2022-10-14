@@ -12,16 +12,6 @@ namespace Apex.Design
         /// Gets a value indicating whether the control is in design mode (running in Blend
         /// or Visual Studio).
         /// </summary>
-        public static bool IsDesignTime
-        {
-            get
-            {
-#if SILVERLIGHT
-                    return DesignerProperties.IsInDesignTool;
-#else
-                return DesignerProperties.GetIsInDesignMode(new DependencyObject());
-#endif
-            }
-        }
+        public static bool IsDesignTime => DesignerProperties.GetIsInDesignMode(new DependencyObject());
     }
 }

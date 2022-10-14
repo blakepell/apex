@@ -159,11 +159,7 @@ namespace Apex.Helpers.Popups
             };
 
             //  Start the storyboard.
-#if !SILVERLIGHT
             storyboard.Begin(popupHost);
-#else
-            storyboard.Begin();
-#endif
         }
 
         /// <summary>

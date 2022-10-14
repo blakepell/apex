@@ -16,20 +16,13 @@ namespace Apex.Controls
         /// <summary>
         /// Initializes the <see cref="CueTextBox"/> class.
         /// </summary>
-#if !SILVERLIGHT
         static TabbedDocumentInterface()
         {
             //  Override the default style. 
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TabbedDocumentInterface),
                 new FrameworkPropertyMetadata(typeof(TabbedDocumentInterface)));
         }
-#else
-        public TabbedDocumentInterface()
-        {
-            //  Override the default style.
-            DefaultStyleKey = typeof(TabbedDocumentInterface);
-        }
-#endif
+
         /// <summary>
         /// Is called when a control template is applied.
         /// </summary>

@@ -12,20 +12,12 @@ namespace Apex.Controls
         /// <summary>
         /// Initializes the <see cref="ImageButton"/> class.
         /// </summary>
-#if !SILVERLIGHT
         static ImageButton()
         {
             //  Override the default style. 
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageButton),
                 new FrameworkPropertyMetadata(typeof(ImageButton)));
         }
-#else
-        public ImageButton()
-        {
-            //  Override the default style.
-            DefaultStyleKey = typeof(ImageButton);
-        }
-#endif
 
         /// <summary>
         /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate" />.

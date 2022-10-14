@@ -17,16 +17,7 @@ namespace Apex.Helpers
         /// <returns>Assemblies in the domain.</returns>
         public static IEnumerable<Assembly> GetDomainAssemblies()
         {
-#if SILVERLIGHT3 || WINDOWS_PHONE
-            return new List<Assembly> {Assembly.GetCallingAssembly(), Assembly.GetExecutingAssembly()};
-#elif SILVERLIGHT4
-            //  TODO: According to MSDN AppDomain.CurrentDomain.GetAssemblies should compile in SL4 - it doesn't seem to.
-            //  We can force it to work by making things dynamic.
-            dynamic appDomain = AppDomain.CurrentDomain;
-            return appDomain.GetAssemblies();
-#else
             return AppDomain.CurrentDomain.GetAssemblies();
-#endif
         }
 
         /// <summary>
@@ -35,30 +26,10 @@ namespace Apex.Helpers
         /// <returns>Domain types.</returns>
         public static IEnumerable<Type> GetTypesInDomain()
         {
-#if SILVERLIGHT3
-            var typesToSearch = (from a in GetDomainAssemblies()
-                                     from t in a.GetExportedTypes()
-                                     select t).ToList();
-#elif SILVERLIGHT4
-                var typesToSearch = (from a in GetDomainAssemblies()
-                                     where a.IsDynamic == false
-                                     from t in a.GetExportedTypes()
-                                     select t).ToList();
-#elif SILVERLIGHT5
-                var typesToSearch = (from a in GetDomainAssemblies()
-                                     where a.IsDynamic == false
-                                     from t in a.GetExportedTypes()
-                                     select t).ToList();
-#elif SILVERLIGHT
-                var typesToSearch = (from a in GetDomainAssemblies()
-                                     from t in a.GetExportedTypes()
-                                     select t).ToList();
-#else
             var typesToSearch = (from a in GetDomainAssemblies()
                                  where a.GlobalAssemblyCache == false && a.IsDynamic == false
                                  from t in a.GetExportedTypes()
                                  select t).ToList();
-#endif
             return typesToSearch.Distinct();
         }
     }

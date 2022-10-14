@@ -32,35 +32,13 @@ namespace Apex.Controls
         /// <summary>
         /// Initializes the <see cref="CueTextBox"/> class.
         /// </summary>
-#if !SILVERLIGHT
         static CueTextBox()
         {
             //  Override the default style. 
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CueTextBox),
                 new FrameworkPropertyMetadata(typeof(CueTextBox)));
         }
-#else
-        public CueTextBox()
-        {
-            //  Override the default style.
-            DefaultStyleKey = typeof(CueTextBox);
 
-            //  Handle the text changed event.
-            TextChanged += new TextChangedEventHandler(CueTextBox_TextChanged);
-        }
-
-        /// <summary>
-        /// Handles the TextChanged event of the CueTextBox control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.Controls.TextChangedEventArgs"/> instance containing the event data.</param>
-        void CueTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //  Update the cue visibilty.
-            UpdateCueVisiblity();
-        }
-
-#endif
         /// <summary>
         /// Raises the <see cref="E:System.Windows.UIElement.LostFocus"/> event (using the provided arguments).
         /// </summary>
@@ -109,8 +87,6 @@ namespace Apex.Controls
             this.UpdateCueVisiblity();
         }
 
-#if !SILVERLIGHT
-
         /// <summary>
         /// Is called when content in this editing control changes.
         /// </summary>
@@ -122,8 +98,6 @@ namespace Apex.Controls
             //  Update the cue visibilty.
             this.UpdateCueVisiblity();
         }
-
-#endif
 
         /// <summary>
         /// Updates the cue visiblity.
@@ -140,13 +114,9 @@ namespace Apex.Controls
             switch (this.CueDisplayMode)
             {
                 case CueDisplayMode.HideWhenHasTextOrFocus:
-#if !SILVERLIGHT
                     cueLabel.Visibility = (this.IsFocused || !string.IsNullOrEmpty(this.Text))
                         ? Visibility.Collapsed
                         : Visibility.Visible;
-#else
-                    cueLabel.Visibility = !string.IsNullOrEmpty(Text) ? Visibility.Collapsed : Visibility.Visible;
-#endif
                     break;
                 case CueDisplayMode.HideWhenHasText:
                     cueLabel.Visibility = string.IsNullOrEmpty(this.Text) ? Visibility.Visible : Visibility.Collapsed;

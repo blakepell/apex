@@ -97,8 +97,6 @@ namespace Apex.Commands
 
         #endregion
 
-#if !SILVERLIGHT
-
         #region Freezable
 
         /// <summary>
@@ -114,6 +112,5 @@ namespace Apex.Commands
 
         #endregion
 
-#endif
     }
 }

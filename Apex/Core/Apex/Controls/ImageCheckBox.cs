@@ -9,20 +9,12 @@ namespace Apex.Controls
         /// <summary>
         /// Initializes the <see cref="ImageCheckBox"/> class.
         /// </summary>
-#if !SILVERLIGHT
         static ImageCheckBox()
         {
             //  Override the default style. 
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageCheckBox),
                 new FrameworkPropertyMetadata(typeof(ImageCheckBox)));
         }
-#else
-        public ImageCheckBox()
-        {
-            //  Override the default style.
-            DefaultStyleKey = typeof(ImageCheckBox);
-        }
-#endif
 
         /// <summary>
         /// The DependencyProperty for the CheckedImageSource property.

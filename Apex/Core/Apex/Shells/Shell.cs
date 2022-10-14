@@ -18,7 +18,6 @@ namespace Apex.Shells
     [TemplatePart(Name = "PART_PopupHost", Type = typeof(Grid))]
     public class Shell : ContentControl, IShell
     {
-#if !SILVERLIGHT
         /// <summary>
         /// Initializes the <see cref="Shell"/> class.
         /// </summary>
@@ -26,15 +25,7 @@ namespace Apex.Shells
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Shell), new FrameworkPropertyMetadata(typeof(Shell)));
         }
-#else
-        /// <summary>
-        /// Initializes the <see cref="Shell"/> class.
-        /// </summary>
-        public Shell()
-        {
-            this.DefaultStyleKey = typeof(Shell);
-        }
-#endif
+
         /// <summary>
         /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.
         /// </summary>
@@ -61,9 +52,6 @@ namespace Apex.Shells
                 throw new Exception("Unable to access the internal elements of the Application host.");
             }
         }
-
-
-#if !SILVERLIGHT
 
         /// <summary>
         /// Minimizes the shell, if supported.
@@ -130,8 +118,6 @@ namespace Apex.Shells
         /// </summary>
         public DragAndDropHost DragAndDropHost => dragAndDropHost;
 
-#endif
-
         /// <summary>
         /// Fullscreens the shell, if supported.
         /// </summary>
@@ -139,8 +125,6 @@ namespace Apex.Shells
         {
             throw new NotImplementedException();
         }
-
-#if !SILVERLIGHT
 
         /// <summary>
         /// Pushes a popup onto the popup stack.
@@ -191,49 +175,6 @@ namespace Apex.Shells
             //  Cancel the dispatcher frame.
             topPopup.DispatcherFrame.Continue = false;
         }
-#else
-        /// <summary>
-        /// Pushes a popup onto the popup stack.
-        /// </summary>
-        /// <param name="popup">The popup.</param>
-        /// <param name="onPopopClosed">The action to invoke when the popop is closed.</param>
-        public void ShowPopup(UIElement popup, Action<object> onPopopClosed)
-        {
-            //  Fire the popup opened event.
-            FirePopupOpened();
-
-            //  Create the popup state.
-            var popupState = new PopupState()
-            {
-                PopupElement = popup,
-                ClosedAction = onPopopClosed
-            };
-            
-            //  Push our popup onto the popup stack.
-            popupStack.Push(popupState);
-
-            //  Transition the popup.
-            popupAnimationHelper.ShowPopup(popupHost, popup);
-        }
-        
-        /// <summary>
-        /// Called when a popup is closed.
-        /// </summary>
-        void OnPopupClosed()
-        {
-            //  Get the top popup.
-            var topPopup = popupStack.Peek();
-
-            //  Pop the top popup.
-            popupStack.Pop();
-        
-            //  Fire the action.
-            var theAction = topPopup.ClosedAction;
-            if(theAction != null)
-                theAction(topPopup.PopupResult);
-        }
-
-#endif
 
         /// <summary>
         /// Closes the popup.
@@ -264,16 +205,9 @@ namespace Apex.Shells
         /// </summary>
         protected virtual void FirePopupOpened()
         {
-#if !SILVERLIGHT
             //  Raise the popup opened event.
             var args = new RoutedEventArgs(PopupOpenedEvent);
             this.RaiseEvent(args);
-#else
-            //  Raise the popup opened event.
-            var theEvent = PopupOpened;
-            if(theEvent != null)
-                theEvent();
-#endif
         }
 
         /// <summary>
@@ -281,16 +215,9 @@ namespace Apex.Shells
         /// </summary>
         protected virtual void FirePopupClosed()
         {
-#if !SILVERLIGHT
             //  Raise the popup closed event.
             var args = new RoutedEventArgs(PopupClosedEvent);
             this.RaiseEvent(args);
-#else
-            //  Raise the popup closed event.
-            var theEvent = PopupClosed;
-            if(theEvent != null)
-                theEvent();
-#endif
         }
 
 
@@ -319,9 +246,7 @@ namespace Apex.Shells
         /// The popup animation helper, fade in by default.
         /// </summary>
         private PopupAnimationHelper popupAnimationHelper = new BounceInOutPopupAnimationHelper()
-            { BounceInDirection = 180, BounceOutDirection = 180 };
-
-#if !SILVERLIGHT
+        { BounceInDirection = 180, BounceOutDirection = 180 };
 
         /// <summary>
         /// Occurs when a popup is opened.
@@ -353,19 +278,6 @@ namespace Apex.Shells
             remove => this.RemoveHandler(PopupClosedEvent, value);
         }
 
-#else
-        /// <summary>
-        /// Occurs when a popup is opened.
-        /// </summary>
-        public event Action PopupOpened;
-
-        /// <summary>
-        /// Occurs when a popup is closed.
-        /// </summary>
-        public event Action PopupClosed;
-
-#endif
-
         /// <summary>
         /// Gets or sets the popup animation helper.
         /// </summary>
@@ -395,11 +307,7 @@ namespace Apex.Shells
         internal class PopupState
         {
             public UIElement PopupElement { get; set; }
-#if !SILVERLIGHT
             public DispatcherFrame DispatcherFrame { get; set; }
-#else
-            public Action<object> ClosedAction { get; set; }
-#endif
             public object PopupResult { get; set; }
         }
     }

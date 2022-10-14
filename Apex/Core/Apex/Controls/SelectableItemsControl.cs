@@ -47,12 +47,7 @@ namespace Apex.Controls
         /// <param name="args">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnIsSelectedChanged(DependencyObject o, DependencyPropertyChangedEventArgs args)
         {
-            var me = o as SelectableItemsControlItem;
-
-#if SILVERLIGHT
-            if(args.OldValue != args.NewValue)
-                VisualStateManager.GoToState(me, ((bool)args.NewValue) ? "Selected" : "Unselected", true);
-#endif
+            //var me = o as SelectableItemsControlItem;
         }
     }
 
@@ -146,11 +141,7 @@ namespace Apex.Controls
         private static readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register("SelectedItem", typeof(object), typeof(SelectableItemsControl),
                 new FrameworkPropertyMetadata(default(object),
-#if !SILVERLIGHT
                     FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectedItemChanged));
-#else
- FrameworkPropertyMetadataOptions.None, new PropertyChangedCallback(SelectedItemChanged)));
-#endif
 
         /// <summary>
         /// Called when the selected item is changed.

@@ -148,11 +148,7 @@ namespace Apex.MVVM
         /// <param name="action">The action.</param>
         protected void OnUI(Action action)
         {
-#if SILVERLIGHT
-            var dispatcher = System.Windows.Deployment.Current.Dispatcher;
-#else
             var dispatcher = Dispatcher.CurrentDispatcher;
-#endif
 
             //  Use the dispatcher to invoke the action.
             if (dispatcher.CheckAccess())

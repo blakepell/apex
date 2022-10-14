@@ -240,12 +240,6 @@ namespace Apex
         /// <returns>The current execution context.</returns>
         private static ExecutionContext DetermineExecutionContext()
         {
-#if SILVERLIGHT
-            //  We can check the designer properties in Silverlight to
-            //  determine whether we're in the desinger.
-            if(DesignerProperties.IsInDesignTool)
-                return ExecutionContext.Design;
-#else
             //  We can check the IsInDesignModeProperty property in WPF to
             //  determine whether we're in the desinger.
             var prop = DesignerProperties.IsInDesignModeProperty;
@@ -255,7 +249,6 @@ namespace Apex
             {
                 return ExecutionContext.Design;
             }
-#endif
 
             //  Test assemblies we know about.
             var unitTestFrameworkMS = @"microsoft.visualstudio.qualitytools.unittestframework";

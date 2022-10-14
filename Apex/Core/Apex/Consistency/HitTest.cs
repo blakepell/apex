@@ -20,17 +20,11 @@ namespace Apex.Consistency
         /// <param name="rootElement">The root element.</param>
         /// <param name="point">The point, relative to the root element.</param>
         public void DoHitTest(UIElement rootElement, Point point)
-        {
-#if SILVERLIGHT
-            results = VisualTreeHelper.FindElementsInHostCoordinates(point, rootElement).ToList();
-#else
+        { 
             results.Clear();
             VisualTreeHelper.HitTest(rootElement, null,
                 new HitTestResultCallback(HitTestCallback), new PointHitTestParameters(point));
-#endif
         }
-
-#if !SILVERLIGHT
 
         // If a child visual object is hit, toggle its opacity to visually indicate a hit.
         private HitTestResultBehavior HitTestCallback(HitTestResult result)
@@ -43,7 +37,6 @@ namespace Apex.Consistency
             return HitTestResultBehavior.Continue;
         }
 
-#endif
         /// <summary>
         /// Gets the hit-test hits.
         /// </summary>

@@ -112,40 +112,10 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void EventProxy(object o, EventArgs e)
         {
-#if SILVERLIGHT
-            //  If we're in Silverlight, we have NOT inherited the data context
-            //  because the EventBindingCollection is not a framework element and
-            //  therefore out of the logical tree. However, we can set it here 
-            //  and update the bindings - and it will all work.
-            DataContext = ParentElement != null ? ParentElement.DataContext : null;
-            var bindingExpression = GetBindingExpression(EventBinding.CommandProperty);
-            if(bindingExpression != null)
-                bindingExpression.UpdateSource();
-            bindingExpression = GetBindingExpression(EventBinding.CommandParameterProperty);
-            if (bindingExpression != null)
-                bindingExpression.UpdateSource();
-
-#endif
-
             if (this.Command != null)
             {
                 this.Command.Execute(this.CommandParameter);
             }
         }
-
-#if SILVERLIGHT
-        /// <summary>
-        /// Gets or sets the parent element. Only needed as a helper property in Silverlight.
-        /// </summary>
-        /// <value>
-        /// The parent element.
-        /// </value>
-        public FrameworkElement ParentElement
-        {
-            get;
-            set;
-        }
-
-#endif
     }
 }

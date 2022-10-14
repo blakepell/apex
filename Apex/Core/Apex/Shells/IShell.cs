@@ -10,8 +10,6 @@ namespace Apex.Shells
     /// </summary>
     public interface IShell
     {
-#if !SILVERLIGHT
-
         /// <summary>
         /// Minimizes the shell, if supported.
         /// </summary>
@@ -37,14 +35,10 @@ namespace Apex.Shells
         /// </summary>
         DragAndDrop.DragAndDropHost DragAndDropHost { get; }
 
-#endif
-
         /// <summary>
         /// Fullscreens the shell, if supported.
         /// </summary>
         void DoFullscreen();
-
-#if !SILVERLIGHT
 
         //  WPF Only: Silverlight cannot push a dispatcher frame and
         //  call the function below synchronously without blocking the UI.
@@ -57,19 +51,7 @@ namespace Apex.Shells
         /// <param name="popup">The popup.</param>
         /// <returns>The popup result.</returns>
         object ShowPopup(UIElement popup);
-
-#else
-        /// <summary>
-        /// Pushes a popup onto the popup stack and displays it.
-        /// Once the popup is closed, this onPopupClosed action will be called 
-        /// the value of IPopup.GetPopupResult();
-        /// </summary>
-        /// <param name="popup">The popup.</param>
-        /// <param name="onPopopClosed">The action to invoke when the popop is closed.</param>
-        void ShowPopup(UIElement popup, Action<object> onPopopClosed);
-
-#endif
-
+         
         /// <summary>
         /// Closes the popup.
         /// </summary>

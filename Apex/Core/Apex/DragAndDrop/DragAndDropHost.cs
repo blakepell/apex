@@ -10,14 +10,12 @@ namespace Apex.DragAndDrop
 {
     /// <summary>
     /// The drag and drop host is a control that allows drag and drop operations
-    /// to be hanlded.
+    /// to be handled.
     /// </summary>
     [TemplatePart(Name = "PART_Host", Type = typeof(Grid))]
     [TemplatePart(Name = "PART_AdornerLayer", Type = typeof(AdornerLayer))]
     public class DragAndDropHost : ContentControl
     {
-#if !SILVERLIGHT
-
         /// <summary>
         /// Initializes the <see cref="DragAndDropHost"/> class.
         /// </summary>
@@ -26,15 +24,7 @@ namespace Apex.DragAndDrop
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DragAndDropHost),
                 new FrameworkPropertyMetadata(typeof(DragAndDropHost)));
         }
-#else
-        /// <summary>
-        /// Initializes the <see cref="DragAndDropHost"/> class.
-        /// </summary>
-        public DragAndDropHost()
-        {
-            this.DefaultStyleKey = typeof(DragAndDropHost);
-        }
-#endif
+
         /// <summary>
         /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.
         /// </summary>
@@ -55,11 +45,7 @@ namespace Apex.DragAndDrop
             }
 
             //  Register the appropriate events.
-#if !SILVERLIGHT
             host.PreviewMouseLeftButtonDown += this.host_MouseDown;
-#else
-            host.MouseLeftButtonDown += new MouseButtonEventHandler(host_MouseDown);
-#endif
             host.MouseMove += this.host_MouseMove;
             host.MouseLeftButtonUp += this.host_MouseUp;
         }
