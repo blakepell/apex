@@ -13,22 +13,26 @@
                         <Grid>
 
                             <!-- The image for the normal state. -->
-                            <Image 
+                            <Image
                                 x:Name="image"
-                                Source="{TemplateBinding NormalImageSource}" Stretch="None" RenderOptions.BitmapScalingMode="Linear" 
+                                Source="{TemplateBinding NormalImageSource}" Stretch="None"
+                                RenderOptions.BitmapScalingMode="Linear"
                                 Margin="{TemplateBinding Padding}" />
-                        </Grid>                        
+                        </Grid>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="image" Property="Source" Value="{Binding  RelativeSource={RelativeSource TemplatedParent},Path=PressedImageSource}" />
+                            <Setter TargetName="image" Property="Source"
+                                    Value="{Binding  RelativeSource={RelativeSource TemplatedParent},Path=PressedImageSource}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="image" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent},Path=DisabledImageSource}" />
+                            <Setter TargetName="image" Property="Source"
+                                    Value="{Binding RelativeSource={RelativeSource TemplatedParent},Path=DisabledImageSource}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="image" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent},Path=MouseOverImageSource}" />
+                            <Setter TargetName="image" Property="Source"
+                                    Value="{Binding RelativeSource={RelativeSource TemplatedParent},Path=MouseOverImageSource}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -36,7 +36,8 @@ namespace Apex.Controls
         static CueTextBox()
         {
             //  Override the default style. 
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CueTextBox), new FrameworkPropertyMetadata(typeof(CueTextBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CueTextBox),
+                new FrameworkPropertyMetadata(typeof(CueTextBox)));
         }
 #else
         public CueTextBox()
@@ -64,10 +65,10 @@ namespace Apex.Controls
         /// Raises the <see cref="E:System.Windows.UIElement.LostFocus"/> event (using the provided arguments).
         /// </summary>
         /// <param name="e">Provides data about the event.</param>
-        protected override void  OnLostFocus(RoutedEventArgs e)
+        protected override void OnLostFocus(RoutedEventArgs e)
         {
             //  Call the base.
- 	         base.OnLostFocus(e);
+            base.OnLostFocus(e);
 
             //  Update the cue visibilty.
             this.UpdateCueVisiblity();
@@ -130,18 +131,20 @@ namespace Apex.Controls
         private void UpdateCueVisiblity()
         {
             //  If we don't have the cue label we can skip.
-            if(cueLabel == null)
+            if (cueLabel == null)
             {
                 return;
             }
 
             //  We set the cue visibilty based on the cue display mode.
-            switch(this.CueDisplayMode)
+            switch (this.CueDisplayMode)
             {
                 case CueDisplayMode.HideWhenHasTextOrFocus:
 #if !SILVERLIGHT
-                    cueLabel.Visibility = (this.IsFocused || !string.IsNullOrEmpty(this.Text)) ? Visibility.Collapsed : Visibility.Visible;
-#else              
+                    cueLabel.Visibility = (this.IsFocused || !string.IsNullOrEmpty(this.Text))
+                        ? Visibility.Collapsed
+                        : Visibility.Visible;
+#else
                     cueLabel.Visibility = !string.IsNullOrEmpty(Text) ? Visibility.Collapsed : Visibility.Visible;
 #endif
                     break;
@@ -155,13 +158,13 @@ namespace Apex.Controls
         /// The cue label.
         /// </summary>
         private TextBlock cueLabel;
-        
+
         /// <summary>
         /// The DependencyProperty for the CueText property.
         /// </summary>
         public static readonly DependencyProperty CueTextProperty =
-          DependencyProperty.Register("CueText", typeof(string), typeof(CueTextBox),
-          new PropertyMetadata(default(string)));
+            DependencyProperty.Register("CueText", typeof(string), typeof(CueTextBox),
+                new PropertyMetadata(default(string)));
 
         /// <summary>
         /// Gets or sets CueText.
@@ -172,13 +175,13 @@ namespace Apex.Controls
             get => (string)this.GetValue(CueTextProperty);
             set => this.SetValue(CueTextProperty, value);
         }
-        
+
         /// <summary>
         /// The DependencyProperty for the CueDisplayMode property.
         /// </summary>
         public static readonly DependencyProperty CueDisplayModeProperty =
-          DependencyProperty.Register("CueDisplayMode", typeof(CueDisplayMode), typeof(CueTextBox),
-          new PropertyMetadata(CueDisplayMode.HideWhenHasTextOrFocus, OnCueDisplayModeChanged));
+            DependencyProperty.Register("CueDisplayMode", typeof(CueDisplayMode), typeof(CueTextBox),
+                new PropertyMetadata(CueDisplayMode.HideWhenHasTextOrFocus, OnCueDisplayModeChanged));
 
         /// <summary>
         /// Gets or sets CueDisplayMode.

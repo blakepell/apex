@@ -23,7 +23,8 @@ namespace Apex.DragAndDrop
         /// </summary>
         static DragAndDropHost()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(DragAndDropHost), new FrameworkPropertyMetadata(typeof(DragAndDropHost)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(DragAndDropHost),
+                new FrameworkPropertyMetadata(typeof(DragAndDropHost)));
         }
 #else
         /// <summary>
@@ -52,7 +53,7 @@ namespace Apex.DragAndDrop
             {
                 throw new Exception("Unable to access the internal elements of the Drag and Drop host.");
             }
-            
+
             //  Register the appropriate events.
 #if !SILVERLIGHT
             host.PreviewMouseLeftButtonDown += this.host_MouseDown;
@@ -70,7 +71,6 @@ namespace Apex.DragAndDrop
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         void host_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
             //  Perform a hist test.
             var hitTest = new HitTest();
             hitTest.DoHitTest(host, e.GetPosition(host));
@@ -79,7 +79,8 @@ namespace Apex.DragAndDrop
             foreach (var hit in hitTest.Hits)
             {
                 //  Is this a draggable object?
-                if (hit is FrameworkElement element && this.IsInDraggableElement(element, out var foundDragElement, out var foundDragSource))
+                if (hit is FrameworkElement element &&
+                    this.IsInDraggableElement(element, out var foundDragElement, out var foundDragSource))
                 {
                     //  We've found an object to drag - store its data.
                     dragElement = foundDragElement;
@@ -279,7 +280,7 @@ namespace Apex.DragAndDrop
 
                 //  Call the event.
                 dragAndDropContinue(this, args);
-                
+
                 //  If the operation has been disallowed, return.
                 if (args.Allow == false)
                 {
@@ -346,11 +347,12 @@ namespace Apex.DragAndDrop
             var searchElement = element;
             do
             {
-                if(DragAndDrop.GetIsDraggable(searchElement))
+                if (DragAndDrop.GetIsDraggable(searchElement))
                 {
                     dragElement = searchElement;
                     break;
                 }
+
                 searchElement = VisualTreeHelper.GetParent(searchElement) as FrameworkElement;
             } while (searchElement != null);
 
@@ -369,6 +371,7 @@ namespace Apex.DragAndDrop
                     dragSource = findDragSource;
                     break;
                 }
+
                 findDragSource = VisualTreeHelper.GetParent(findDragSource) as FrameworkElement;
             } while (findDragSource != null);
 
@@ -397,6 +400,7 @@ namespace Apex.DragAndDrop
                     dropTarget = searchElement;
                     break;
                 }
+
                 searchElement = VisualTreeHelper.GetParent(searchElement) as FrameworkElement;
             } while (searchElement != null);
 
@@ -457,20 +461,20 @@ namespace Apex.DragAndDrop
         /// The current mouse position.
         /// </summary>
         private Point currentMousePosition;
-                
+
         /// <summary>
         /// The MinimumHorizontalDragDistance property.
         /// </summary>
         private static readonly DependencyProperty MinimumHorizontalDragDistanceProperty =
-          DependencyProperty.Register("MinimumHorizontalDragDistance", typeof(double), typeof(DragAndDropHost),
-          new PropertyMetadata(Consistency.SystemParameters.MinimumHorizontalDragDistance));
+            DependencyProperty.Register("MinimumHorizontalDragDistance", typeof(double), typeof(DragAndDropHost),
+                new PropertyMetadata(Consistency.SystemParameters.MinimumHorizontalDragDistance));
 
         /// <summary>
         /// The MinimumVerticalDragDistance property.
         /// </summary>
         private static readonly DependencyProperty MinimumVerticalDragDistanceProperty =
-          DependencyProperty.Register("MinimumVerticalDragDistance", typeof(double), typeof(DragAndDropHost),
-          new PropertyMetadata(Consistency.SystemParameters.MinimumVerticalDragDistance));
+            DependencyProperty.Register("MinimumVerticalDragDistance", typeof(double), typeof(DragAndDropHost),
+                new PropertyMetadata(Consistency.SystemParameters.MinimumVerticalDragDistance));
 
         /// <summary>
         /// Gets or sets the minimum horizontal drag distance.
@@ -505,7 +509,7 @@ namespace Apex.DragAndDrop
         /// Occurs when drag and drop continues.
         /// </summary>
         public event DragAndDropDelegate DragAndDropContinue;
-        
+
         /// <summary>
         /// Occurs when drag and drop ends.
         /// </summary>

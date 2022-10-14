@@ -21,7 +21,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <ItemsControl 
+                            <ItemsControl
                                 Grid.Row="0"
                                 ItemsSource="{TemplateBinding PivotItems}"
                                 Visibility="{TemplateBinding ShowPivotHeadings,
@@ -30,37 +30,42 @@
 
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock 
-                                            x:Name="tbPivotTitle" Margin="6,0,6,0" FontSize="32" Text="{Binding Title}" Opacity="0.9" Foreground="#FF797979" 
-                                                    
+                                        <TextBlock
+                                            x:Name="tbPivotTitle" Margin="6,0,6,0" FontSize="32" Text="{Binding Title}"
+                                            Opacity="0.9" Foreground="#FF797979"
+
                                             apexCommands:ExtendedCommands.LeftClickCommand="{Binding SelectPivotItemCommand, RelativeSource={RelativeSource FindAncestor, 
-                                             AncestorType={x:Type apexControls:PivotControl}}}" 
-                                                    apexCommands:ExtendedCommands.LeftClickCommandParameter="{Binding}" />
+                                             AncestorType={x:Type apexControls:PivotControl}}}"
+                                            apexCommands:ExtendedCommands.LeftClickCommandParameter="{Binding}" />
 
                                         <DataTemplate.Resources>
                                             <Storyboard x:Key="FadeIn">
-                                                <DoubleAnimation BeginTime="00:00:00" Duration="0:0:0.1" To="0.9" Storyboard.TargetProperty="(TextBlock.Opacity)" />
+                                                <DoubleAnimation BeginTime="00:00:00" Duration="0:0:0.1" To="0.9"
+                                                                 Storyboard.TargetProperty="(TextBlock.Opacity)" />
                                             </Storyboard>
                                             <Storyboard x:Key="FadeOut">
-                                                <DoubleAnimation BeginTime="00:00:00" Duration="0:0:0.3" To="0.3" Storyboard.TargetProperty="(TextBlock.Opacity)" />
+                                                <DoubleAnimation BeginTime="00:00:00" Duration="0:0:0.3" To="0.3"
+                                                                 Storyboard.TargetProperty="(TextBlock.Opacity)" />
                                             </Storyboard>
                                         </DataTemplate.Resources>
 
                                         <DataTemplate.Triggers>
-                                            <DataTrigger  Binding="{Binding IsSelected}" Value="True">
-                                                <Setter TargetName="tbPivotTitle" Property="Foreground" Value="#FF000000"/>
+                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                <Setter TargetName="tbPivotTitle" Property="Foreground"
+                                                        Value="#FF000000" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding IsSelected}" Value="False">
-                                                <Setter TargetName="tbPivotTitle" Property="Foreground" Value="#FF797979"/>
+                                                <Setter TargetName="tbPivotTitle" Property="Foreground"
+                                                        Value="#FF797979" />
                                             </DataTrigger>
                                             <Trigger Property="IsMouseOver" Value="True">
 
                                                 <Trigger.EnterActions>
-                                                    <BeginStoryboard Storyboard="{StaticResource FadeIn}"/>
+                                                    <BeginStoryboard Storyboard="{StaticResource FadeIn}" />
                                                 </Trigger.EnterActions>
 
                                                 <Trigger.ExitActions>
-                                                    <BeginStoryboard Storyboard="{StaticResource FadeOut}"/>
+                                                    <BeginStoryboard Storyboard="{StaticResource FadeOut}" />
                                                 </Trigger.ExitActions>
 
                                             </Trigger>
@@ -74,13 +79,13 @@
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
-                            <apexControls:AnimatedScrollViewer 
-                                x:Name="PART_PivotScrollViewer" 
-                                Grid.Row="1" VerticalScrollBarVisibility="Hidden" 
+                            <apexControls:AnimatedScrollViewer
+                                x:Name="PART_PivotScrollViewer"
+                                Grid.Row="1" VerticalScrollBarVisibility="Hidden"
                                 HorizontalScrollBarVisibility="Hidden"
                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                                <ItemsControl 
-                                    x:Name="PART_ItemsControl" 
+                                <ItemsControl
+                                    x:Name="PART_ItemsControl"
                                     ItemsSource="{TemplateBinding PivotItems}" HorizontalAlignment="Center">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -90,13 +95,13 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Grid x:Name="parentGrid" Margin="200, 0, 200, 0">
-                                                <ContentPresenter 
-                                                   DataContext="{Binding DataContext,
+                                                <ContentPresenter
+                                                    DataContext="{Binding DataContext,
                                                     RelativeSource={RelativeSource FindAncestor, 
-                                             AncestorType={x:Type apexControls:PivotControl}}}" 
+                                             AncestorType={x:Type apexControls:PivotControl}}}"
                                                     Content="{Binding DataContext.Content,
                                                     RelativeSource={RelativeSource FindAncestor, 
-                                             AncestorType={x:Type Grid}}}"  />
+                                             AncestorType={x:Type Grid}}}" />
                                             </Grid>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>

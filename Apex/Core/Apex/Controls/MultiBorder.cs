@@ -15,67 +15,67 @@ namespace Apex.Controls
         /// </summary>
         static MultiBorder()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof (MultiBorder),
-                                                     new FrameworkPropertyMetadata(typeof (MultiBorder)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MultiBorder),
+                new FrameworkPropertyMetadata(typeof(MultiBorder)));
         }
 
         /// <summary>
         /// The BorderBrushLeftProperty dependency property.
         /// </summary>
         public static DependencyProperty BorderBrushLeftProperty = DependencyProperty.Register("BorderBrushLeft",
-                                                                                               typeof (Brush),
-                                                                                               typeof (MultiBorder));
+            typeof(Brush),
+            typeof(MultiBorder));
 
         /// <summary>
         /// The BorderBrushTopProperty dependency property.
         /// </summary>
         public static DependencyProperty BorderBrushTopProperty = DependencyProperty.Register("BorderBrushTop",
-                                                                                              typeof (Brush),
-                                                                                              typeof (MultiBorder));
+            typeof(Brush),
+            typeof(MultiBorder));
 
         /// <summary>
         /// The BorderBrushRightProperty dependency property.
         /// </summary>
         public static DependencyProperty BorderBrushRightProperty = DependencyProperty.Register("BorderBrushRight",
-                                                                                                typeof (Brush),
-                                                                                                typeof (MultiBorder));
+            typeof(Brush),
+            typeof(MultiBorder));
 
         /// <summary>
         /// The BorderBrushBottomProperty dependency property.
         /// </summary>
         public static DependencyProperty BorderBrushBottomProperty = DependencyProperty.Register("BorderBrushBottom",
-                                                                                                 typeof (Brush),
-                                                                                                 typeof (MultiBorder));
+            typeof(Brush),
+            typeof(MultiBorder));
 
         /// <summary>
         /// The BorderThicknessLeftProperty dependency property.
         /// </summary>
         public static DependencyProperty BorderThicknessLeftProperty = DependencyProperty.Register(
-            "BorderThicknessLeft", typeof (double), typeof (MultiBorder),
+            "BorderThicknessLeft", typeof(double), typeof(MultiBorder),
             new PropertyMetadata(1.0));
 
         /// <summary>
         /// The BorderThicknessTopProperty dependency property.
         /// </summary>
         public static DependencyProperty BorderThicknessTopProperty = DependencyProperty.Register("BorderThicknessTop",
-                                                                                                  typeof (double),
-                                                                                                  typeof (MultiBorder),
-                                                                                                  new PropertyMetadata(
-                                                                                                      1.0));
+            typeof(double),
+            typeof(MultiBorder),
+            new PropertyMetadata(
+                1.0));
 
         /// <summary>
         /// The BorderThicknessRightProperty dependency property.
         /// </summary>
         public static DependencyProperty BorderThicknessRightProperty =
-            DependencyProperty.Register("BorderThicknessRight", typeof (double), typeof (MultiBorder),
-                                        new PropertyMetadata(1.0));
+            DependencyProperty.Register("BorderThicknessRight", typeof(double), typeof(MultiBorder),
+                new PropertyMetadata(1.0));
 
         /// <summary>
         /// The BorderThicknessBottomProperty dependency property.
         /// </summary>
         public static DependencyProperty BorderThicknessBottomProperty =
-            DependencyProperty.Register("BorderThicknessBottom", typeof (double), typeof (MultiBorder),
-                                        new PropertyMetadata(1.0));
+            DependencyProperty.Register("BorderThicknessBottom", typeof(double), typeof(MultiBorder),
+                new PropertyMetadata(1.0));
 
         /// <summary>
         /// Gets or sets the border brush left.

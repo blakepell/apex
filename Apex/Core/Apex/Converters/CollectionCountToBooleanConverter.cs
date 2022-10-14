@@ -31,12 +31,14 @@ namespace Apex.Converters
             }
             catch (Exception exception)
             {
-                throw new InvalidOperationException("The value provided to a CollectionCountToBooleanConverter could not be cast to an ICollection.", exception);
+                throw new InvalidOperationException(
+                    "The value provided to a CollectionCountToBooleanConverter could not be cast to an ICollection.",
+                    exception);
             }
 
             //  Are we inverting.
             var invert = IsInverted(parameter);
-            
+
             //  Return the appropriate value.
             return invert ? collection.Count == 0 : collection.Count > 0;
         }

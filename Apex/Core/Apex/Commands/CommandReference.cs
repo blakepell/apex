@@ -22,9 +22,9 @@ namespace Apex.Commands
         /// The Command dependency property.
         /// </summary>
         public static readonly DependencyProperty CommandProperty =
-          DependencyProperty.Register("Command",
-          typeof(ICommand), typeof(CommandReference),
-          new PropertyMetadata(OnCommandChanged));
+            DependencyProperty.Register("Command",
+                typeof(ICommand), typeof(CommandReference),
+                new PropertyMetadata(OnCommandChanged));
 
         /// <summary>
         /// Gets or sets the command.
@@ -115,6 +115,5 @@ namespace Apex.Commands
         #endregion
 
 #endif
-
     }
 }

@@ -16,19 +16,19 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
 
-                            <Image 
-                                Source="{TemplateBinding CheckedImageSource}" Stretch="None" RenderOptions.BitmapScalingMode="Linear" 
+                            <Image
+                                Source="{TemplateBinding CheckedImageSource}" Stretch="None"
+                                RenderOptions.BitmapScalingMode="Linear"
                                 Margin="{TemplateBinding Padding}"
-                                Visibility="{TemplateBinding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                />
+                                Visibility="{TemplateBinding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-                            <Image 
-                                Source="{TemplateBinding UncheckedImageSource}" Stretch="None" RenderOptions.BitmapScalingMode="Linear" 
+                            <Image
+                                Source="{TemplateBinding UncheckedImageSource}" Stretch="None"
+                                RenderOptions.BitmapScalingMode="Linear"
                                 Margin="{TemplateBinding Padding}"
-                                Visibility="{TemplateBinding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"
-                                />
+                                Visibility="{TemplateBinding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}" />
 
-                        </Grid>                        
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

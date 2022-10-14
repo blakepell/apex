@@ -82,7 +82,9 @@ namespace Apex.Controls
             //  If we have enumerations and a selected enumeration, set the selected item.
             if (enumerations != null && this.SelectedEnumeration != null)
             {
-                var selectedEnum = from enumeration in enumerations where enumeration.Value.ToString() == this.SelectedEnumeration.ToString() select enumeration;
+                var selectedEnum = from enumeration in enumerations
+                                   where enumeration.Value.ToString() == this.SelectedEnumeration.ToString()
+                                   select enumeration;
                 this.SelectedItem = selectedEnum.FirstOrDefault();
             }
 
@@ -94,9 +96,10 @@ namespace Apex.Controls
         /// The SelectedEnumerationProperty dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedEnumerationProperty =
-          DependencyProperty.Register("SelectedEnumeration", typeof(object), typeof(EnumerationComboBox),
+            DependencyProperty.Register("SelectedEnumeration", typeof(object), typeof(EnumerationComboBox),
 #if !SILVERLIGHT
- new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedEnumerationChanged));
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                    OnSelectedEnumerationChanged));
 #else
         new PropertyMetadata(null, new PropertyChangedCallback(OnSelectedEnumerationChanged)));
 #endif
@@ -170,11 +173,7 @@ namespace Apex.Controls
         /// <value>
         /// The name.
         /// </value>
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the value.
@@ -182,10 +181,6 @@ namespace Apex.Controls
         /// <value>
         /// The value.
         /// </value>
-        public object Value
-        {
-            get;
-            set;
-        }
+        public object Value { get; set; }
     }
 }

@@ -14,23 +14,23 @@ namespace Apex.Helpers
             switch (msg)
             {
                 case Shell32.BFFM_INITIALIZED: // Required to set initialPath
-                    {
-                        //Win32.SendMessage(new HandleRef(null, hWnd), BFFM_SETSELECTIONA, 1, lpData);
-                        // Use BFFM_SETSELECTIONW if passing a Unicode string, i.e. native CLR Strings.
-                        User32.SendMessage(new HandleRef(null, hWnd), Shell32.BFFM_SETSELECTIONW, 1, initialPath);
-                        break;
-                    }
+                {
+                    //Win32.SendMessage(new HandleRef(null, hWnd), BFFM_SETSELECTIONA, 1, lpData);
+                    // Use BFFM_SETSELECTIONW if passing a Unicode string, i.e. native CLR Strings.
+                    User32.SendMessage(new HandleRef(null, hWnd), Shell32.BFFM_SETSELECTIONW, 1, initialPath);
+                    break;
+                }
                 case Shell32.BFFM_SELCHANGED:
+                {
+                    var pathPtr = Marshal.AllocHGlobal(260 * Marshal.SystemDefaultCharSize);
+                    if (Shell32.SHGetPathFromIDList(lp, pathPtr))
                     {
-                        var pathPtr = Marshal.AllocHGlobal(260 * Marshal.SystemDefaultCharSize);
-                        if (Shell32.SHGetPathFromIDList(lp, pathPtr))
-                        {
-                            User32.SendMessage(new HandleRef(null, hWnd), Shell32.BFFM_SETSTATUSTEXTW, 0, pathPtr);
-                        }
-
-                        Marshal.FreeHGlobal(pathPtr);
-                        break;
+                        User32.SendMessage(new HandleRef(null, hWnd), Shell32.BFFM_SETSTATUSTEXTW, 0, pathPtr);
                     }
+
+                    Marshal.FreeHGlobal(pathPtr);
+                    break;
+                }
             }
 
             return 0;
@@ -66,6 +66,7 @@ namespace Apex.Helpers
                 {
                     return null;
                 }
+
                 sb.Append(Marshal.PtrToStringAuto(bufferAddress));
             }
             finally

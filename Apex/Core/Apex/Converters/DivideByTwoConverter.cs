@@ -26,13 +26,14 @@ namespace Apex.Converters
             {
                 if (parameter != null && parameter is string s && s == "Negative")
                 {
-                    return -d/2;
+                    return -d / 2;
                 }
                 else
                 {
-                    return d/2;
+                    return d / 2;
                 }
             }
+
             return 0.0;
         }
 
@@ -47,7 +48,7 @@ namespace Apex.Converters
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         public object ConvertBack(object value, Type targetType, object parameter,
-                                  System.Globalization.CultureInfo culture)
+            System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
         }

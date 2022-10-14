@@ -26,6 +26,7 @@ namespace Apex.Extensions
                     dp = tp;
                 }
             }
+
             return null;
         }
 
@@ -43,13 +44,13 @@ namespace Apex.Extensions
 
                 p = p.Parent as FrameworkElement;
             }
+
             return null;
         }
 
         public static BitmapSource RenderBitmap(this FrameworkElement element)
         {
 #if SILVERLIGHT
-
       //  We'll use the writable bitmap.
       WriteableBitmap wb = new WriteableBitmap((int)element.ActualWidth, (int)element.ActualHeight);
       wb.Render(element, new TranslateTransform());
@@ -59,7 +60,6 @@ namespace Apex.Extensions
 #else
 
             //  We're in WPF, so use the render bitmap.
-
 
 
             //  Create a visual brush from the element.
@@ -82,7 +82,8 @@ namespace Apex.Extensions
             double systemDPI = 96;
 
             //  Create the bitmap and render it.
-            var bitmap = new RenderTargetBitmap((int)element.ActualWidth, (int)element.ActualHeight, systemDPI, systemDPI, PixelFormats.Default);
+            var bitmap = new RenderTargetBitmap((int)element.ActualWidth, (int)element.ActualHeight, systemDPI,
+                systemDPI, PixelFormats.Default);
             bitmap.Render(visual);
 
             //  Return the bitmap.

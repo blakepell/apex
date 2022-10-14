@@ -11,8 +11,8 @@ namespace Apex.MVVM
         /// The DependencyProperty for the ViewModel property.
         /// </summary>
         private static readonly DependencyProperty ViewModelProperty =
-          DependencyProperty.RegisterAttached("ViewModel", typeof(object), typeof(FrameworkElement),
-          new PropertyMetadata(default(object), OnViewModelChanged));
+            DependencyProperty.RegisterAttached("ViewModel", typeof(object), typeof(FrameworkElement),
+                new PropertyMetadata(default(object), OnViewModelChanged));
 
         /// <summary>
         /// Gets the value of the ViewModel property.

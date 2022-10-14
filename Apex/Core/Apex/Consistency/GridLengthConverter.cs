@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Apex.Consistency
 {
@@ -26,7 +25,6 @@ namespace Apex.Consistency
             return (GridLength)gridLengthConverter.ConvertFromString(gridLength);
 
 #else
-
             //   We are in silverlight and do not have a grid length converter.
             //  We can do the conversion by hand.
             

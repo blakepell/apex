@@ -30,7 +30,6 @@ namespace Apex.MVVM
         public AsynchronousCommand(Action<object> parameterizedAction, bool canExecute = true)
             : base(parameterizedAction, canExecute)
         {
-
             //  Initialise the command.
             this.Initialise();
         }
@@ -43,10 +42,10 @@ namespace Apex.MVVM
             //  Construct the cancel command.
             this.CancelCommand = new Command(
                 () =>
-                    {
-                        //  Set the Is Cancellation Requested flag.
-                        this.IsCancellationRequested = true;
-                    });
+                {
+                    //  Set the Is Cancellation Requested flag.
+                    this.IsCancellationRequested = true;
+                });
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace Apex.MVVM
             }
 
             //  Invoke the executing command, allowing the command to be cancelled.
-            var args = new CancelCommandEventArgs {Parameter = param, Cancel = false};
+            var args = new CancelCommandEventArgs { Parameter = param, Cancel = false };
             this.InvokeExecuting(args);
 
             //  If the event has been cancelled, bail now.
@@ -87,39 +86,39 @@ namespace Apex.MVVM
             // Run the action on a new thread from the thread pool (this will therefore work in SL and WP7 as well).
             ThreadPool.QueueUserWorkItem(
                 state =>
-                    {
-                        //  Invoke the action.
-                        this.InvokeAction(param);
+                {
+                    //  Invoke the action.
+                    this.InvokeAction(param);
 
-                        //  Fire the executed event and set the executing state.
-                        this.ReportProgress(
-                            () =>
-                                {
-                                    //  We are no longer executing.
-                                    this.IsExecuting = false;
+                    //  Fire the executed event and set the executing state.
+                    this.ReportProgress(
+                        () =>
+                        {
+                            //  We are no longer executing.
+                            this.IsExecuting = false;
 
-                                    //  If we were cancelled, invoke the cancelled event - otherwise invoke executed.
-                                    if (this.IsCancellationRequested)
-                                    {
-                                        this.InvokeCancelled(new CommandEventArgs {Parameter = param});
-                                    }
-                                    else
-                                    {
-                                        this.InvokeExecuted(new CommandEventArgs {Parameter = param});
-                                    }
+                            //  If we were cancelled, invoke the cancelled event - otherwise invoke executed.
+                            if (this.IsCancellationRequested)
+                            {
+                                this.InvokeCancelled(new CommandEventArgs { Parameter = param });
+                            }
+                            else
+                            {
+                                this.InvokeExecuted(new CommandEventArgs { Parameter = param });
+                            }
 
-                                    //  We are no longer requesting cancellation.
-                                    this.IsCancellationRequested = false;
+                            //  We are no longer requesting cancellation.
+                            this.IsCancellationRequested = false;
 
-                                    //  If we disable during execution, re-enable now.
-                                    if (this.DisableDuringExecution)
-                                    {
-                                        this.CanExecute = true;
-                                    }
-                                }
-                            );
-                    }
-                );
+                            //  If we disable during execution, re-enable now.
+                            if (this.DisableDuringExecution)
+                            {
+                                this.CanExecute = true;
+                            }
+                        }
+                    );
+                }
+            );
         }
 
         /// <summary>

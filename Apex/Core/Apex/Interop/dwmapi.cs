@@ -4,7 +4,7 @@ using System.Drawing.Printing;
 
 namespace Apex.Interop
 {
-    internal class dwmapi
+    internal class Dwmapi
     {
         [DllImport("dwmapi.dll", PreserveSig = true)]
         internal static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
@@ -37,7 +37,7 @@ namespace Apex.Interop
                     return false;
                 }
             }
-            catch (Exception)
+            catch
             {
                 // Probably dwmapi.dll not found (incompatible OS)
                 return false;

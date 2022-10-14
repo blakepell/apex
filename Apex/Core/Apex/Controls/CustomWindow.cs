@@ -28,19 +28,19 @@ namespace Apex.Controls
         {
             var handle = (new WindowInteropHelper(this)).Handle;
             HwndSource.FromHwnd(handle).AddHook(WindowProc);
-            dwmapi.DropShadow(handle);
+            Dwmapi.DropShadow(handle);
         }
 
         private static IntPtr WindowProc(
-              IntPtr hwnd,
-              int msg,
-              IntPtr wParam,
-              IntPtr lParam,
-              ref bool handled)
+            IntPtr hwnd,
+            int msg,
+            IntPtr wParam,
+            IntPtr lParam,
+            ref bool handled)
         {
             switch (msg)
             {
-                case 0x0024:/* WM_GETMINMAXINFO */
+                case 0x0024: /* WM_GETMINMAXINFO */
                     WmGetMinMaxInfo(hwnd, lParam);
                     handled = true;
                     break;
@@ -59,7 +59,6 @@ namespace Apex.Controls
 
             if (monitor != IntPtr.Zero)
             {
-
                 var monitorInfo = new MONITORINFO();
                 User32.GetMonitorInfo(monitor, monitorInfo);
                 var rcWorkArea = monitorInfo.rcWork;
@@ -77,8 +76,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the HasDropShadow property.
         /// </summary>
         private static readonly DependencyProperty HasDropShadowProperty =
-          DependencyProperty.Register("HasDropShadow", typeof(bool), typeof(CustomWindow),
-          new PropertyMetadata(true, OnHasDropShadowChanged));
+            DependencyProperty.Register("HasDropShadow", typeof(bool), typeof(CustomWindow),
+                new PropertyMetadata(true, OnHasDropShadowChanged));
 
         /// <summary>
         /// Gets or sets HasDropShadow.

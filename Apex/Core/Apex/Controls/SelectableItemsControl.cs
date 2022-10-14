@@ -27,8 +27,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the IsSelected property.
         /// </summary>
         public static readonly DependencyProperty IsSelectedProperty =
-          DependencyProperty.Register("IsSelected", typeof(bool), typeof(SelectableItemsControlItem),
-          new PropertyMetadata(default(bool), OnIsSelectedChanged));
+            DependencyProperty.Register("IsSelected", typeof(bool), typeof(SelectableItemsControlItem),
+                new PropertyMetadata(default(bool), OnIsSelectedChanged));
 
         /// <summary>
         /// Gets or sets IsSelected.
@@ -91,10 +91,11 @@ namespace Apex.Controls
 
             if (this.ClickToSelectItem && item is ISelectableItem)
             {
-                ((SelectableItemsControlItem) element).MouseLeftButtonDown += (sender, args) => this.DoSelectItemCommand(item);
+                ((SelectableItemsControlItem)element).MouseLeftButtonDown +=
+                    (sender, args) => this.DoSelectItemCommand(item);
             }
         }
-        
+
         /// <summary>
         /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.
         /// </summary>
@@ -138,15 +139,15 @@ namespace Apex.Controls
                 }
             }
         }
-        
+
         /// <summary>
         /// The DependencyProperty for the SelectedItem property.
         /// </summary>
         private static readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register("SelectedItem", typeof(object), typeof(SelectableItemsControl),
-            new FrameworkPropertyMetadata(default(object), 
+                new FrameworkPropertyMetadata(default(object),
 #if !SILVERLIGHT
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectedItemChanged));
+                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectedItemChanged));
 #else
  FrameworkPropertyMetadataOptions.None, new PropertyChangedCallback(SelectedItemChanged)));
 #endif
@@ -159,8 +160,8 @@ namespace Apex.Controls
         private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             //  Get the control, call the OnChanged function.
-            var selectableItemsControl = (SelectableItemsControl) d;
-            selectableItemsControl.OnSelectedItemChanged(e.OldValue, e.NewValue);        
+            var selectableItemsControl = (SelectableItemsControl)d;
+            selectableItemsControl.OnSelectedItemChanged(e.OldValue, e.NewValue);
         }
 
         /// <summary>
@@ -179,7 +180,7 @@ namespace Apex.Controls
             //  Set the Selected state of the items.
             this.SetItemsSelectedState();
         }
-       
+
         /// <summary>
         /// Gets or sets SelectedItem.
         /// </summary>
@@ -198,7 +199,7 @@ namespace Apex.Controls
         {
             this.SelectedItem = itemToSelect;
         }
-        
+
         private SelectableItemsControlItem GetItemContainerFromItem(object item)
         {
             return this.Items.OfType<SelectableItemsControlItem>().FirstOrDefault(sici => sici.Content == item);
@@ -213,18 +214,14 @@ namespace Apex.Controls
         /// Gets the SelectItem command.
         /// </summary>
         /// <value>The SelectItem command.</value>
-        public Command SelectItemCommand
-        {
-            get;
-            private set;
-        }
-        
+        public Command SelectItemCommand { get; private set; }
+
         /// <summary>
         /// The DependencyProperty for the ClickToSelectItem property.
         /// </summary>
         public static readonly DependencyProperty ClickToSelectItemProperty =
-          DependencyProperty.Register("ClickToSelectItem", typeof(bool), typeof(SelectableItemsControl),
-          new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("ClickToSelectItem", typeof(bool), typeof(SelectableItemsControl),
+                new PropertyMetadata(default(bool)));
 
         /// <summary>
         /// Gets or sets ClickToSelectItem.

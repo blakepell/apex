@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+
 // ReSharper disable InconsistentNaming
 
 namespace Apex.Adorners
@@ -15,7 +16,7 @@ namespace Apex.Adorners
         /// </summary>
         private static readonly DependencyProperty UIElementProperty =
             DependencyProperty.Register("UIElement", typeof(UIElement), typeof(Adorner),
-            new PropertyMetadata(null));
+                new PropertyMetadata(null));
 
         /// <summary>
         /// Gets the translation.

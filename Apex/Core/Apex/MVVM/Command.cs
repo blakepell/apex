@@ -48,7 +48,7 @@ namespace Apex.MVVM
         public virtual void DoExecute(object param)
         {
             //  Invoke the executing command, allowing the command to be cancelled.
-            var args = new CancelCommandEventArgs {Parameter = param, Cancel = false};
+            var args = new CancelCommandEventArgs { Parameter = param, Cancel = false };
             this.InvokeExecuting(args);
 
             //  If the event has been cancelled, bail now.
@@ -62,7 +62,7 @@ namespace Apex.MVVM
             this.InvokeAction(param);
 
             //  Call the executed function.
-            this.InvokeExecuted(new CommandEventArgs {Parameter = param});
+            this.InvokeExecuted(new CommandEventArgs { Parameter = param });
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Apex.MVVM
                 theEvent(this, args);
             }
         }
-        
+
         /// <summary>
         /// The action that will be called when the command is invoked.
         /// </summary>
@@ -147,7 +147,7 @@ namespace Apex.MVVM
                 }
 
                 canExecute = value;
-                    
+
                 var theEvent = this.CanExecuteChanged;
                 if (theEvent != null)
                 {
@@ -283,7 +283,7 @@ namespace Apex.MVVM
                 theEvent(this, args);
             }
         }
-        
+
         /// <summary>
         /// The parameterised action that will be called when the command is invoked.
         /// </summary>
@@ -344,10 +344,10 @@ namespace Apex.MVVM
             //  user has bound to the wrong data type.
             if (parameter is TParameter == false)
             {
-                var passedType = parameter != null ? parameter.GetType() : typeof (object);
+                var passedType = parameter != null ? parameter.GetType() : typeof(object);
                 throw new InvalidOperationException("A parameter of type " + passedType.Name +
                                                     " was passed to a Command expecting " +
-                                                    "a parameter of type " + typeof (TParameter).Name +
+                                                    "a parameter of type " + typeof(TParameter).Name +
                                                     ". Check the binding of the 'CommandParameter'.");
             }
 

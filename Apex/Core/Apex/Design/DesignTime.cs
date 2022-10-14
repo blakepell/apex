@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace Apex.Design
 {
-  /// <summary>
-  /// Class for design time functionality.
-  /// </summary>
+    /// <summary>
+    /// Class for design time functionality.
+    /// </summary>
     public static class DesignTime
     {
         /// <summary>
@@ -16,13 +16,11 @@ namespace Apex.Design
         {
             get
             {
-              
 #if SILVERLIGHT
                     return DesignerProperties.IsInDesignTool;
 #else
-                    return DesignerProperties.GetIsInDesignMode(new DependencyObject());
+                return DesignerProperties.GetIsInDesignMode(new DependencyObject());
 #endif
-                
             }
         }
     }

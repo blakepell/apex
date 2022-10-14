@@ -17,8 +17,8 @@ namespace Apex.Commands
         /// </summary>
         public static readonly DependencyProperty ContextMenuDataContextProperty =
             DependencyProperty.RegisterAttached("ContextMenuDataContext",
-            typeof(object), typeof(ExtendedCommands),
-            new PropertyMetadata(OnContextMenuDataContextChanged));
+                typeof(object), typeof(ExtendedCommands),
+                new PropertyMetadata(OnContextMenuDataContextChanged));
 
         /// <summary>
         /// Gets the context menu data context.
@@ -175,9 +175,9 @@ namespace Apex.Commands
         /// The LeftClickCommand dependency property.
         /// </summary>
         public static readonly DependencyProperty LeftClickCommandProperty =
-          DependencyProperty.RegisterAttached("LeftClickCommand", typeof(ICommand),
-          typeof(ExtendedCommands), new PropertyMetadata(default(ICommand),
-          OnLeftClickCommandChanged));
+            DependencyProperty.RegisterAttached("LeftClickCommand", typeof(ICommand),
+                typeof(ExtendedCommands), new PropertyMetadata(default(ICommand),
+                    OnLeftClickCommandChanged));
 
         /// <summary>
         /// Gets the left click command.
@@ -230,8 +230,8 @@ namespace Apex.Commands
         /// The LeftClickCommandParameter dependency property.
         /// </summary>
         public static readonly DependencyProperty LeftClickCommandParameterProperty =
-          DependencyProperty.RegisterAttached("LeftClickCommandParameter", typeof(object),
-          typeof(ExtendedCommands), new PropertyMetadata(default(object)));
+            DependencyProperty.RegisterAttached("LeftClickCommandParameter", typeof(object),
+                typeof(ExtendedCommands), new PropertyMetadata(default(object)));
 
         /// <summary>
         /// Gets the left click command parameter.
@@ -257,8 +257,8 @@ namespace Apex.Commands
         /// The LeftDoubleClickCommand dependency property.
         /// </summary>
         public static readonly DependencyProperty LeftDoubleClickCommandProperty =
-          DependencyProperty.RegisterAttached("LeftDoubleClickCommand", typeof(ICommand),
-          typeof(ExtendedCommands), new PropertyMetadata(default(ICommand)));
+            DependencyProperty.RegisterAttached("LeftDoubleClickCommand", typeof(ICommand),
+                typeof(ExtendedCommands), new PropertyMetadata(default(ICommand)));
 
         /// <summary>
         /// Gets the left double click command.
@@ -312,9 +312,9 @@ namespace Apex.Commands
         /// The LeftDoubleClickCommandParameter property.
         /// </summary>
         public static readonly DependencyProperty LeftDoubleClickCommandParameterProperty =
-          DependencyProperty.RegisterAttached("LeftDoubleClickCommandParameter", typeof(object),
-          typeof(ExtendedCommands), new PropertyMetadata(default(object))
-          );
+            DependencyProperty.RegisterAttached("LeftDoubleClickCommandParameter", typeof(object),
+                typeof(ExtendedCommands), new PropertyMetadata(default(object))
+            );
 
         /// <summary>
         /// Gets the left double click command parameter.
@@ -341,7 +341,8 @@ namespace Apex.Commands
         /// </summary>
         /// <param name="d">The dependency object.</param>
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
-        private static void OnLeftDoubleClickCommandParameterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnLeftDoubleClickCommandParameterChanged(DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
         {
             var me = d as FrameworkElement;
         }
@@ -350,9 +351,9 @@ namespace Apex.Commands
         /// The RightClickCommand dependency property.
         /// </summary>
         public static readonly DependencyProperty RightClickCommandProperty =
-          DependencyProperty.RegisterAttached("RightClickCommand", typeof(ICommand),
-          typeof(ExtendedCommands), new PropertyMetadata(default(ICommand),
-          OnRightClickCommandChanged));
+            DependencyProperty.RegisterAttached("RightClickCommand", typeof(ICommand),
+                typeof(ExtendedCommands), new PropertyMetadata(default(ICommand),
+                    OnRightClickCommandChanged));
 
         /// <summary>
         /// Gets the right click command.
@@ -405,8 +406,8 @@ namespace Apex.Commands
         /// The RightClickCommandParameter dependency property.
         /// </summary>
         public static readonly DependencyProperty RightClickCommandParameterProperty =
-          DependencyProperty.RegisterAttached("RightClickCommandParameter", typeof(object),
-          typeof(ExtendedCommands), new PropertyMetadata(default(object)));
+            DependencyProperty.RegisterAttached("RightClickCommandParameter", typeof(object),
+                typeof(ExtendedCommands), new PropertyMetadata(default(object)));
 
         /// <summary>
         /// Gets the right click command parameter.
@@ -432,9 +433,9 @@ namespace Apex.Commands
         /// The RightDoubleClickCommand dependency property.
         /// </summary>
         public static readonly DependencyProperty RightDoubleClickCommandProperty =
-          DependencyProperty.RegisterAttached("RightDoubleClickCommand", typeof(ICommand),
-          typeof(ExtendedCommands), new PropertyMetadata(default(ICommand),
-          OnRightDoubleClickCommandChanged));
+            DependencyProperty.RegisterAttached("RightDoubleClickCommand", typeof(ICommand),
+                typeof(ExtendedCommands), new PropertyMetadata(default(ICommand),
+                    OnRightDoubleClickCommandChanged));
 
         /// <summary>
         /// Gets the right double click command.
@@ -488,8 +489,8 @@ namespace Apex.Commands
         /// The RightDoubleClickCommandParameter dependency property.
         /// </summary>
         public static readonly DependencyProperty RightDoubleClickCommandParameterProperty =
-          DependencyProperty.RegisterAttached("RightDoubleClickCommandParameter", typeof(object),
-          typeof(ExtendedCommands), new PropertyMetadata(default(object)));
+            DependencyProperty.RegisterAttached("RightDoubleClickCommandParameter", typeof(object),
+                typeof(ExtendedCommands), new PropertyMetadata(default(object)));
 
         /// <summary>
         /// Gets the right double click command parameter.
@@ -510,6 +511,5 @@ namespace Apex.Commands
         {
             element.SetValue(RightDoubleClickCommandParameterProperty, value);
         }
-
     }
 }

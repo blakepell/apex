@@ -18,7 +18,8 @@ namespace Apex.Controls
         static FolderTextBox()
         {
             //  Override the default style. 
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(FolderTextBox), new FrameworkPropertyMetadata(typeof(FolderTextBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FolderTextBox),
+                new FrameworkPropertyMetadata(typeof(FolderTextBox)));
         }
 
         /// <summary>

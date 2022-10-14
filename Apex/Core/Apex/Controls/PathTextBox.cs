@@ -18,7 +18,8 @@ namespace Apex.Controls
         static PathTextBox()
         {
             //  Override the default style. 
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(PathTextBox), new FrameworkPropertyMetadata(typeof(PathTextBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(PathTextBox),
+                new FrameworkPropertyMetadata(typeof(PathTextBox)));
         }
 
         /// <summary>

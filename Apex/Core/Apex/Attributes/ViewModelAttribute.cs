@@ -31,10 +31,6 @@ namespace Apex.MVVM
         /// <summary>
         /// Gets the execution context for the model.
         /// </summary>
-        public ExecutionContext Context
-        {
-            get;
-            private set;
-        }
+        public ExecutionContext Context { get; private set; }
     }
 }

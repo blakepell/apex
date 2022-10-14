@@ -65,7 +65,7 @@ namespace Apex.MVVM
             var oldValue = this.Value;
 
             //  Is the value different?
-            if(oldValue != newValue)
+            if (oldValue != newValue)
             {
                 //  Set the new value.
                 this.Value = newValue;
@@ -102,7 +102,7 @@ namespace Apex.MVVM
         {
             //  Fire the event (thread safe).
             var theEvent = this.NotifyingPropertyChanged;
-            if(theEvent != null)
+            if (theEvent != null)
             {
                 theEvent(this, new NotifyingPropertyChangedArgs(oldValue, newValue));
             }

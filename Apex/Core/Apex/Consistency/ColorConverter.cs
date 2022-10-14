@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Media;
 
 namespace Apex.Consistency
@@ -53,8 +50,8 @@ namespace Apex.Consistency
                 pieces[3] = (num & 0x000000f);
                 pieces[3] += pieces[3] * 16;
             }
+
             return Color.FromArgb((byte)pieces[0], (byte)pieces[1], (byte)pieces[2], (byte)pieces[3]);
-        
         }
     }
 }

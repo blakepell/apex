@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace Apex.Adorners 
+namespace Apex.Adorners
 {
     /// <summary>
     /// Adorner for a UI element.

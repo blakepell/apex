@@ -68,12 +68,12 @@ namespace Apex.Controls
 
             //  Split the string by comma.
             string[] theLengths = lengths.Split(',');
-            
+
             //  Use a consistency grid length converter.
             var gridLengthConverter = new Consistency.GridLengthConverter();
 
             //  Convert the lengths.
-            foreach(var length in theLengths)
+            foreach (var length in theLengths)
             {
                 gridLengths.Add(gridLengthConverter.ConvertFromString(length));
             }
@@ -87,14 +87,14 @@ namespace Apex.Controls
         /// </summary>
         private static readonly DependencyProperty rowsProperty =
             DependencyProperty.Register("Rows", typeof(string), typeof(ApexGrid),
-            new PropertyMetadata(null, OnRowsChanged));
+                new PropertyMetadata(null, OnRowsChanged));
 
         /// <summary>
         /// The columns dependency property.
         /// </summary>
         private static readonly DependencyProperty columnsProperty =
             DependencyProperty.Register("Columns", typeof(string), typeof(ApexGrid),
-            new PropertyMetadata(null, OnColumnsChanged));
+                new PropertyMetadata(null, OnColumnsChanged));
 
         /// <summary>
         /// Gets or sets the rows.

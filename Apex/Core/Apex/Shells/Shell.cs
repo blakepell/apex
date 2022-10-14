@@ -48,12 +48,12 @@ namespace Apex.Shells
 
             //  Wire up the close event handler.
             this.PopupClosed += this.OnPopupClosed;
-            
+
             //  Get the template parts.
             try
             {
                 applicationHost = (Grid)this.GetTemplateChild("PART_ApplicationHost");
-               // dragAndDropHost = (DragAndDropHost)GetTemplateChild("PART_DragAndDropHost");
+                // dragAndDropHost = (DragAndDropHost)GetTemplateChild("PART_DragAndDropHost");
                 popupHost = (Grid)this.GetTemplateChild("PART_PopupHost");
             }
             catch
@@ -161,20 +161,20 @@ namespace Apex.Shells
                 PopupElement = popup,
                 DispatcherFrame = new DispatcherFrame()
             };
-            
+
             //  Push our popup state onto the popup stack.
             popupStack.Push(popupState);
 
             //  Transition the popup.
             popupAnimationHelper.ShowPopup(popupHost, popup);
-            
+
             //  Push the dispatcher frame - this will now block until we close the popup.
-            Dispatcher.PushFrame(popupState.DispatcherFrame); 
+            Dispatcher.PushFrame(popupState.DispatcherFrame);
 
             //  Return the popup result (which by now will be stored in its state).
             return popupState.PopupResult;
         }
-        
+
         /// <summary>
         /// Called when a popup is closed.
         /// </summary>
@@ -192,7 +192,6 @@ namespace Apex.Shells
             topPopup.DispatcherFrame.Continue = false;
         }
 #else
-        
         /// <summary>
         /// Pushes a popup onto the popup stack.
         /// </summary>
@@ -244,9 +243,10 @@ namespace Apex.Shells
         public void ClosePopup(UIElement popup, object result)
         {
             //  Make sure we're the top of the stack.
-            if(popupStack.Peek().PopupElement != popup)
+            if (popupStack.Peek().PopupElement != popup)
             {
-                throw new InvalidOperationException("Cannot close the specified popup - it is not the top of the popup stack.");
+                throw new InvalidOperationException(
+                    "Cannot close the specified popup - it is not the top of the popup stack.");
             }
 
             //  Store the popup result.
@@ -293,7 +293,7 @@ namespace Apex.Shells
 #endif
         }
 
-       
+
         /// <summary>
         /// The top level application host.
         /// </summary>
@@ -303,7 +303,7 @@ namespace Apex.Shells
         /// The drag and drop host.
         /// </summary>
         private DragAndDropHost dragAndDropHost;
-        
+
         /// <summary>
         /// The popup host.
         /// </summary>
@@ -318,7 +318,8 @@ namespace Apex.Shells
         /// <summary>
         /// The popup animation helper, fade in by default.
         /// </summary>
-        private PopupAnimationHelper popupAnimationHelper = new BounceInOutPopupAnimationHelper() { BounceInDirection = 180, BounceOutDirection = 180 };
+        private PopupAnimationHelper popupAnimationHelper = new BounceInOutPopupAnimationHelper()
+            { BounceInDirection = 180, BounceOutDirection = 180 };
 
 #if !SILVERLIGHT
 
@@ -353,7 +354,6 @@ namespace Apex.Shells
         }
 
 #else
-
         /// <summary>
         /// Occurs when a popup is opened.
         /// </summary>
@@ -375,16 +375,17 @@ namespace Apex.Shells
         public PopupAnimationHelper PopupAnimationHelper
         {
             get => popupAnimationHelper;
-            set 
+            set
             {
-                if(value == null)
+                if (value == null)
                 {
                     throw new ArgumentException("Popup animation helper cannot be null.");
                 }
 
-                if(popupAnimationHelper.OpenPopupsCount > 0)
+                if (popupAnimationHelper.OpenPopupsCount > 0)
                 {
-                    throw new InvalidOperationException("Cannot change the popup animation helper - there are popups open.");
+                    throw new InvalidOperationException(
+                        "Cannot change the popup animation helper - there are popups open.");
                 }
 
                 popupAnimationHelper = value;

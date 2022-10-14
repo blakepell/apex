@@ -9,31 +9,11 @@
         /// <summary>
         /// Gets the minimum horizontal drag distance.
         /// </summary>
-        public static double MinimumHorizontalDragDistance
-        {
-            get
-            {
-#if SILVERLIGHT
-                return 4.0;
-#else
-                return System.Windows.SystemParameters.MinimumHorizontalDragDistance;
-#endif
-            }
-        }
+        public static double MinimumHorizontalDragDistance => System.Windows.SystemParameters.MinimumHorizontalDragDistance;
 
         /// <summary>
         /// Gets the minimum vertical drag distance.
         /// </summary>
-        public static double MinimumVerticalDragDistance
-        {
-            get
-            {
-#if SILVERLIGHT
-                return 4.0;
-#else
-                return System.Windows.SystemParameters.MinimumVerticalDragDistance;
-#endif
-            }
-        }
+        public static double MinimumVerticalDragDistance => System.Windows.SystemParameters.MinimumVerticalDragDistance;
     }
 }

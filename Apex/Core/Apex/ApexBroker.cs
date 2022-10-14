@@ -30,14 +30,15 @@ namespace Apex
 
                 //  Enumerate all types to search.
                 var typesToSearch = AssembliesHelper.GetTypesInDomain().ToList();
-            
+
                 //  Find every type that has the Model attribute.
                 var modelTypes = from t in typesToSearch
                                  where t.GetCustomAttributes(typeof(ModelAttribute), false).Any()
                                  select new
                                  {
                                      ModelType = t,
-                                     ModelAttribute = (ModelAttribute)t.GetCustomAttributes(typeof(ModelAttribute), false).Single()
+                                     ModelAttribute =
+                                         (ModelAttribute)t.GetCustomAttributes(typeof(ModelAttribute), false).Single()
                                  };
 
                 //  Go through each model type, construct it and register it as a model.
@@ -47,7 +48,7 @@ namespace Apex
                     var modelInstance = Activator.CreateInstance(modelType.ModelType);
 
                     //  If the model implements the IModel interface, notify it that it can be initialised.
-                    if(modelInstance is IModel model)
+                    if (modelInstance is IModel model)
                     {
                         model.OnInitialised();
                     }
@@ -58,12 +59,13 @@ namespace Apex
 
                 //  Find every type that has the View attribute.
                 var viewTypes = from t in typesToSearch
-                                 where t.GetCustomAttributes(typeof(ViewAttribute), false).Any()
-                                 select new
-                                 {
-                                     ViewType = t,
-                                     ViewAttribute = (ViewAttribute)t.GetCustomAttributes(typeof(ViewAttribute), false).Single()
-                                 };
+                                where t.GetCustomAttributes(typeof(ViewAttribute), false).Any()
+                                select new
+                                {
+                                    ViewType = t,
+                                    ViewAttribute = (ViewAttribute)t.GetCustomAttributes(typeof(ViewAttribute), false)
+                                        .Single()
+                                };
 
                 //  Register each view to viewmodel.
                 foreach (var viewType in viewTypes)
@@ -89,11 +91,12 @@ namespace Apex
 
             try
             {
-                return (TModel) modelInstances.Single(m => m is TModel);
+                return (TModel)modelInstances.Single(m => m is TModel);
             }
             catch
             {
-                throw new InvalidOperationException("The Model Type " + typeof(TModel).Name + " has not been registered.");
+                throw new InvalidOperationException("The Model Type " + typeof(TModel).Name +
+                                                    " has not been registered.");
             }
         }
 
@@ -132,14 +135,14 @@ namespace Apex
         /// <param name="serviceInstance">The service instance.</param>
         public static void RegisterService<TService>(object serviceInstance)
         {
-            lock(syncLock)
+            lock (syncLock)
             {
-                if(serviceTypesToInstances.ContainsKey(typeof(TService)))
+                if (serviceTypesToInstances.ContainsKey(typeof(TService)))
                 {
                     throw new InvalidOperationException("A Service of this type has already been registered.");
                 }
 
-                serviceTypesToInstances[typeof (TService)] = serviceInstance;
+                serviceTypesToInstances[typeof(TService)] = serviceInstance;
             }
         }
 
@@ -167,9 +170,9 @@ namespace Apex
         {
             var instance = default(TService);
 
-            lock(syncLock)
+            lock (syncLock)
             {
-                if(serviceTypesToInstances.ContainsKey(typeof(TService)))
+                if (serviceTypesToInstances.ContainsKey(typeof(TService)))
                 {
                     instance = (TService)serviceTypesToInstances[typeof(TService)];
                 }
@@ -212,7 +215,7 @@ namespace Apex
 
             return (from vmm in viewModelViewMappings
                     where vmm.ViewModelType.AssemblyQualifiedName == viewModelType.AssemblyQualifiedName
-                    && vmm.Hint == hint
+                          && vmm.Hint == hint
                     select vmm.ViewType).FirstOrDefault();
         }
 
@@ -237,7 +240,6 @@ namespace Apex
         /// <returns>The current execution context.</returns>
         private static ExecutionContext DetermineExecutionContext()
         {
-
 #if SILVERLIGHT
             //  We can check the designer properties in Silverlight to
             //  determine whether we're in the desinger.
@@ -247,20 +249,20 @@ namespace Apex
             //  We can check the IsInDesignModeProperty property in WPF to
             //  determine whether we're in the desinger.
             var prop = DesignerProperties.IsInDesignModeProperty;
-            if((bool)DependencyPropertyDescriptor
-                .FromProperty(prop, typeof(FrameworkElement))
-                .Metadata.DefaultValue == true)
+            if ((bool)DependencyPropertyDescriptor
+                    .FromProperty(prop, typeof(FrameworkElement))
+                    .Metadata.DefaultValue == true)
             {
                 return ExecutionContext.Design;
             }
 #endif
-            
+
             //  Test assemblies we know about.
             var unitTestFrameworkMS = @"microsoft.visualstudio.qualitytools.unittestframework";
             var unitTestFrameworkNunit = @"nunit.framework";
             bool isUnitTest = AssembliesHelper.GetDomainAssemblies().Any(a =>
                 (a.FullName.ToLower().StartsWith(unitTestFrameworkMS) ||
-                a.FullName.ToLower().StartsWith(unitTestFrameworkNunit)));
+                 a.FullName.ToLower().StartsWith(unitTestFrameworkNunit)));
 
             //  If we're not in a unit test, we're in the designer.
             if (isUnitTest)
@@ -302,13 +304,13 @@ namespace Apex
         /// <summary>
         /// Dictionary of service types to service instances.
         /// </summary>
-        private static Dictionary<Type, object> serviceTypesToInstances = new Dictionary<Type, object>(); 
+        private static Dictionary<Type, object> serviceTypesToInstances = new Dictionary<Type, object>();
 
         /// <summary>
         /// The shell.
         /// </summary>
         private static IShell shell;
-        
+
         /// <summary>
         /// The view-viewmodel mapping.
         /// </summary>
@@ -320,11 +322,7 @@ namespace Apex
             /// <value>
             /// The type of the view model.
             /// </value>
-            public Type ViewModelType
-            {
-                get;
-                set;
-            }
+            public Type ViewModelType { get; set; }
 
             /// <summary>
             /// Gets or sets the type of the view.
@@ -332,11 +330,7 @@ namespace Apex
             /// <value>
             /// The type of the view.
             /// </value>
-            public Type ViewType
-            {
-                get;
-                set;
-            }
+            public Type ViewType { get; set; }
 
             /// <summary>
             /// Gets or sets the hint.
@@ -344,11 +338,7 @@ namespace Apex
             /// <value>
             /// The hint.
             /// </value>
-            public string Hint
-            {
-                get;
-                set;
-            }
+            public string Hint { get; set; }
         }
 
         /// <summary>

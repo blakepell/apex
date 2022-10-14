@@ -27,7 +27,6 @@ namespace Apex.Helpers
 #else
             return AppDomain.CurrentDomain.GetAssemblies();
 #endif
-
         }
 
         /// <summary>
@@ -36,7 +35,6 @@ namespace Apex.Helpers
         /// <returns>Domain types.</returns>
         public static IEnumerable<Type> GetTypesInDomain()
         {
-            
 #if SILVERLIGHT3
             var typesToSearch = (from a in GetDomainAssemblies()
                                      from t in a.GetExportedTypes()
@@ -57,12 +55,11 @@ namespace Apex.Helpers
                                      select t).ToList();
 #else
             var typesToSearch = (from a in GetDomainAssemblies()
-                                    where a.GlobalAssemblyCache == false && a.IsDynamic == false
-                                    from t in a.GetExportedTypes()
-                                    select t).ToList();
+                                 where a.GlobalAssemblyCache == false && a.IsDynamic == false
+                                 from t in a.GetExportedTypes()
+                                 select t).ToList();
 #endif
             return typesToSearch.Distinct();
-
         }
     }
 }

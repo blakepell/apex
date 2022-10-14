@@ -34,7 +34,7 @@ namespace Apex.Controls
             {
                 //  Get the child.
                 var child = VisualTreeHelper.GetChild(this, i);
-              
+
                 //  Create the binding.
                 var binding = new Binding
                 {
@@ -46,7 +46,7 @@ namespace Apex.Controls
                 BindingOperations.SetBinding(child, MarginProperty, binding);
             }
         }
-      
+
         /// <summary>
         /// Called when the padding changes.
         /// </summary>
@@ -54,13 +54,13 @@ namespace Apex.Controls
         /// <param name="args">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnPaddingChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
-          //  Get the padded grid that has had its padding changed.
-          if (dependencyObject is PaddedGrid me)
-          {
-            //  Use an explicit 'InvalidateArrange', rather than the AffectsMeasure FrameworkPropertyMetadataOptions flag
-            //  as these flags aren't available in Silverlight - this method will work in SL and WPF.
-            me.InvalidateArrange();
-          } 
+            //  Get the padded grid that has had its padding changed.
+            if (dependencyObject is PaddedGrid me)
+            {
+                //  Use an explicit 'InvalidateArrange', rather than the AffectsMeasure FrameworkPropertyMetadataOptions flag
+                //  as these flags aren't available in Silverlight - this method will work in SL and WPF.
+                me.InvalidateArrange();
+            }
         }
 
         /// <summary>
@@ -68,9 +68,9 @@ namespace Apex.Controls
         /// </summary>
 #if !SILVERLIGHT
         private static readonly DependencyProperty PaddingProperty =
-          DependencyProperty.Register("Padding", typeof(Thickness), typeof(PaddedGrid),
-          new FrameworkPropertyMetadata(new Thickness(0.0), 
-              FrameworkPropertyMetadataOptions.AffectsArrange, OnPaddingChanged));
+            DependencyProperty.Register("Padding", typeof(Thickness), typeof(PaddedGrid),
+                new FrameworkPropertyMetadata(new Thickness(0.0),
+                    FrameworkPropertyMetadataOptions.AffectsArrange, OnPaddingChanged));
 #else
         private static readonly DependencyProperty PaddingProperty =
           DependencyProperty.Register("Padding", typeof(Thickness), typeof(PaddedGrid),

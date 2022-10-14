@@ -52,6 +52,7 @@ namespace Apex.Extensions
             {
                 parent = tmp;
             }
+
             return parent;
         }
 
@@ -152,14 +153,14 @@ namespace Apex.Extensions
                     if (child is FrameworkElement frameworkElement && frameworkElement.Name == childName)
                     {
                         // if the child's name is of the request name
-                        foundChild = (T) child;
+                        foundChild = (T)child;
                         break;
                     }
                 }
                 else
                 {
                     // child element found.
-                    foundChild = (T) child;
+                    foundChild = (T)child;
                     break;
                 }
             }
@@ -193,7 +194,7 @@ namespace Apex.Extensions
         {
             //  Get appropriate properties.
             var properties = TypeDescriptor.GetProperties(me,
-                                                          new Attribute[] {new PropertyFilterAttribute(PropertyFilterOptions.All)});
+                new Attribute[] { new PropertyFilterAttribute(PropertyFilterOptions.All) });
 
             //  Return all non null dependency properties.
             return from PropertyDescriptor pd in properties
@@ -205,7 +206,6 @@ namespace Apex.Extensions
 #endif
 
 #if SILVERLIGHT
-
     /// <summary>
     /// Retrieves all the logical children of a framework element using a 
     /// depth-first search.  A visual element is assumed to be a logical 

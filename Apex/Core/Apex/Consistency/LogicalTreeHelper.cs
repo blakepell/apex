@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using Apex.Extensions;
 
 namespace Apex.Consistency
 {
@@ -37,7 +30,7 @@ namespace Apex.Consistency
                 foreach (var child in kids)
                     if (child is DependencyObject)
                     {
-                        children.Add((DependencyObject) child);
+                        children.Add((DependencyObject)child);
                     }
             }
 

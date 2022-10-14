@@ -1,10 +1,8 @@
-﻿
-  using System;
-  using System.Linq;
+﻿using System;
+using System.Linq;
 
-  namespace Apex.Helpers
+namespace Apex.Helpers
 {
-
     /// <summary>
     /// The enumeration helper class.
     /// </summary>
@@ -30,7 +28,6 @@
 
             //  Get the values.
             return fields.Select(field => field.GetValue(enumType)).ToArray();
-
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Apex.Controls
         static SearchTextBox()
         {
             //  Override the default style. 
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(SearchTextBox), new FrameworkPropertyMetadata(typeof(SearchTextBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SearchTextBox),
+                new FrameworkPropertyMetadata(typeof(SearchTextBox)));
         }
 #else
         public SearchTextBox()
@@ -24,6 +25,5 @@ namespace Apex.Controls
             DefaultStyleKey = typeof(SearchTextBox);
         }
 #endif
-
     }
 }

@@ -77,7 +77,8 @@ namespace Apex.Behaviours
             this.AssociatedObject.RenderTransform = translation;
 
             //  Create an animation for the opacity.
-            var opacityAnimation = new DoubleAnimation() { From = 0, To = 1, Duration = this.Duration, BeginTime = this.BeginTime };
+            var opacityAnimation = new DoubleAnimation()
+                { From = 0, To = 1, Duration = this.Duration, BeginTime = this.BeginTime };
 
             //  Create an animation for the slide in.
             var slideInAnimation = new DoubleAnimation
@@ -92,7 +93,8 @@ namespace Apex.Behaviours
             Storyboard.SetTarget(opacityAnimation, this.AssociatedObject);
             Storyboard.SetTarget(slideInAnimation, this.AssociatedObject);
             Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-            Storyboard.SetTargetProperty(slideInAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
+            Storyboard.SetTargetProperty(slideInAnimation,
+                new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
 
             //  Return the animations.
             return new List<Timeline> { opacityAnimation, slideInAnimation };
@@ -105,7 +107,7 @@ namespace Apex.Behaviours
         /// </summary>
         public static readonly DependencyProperty DurationProperty =
             DependencyProperty.Register("Duration", typeof(Duration), typeof(SlideFadeInBehaviour),
-            new PropertyMetadata(new Duration(TimeSpan.FromMilliseconds(750))));
+                new PropertyMetadata(new Duration(TimeSpan.FromMilliseconds(750))));
 
         /// <summary>
         /// Gets or sets the duration.
@@ -123,8 +125,8 @@ namespace Apex.Behaviours
         /// The DependencyProperty for the BeginTime property.
         /// </summary>
         private static readonly DependencyProperty BeginTimeProperty =
-          DependencyProperty.Register("BeginTime", typeof(TimeSpan), typeof(SlideFadeInBehaviour),
-          new PropertyMetadata(TimeSpan.FromMilliseconds(0)));
+            DependencyProperty.Register("BeginTime", typeof(TimeSpan), typeof(SlideFadeInBehaviour),
+                new PropertyMetadata(TimeSpan.FromMilliseconds(0)));
 
         /// <summary>
         /// Gets or sets BeginTime.

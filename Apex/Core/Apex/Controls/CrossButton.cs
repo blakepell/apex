@@ -4,10 +4,10 @@ using System.Windows.Media;
 
 namespace Apex.Controls
 {
-  /// <summary>
-  /// The Cross Button is a very simple version of the button that displays as a discrete cross,
-  /// similar to the buttons at the top of Google Chrome's tabs.
-  /// </summary>
+    /// <summary>
+    /// The Cross Button is a very simple version of the button that displays as a discrete cross,
+    /// similar to the buttons at the top of Google Chrome's tabs.
+    /// </summary>
     public class CrossButton : Button
     {
 #if !SILVERLIGHT
@@ -16,10 +16,11 @@ namespace Apex.Controls
         /// </summary>
         static CrossButton()
         {
-          //  Set the style key, so that our control template is used.
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CrossButton), new FrameworkPropertyMetadata(typeof(CrossButton)));
+            //  Set the style key, so that our control template is used.
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CrossButton),
+                new FrameworkPropertyMetadata(typeof(CrossButton)));
         }
-#else        
+#else
         /// <summary>
         /// Initializes a new instance of the <see cref="CrossButton"/> class.
         /// </summary>
@@ -33,8 +34,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the NormalBackgroundBrush property.
         /// </summary>
         public static readonly DependencyProperty NormalBackgroundBrushProperty =
-          DependencyProperty.Register("NormalBackgroundBrush", typeof(Brush), typeof(CrossButton),
-          new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#00000000"))));
+            DependencyProperty.Register("NormalBackgroundBrush", typeof(Brush), typeof(CrossButton),
+                new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#00000000"))));
 
         /// <summary>
         /// Gets or sets NormalBackgroundBrush.
@@ -50,8 +51,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the NormalCrossBrush property.
         /// </summary>
         public static readonly DependencyProperty NormalCrossBrushProperty =
-          DependencyProperty.Register("NormalCrossBrush", typeof(Brush), typeof(CrossButton),
-          new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FF8f949b"))));
+            DependencyProperty.Register("NormalCrossBrush", typeof(Brush), typeof(CrossButton),
+                new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FF8f949b"))));
 
         /// <summary>
         /// Gets or sets NormalCrossBrush.
@@ -67,8 +68,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the HoverBackgroundBrush property.
         /// </summary>
         public static readonly DependencyProperty HoverBackgroundBrushProperty =
-          DependencyProperty.Register("HoverBackgroundBrush", typeof(Brush), typeof(CrossButton),
-          new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FFc13535"))));
+            DependencyProperty.Register("HoverBackgroundBrush", typeof(Brush), typeof(CrossButton),
+                new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FFc13535"))));
 
         /// <summary>
         /// Gets or sets HoverBackgroundBrush.
@@ -84,8 +85,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the HoverCrossBrush property.
         /// </summary>
         public static readonly DependencyProperty HoverCrossBrushProperty =
-          DependencyProperty.Register("HoverCrossBrush", typeof(Brush), typeof(CrossButton),
-          new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FFf9ebeb"))));
+            DependencyProperty.Register("HoverCrossBrush", typeof(Brush), typeof(CrossButton),
+                new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FFf9ebeb"))));
 
         /// <summary>
         /// Gets or sets HoverCrossBrush.
@@ -101,8 +102,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the PressedBackgroundBrush property.
         /// </summary>
         public static readonly DependencyProperty PressedBackgroundBrushProperty =
-          DependencyProperty.Register("PressedBackgroundBrush", typeof(Brush), typeof(CrossButton),
-          new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FF431e20"))));
+            DependencyProperty.Register("PressedBackgroundBrush", typeof(Brush), typeof(CrossButton),
+                new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FF431e20"))));
 
         /// <summary>
         /// Gets or sets PressedBackgroundBrush.
@@ -118,8 +119,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the PressedCrossBrush property.
         /// </summary>
         public static readonly DependencyProperty PressedCrossBrushProperty =
-          DependencyProperty.Register("PressedCrossBrush", typeof(Brush), typeof(CrossButton),
-          new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FFf9ebeb"))));
+            DependencyProperty.Register("PressedCrossBrush", typeof(Brush), typeof(CrossButton),
+                new PropertyMetadata(new SolidColorBrush(Consistency.ColorConverter.ConvertFromString("#FFf9ebeb"))));
 
         /// <summary>
         /// Gets or sets PressedCrossBrush.

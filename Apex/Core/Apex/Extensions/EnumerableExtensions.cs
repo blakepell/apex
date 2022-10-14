@@ -13,7 +13,8 @@ namespace Apex.Extensions
         /// <param name="source">The source collection.</param>
         /// <param name="getChildrenFunction">The get children function, e.g. for a tree node this would be (node) => node.Children .</param>
         /// <returns>The hierarchy as a flat list.</returns>
-        public static IEnumerable<TSource> Flatten<TSource>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TSource>> getChildrenFunction)
+        public static IEnumerable<TSource> Flatten<TSource>(this IEnumerable<TSource> source,
+            Func<TSource, IEnumerable<TSource>> getChildrenFunction)
         {
             //  Create a flat list.
             var flattenedList = new List<TSource>();

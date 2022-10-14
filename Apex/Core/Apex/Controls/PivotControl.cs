@@ -12,19 +12,19 @@ namespace Apex.Controls
     /// <summary>
     /// Interaction logic for PivotControl.xaml
     /// </summary>
-    [TemplatePart(Name = "PART_ItemsControl", Type = typeof (ItemsControl))]
-    [TemplatePart(Name = "PART_PivotScrollViewer", Type = typeof (AnimatedScrollViewer))]
+    [TemplatePart(Name = "PART_ItemsControl", Type = typeof(ItemsControl))]
+    [TemplatePart(Name = "PART_PivotScrollViewer", Type = typeof(AnimatedScrollViewer))]
     [ContentProperty("PivotItems")]
     public partial class PivotControl : ContentControl
     {
-
 #if !SILVERLIGHT
         /// <summary>
         /// Initializes the <see cref="PivotControl"/> class.
         /// </summary>
         static PivotControl()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof (PivotControl), new FrameworkPropertyMetadata(typeof (PivotControl)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(PivotControl),
+                new FrameworkPropertyMetadata(typeof(PivotControl)));
         }
 #else
     /// <summary>
@@ -52,12 +52,12 @@ namespace Apex.Controls
             {
                 throw new Exception("Unable to access the internal elements of the Pivot control.");
             }
+
             selectPivotItemCommand = new Command(this.SelectPivotItem, true);
 
             this.SizeChanged += this.PivotControl_SizeChanged;
 
             this.Loaded += this.PivotControl_Loaded;
-
         }
 
         private void PivotControl_Loaded(object sender, RoutedEventArgs e)
@@ -72,6 +72,7 @@ namespace Apex.Controls
                         break;
                     }
                 }
+
                 if (this.SelectedPivotItem == null)
                 {
                     this.SelectedPivotItem = this.PivotItems[0];
@@ -122,13 +123,15 @@ namespace Apex.Controls
         /// PivotItems dependency property.
         /// </summary>
         public static readonly DependencyProperty PivotItemsProperty = DependencyProperty.Register("PivotItems",
-                                                                                                   typeof (ObservableCollection<PivotItem>), typeof (PivotControl), new PropertyMetadata(new ObservableCollection<PivotItem>()));
+            typeof(ObservableCollection<PivotItem>), typeof(PivotControl),
+            new PropertyMetadata(new ObservableCollection<PivotItem>()));
 
         /// <summary>
         /// SelectedPivotItem dependency property.
         /// </summary>
-        public static readonly DependencyProperty SelectedPivotItemProperty = DependencyProperty.Register("SelectedPivotItem",
-                                                                                                          typeof (PivotItem), typeof (PivotControl), new PropertyMetadata(null, OnSelectedPivotItemChanged));
+        public static readonly DependencyProperty SelectedPivotItemProperty = DependencyProperty.Register(
+            "SelectedPivotItem",
+            typeof(PivotItem), typeof(PivotControl), new PropertyMetadata(null, OnSelectedPivotItemChanged));
 
         private Command selectPivotItemCommand = null;
 
@@ -196,7 +199,7 @@ namespace Apex.Controls
             var relativePoint = pivotContent.TransformToAncestor(this).Transform(new Point(0, 0));
 
             //  We'll actually move the item to the centre of the screen.
-            relativePoint.X += (pivotContent.ActualWidth/2) - (this.ActualWidth/2);
+            relativePoint.X += (pivotContent.ActualWidth / 2) - (this.ActualWidth / 2);
 
             var horzAnim = new DoubleAnimation
             {
@@ -210,15 +213,16 @@ namespace Apex.Controls
             sb.Children.Add(horzAnim);
 
             Storyboard.SetTarget(horzAnim, pivotScrollViewer);
-            Storyboard.SetTargetProperty(horzAnim, new PropertyPath(AnimatedScrollViewer.CurrentHorizontalOffsetProperty));
+            Storyboard.SetTargetProperty(horzAnim,
+                new PropertyPath(AnimatedScrollViewer.CurrentHorizontalOffsetProperty));
 
             sb.Begin();
         }
 
 
         private static readonly DependencyProperty ShowPivotHeadingsProperty =
-            DependencyProperty.Register("ShowPivotHeadings", typeof (bool), typeof (PivotControl),
-                                        new PropertyMetadata(true));
+            DependencyProperty.Register("ShowPivotHeadings", typeof(bool), typeof(PivotControl),
+                new PropertyMetadata(true));
 
         /// <summary>
         /// Gets or sets a value indicating whether [show pivot headings].

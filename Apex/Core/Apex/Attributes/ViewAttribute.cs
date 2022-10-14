@@ -46,19 +46,11 @@ namespace Apex.MVVM
         /// <value>
         /// The type of the view model.
         /// </value>
-        public Type ViewModelType
-        {
-            get;
-            private set;
-        }
+        public Type ViewModelType { get; private set; }
 
         /// <summary>
         /// Gets the hint.
         /// </summary>
-        public string Hint
-        {
-            get;
-            private set;
-        }
+        public string Hint { get; private set; }
     }
 }

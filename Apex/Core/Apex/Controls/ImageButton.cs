@@ -16,7 +16,8 @@ namespace Apex.Controls
         static ImageButton()
         {
             //  Override the default style. 
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageButton), new FrameworkPropertyMetadata(typeof(ImageButton)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageButton),
+                new FrameworkPropertyMetadata(typeof(ImageButton)));
         }
 #else
         public ImageButton()
@@ -35,17 +36,17 @@ namespace Apex.Controls
             base.OnApplyTemplate();
 
             //  If we're missing any images, use the normal one.
-            if(this.MouseOverImageSource == null)
+            if (this.MouseOverImageSource == null)
             {
                 this.MouseOverImageSource = this.NormalImageSource;
             }
 
-            if(this.PressedImageSource == null)
+            if (this.PressedImageSource == null)
             {
                 this.PressedImageSource = this.NormalImageSource;
             }
 
-            if(this.DisabledImageSource == null)
+            if (this.DisabledImageSource == null)
             {
                 this.DisabledImageSource = this.NormalImageSource;
             }
@@ -55,8 +56,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the NormalImageSource property.
         /// </summary>
         public static readonly DependencyProperty NormalImageSourceProperty =
-          DependencyProperty.Register("NormalImageSource", typeof(ImageSource), typeof(ImageButton),
-          new PropertyMetadata(default(ImageSource)));
+            DependencyProperty.Register("NormalImageSource", typeof(ImageSource), typeof(ImageButton),
+                new PropertyMetadata(default(ImageSource)));
 
         /// <summary>
         /// Gets or sets NormalImageSource.
@@ -67,14 +68,14 @@ namespace Apex.Controls
             get => (ImageSource)this.GetValue(NormalImageSourceProperty);
             set => this.SetValue(NormalImageSourceProperty, value);
         }
-        
-        
+
+
         /// <summary>
         /// The DependencyProperty for the MouseOverImageSource property.
         /// </summary>
         public static readonly DependencyProperty MouseOverImageSourceProperty =
-          DependencyProperty.Register("MouseOverImageSource", typeof(ImageSource), typeof(ImageButton),
-          new PropertyMetadata(default(ImageSource)));
+            DependencyProperty.Register("MouseOverImageSource", typeof(ImageSource), typeof(ImageButton),
+                new PropertyMetadata(default(ImageSource)));
 
         /// <summary>
         /// Gets or sets MouseOverImageSource.
@@ -85,13 +86,13 @@ namespace Apex.Controls
             get => (ImageSource)this.GetValue(MouseOverImageSourceProperty);
             set => this.SetValue(MouseOverImageSourceProperty, value);
         }
-        
+
         /// <summary>
         /// The DependencyProperty for the PressedImageSource property.
         /// </summary>
         public static readonly DependencyProperty PressedImageSourceProperty =
-          DependencyProperty.Register("PressedImageSource", typeof(ImageSource), typeof(ImageButton),
-          new PropertyMetadata(default(ImageSource)));
+            DependencyProperty.Register("PressedImageSource", typeof(ImageSource), typeof(ImageButton),
+                new PropertyMetadata(default(ImageSource)));
 
         /// <summary>
         /// Gets or sets PressedImageSource.
@@ -102,13 +103,13 @@ namespace Apex.Controls
             get => (ImageSource)this.GetValue(PressedImageSourceProperty);
             set => this.SetValue(PressedImageSourceProperty, value);
         }
-        
+
         /// <summary>
         /// The DependencyProperty for the DisabledImageSource property.
         /// </summary>
         public static readonly DependencyProperty DisabledImageSourceProperty =
-          DependencyProperty.Register("DisabledImageSource", typeof(ImageSource), typeof(ImageButton),
-          new PropertyMetadata(default(ImageSource)));
+            DependencyProperty.Register("DisabledImageSource", typeof(ImageSource), typeof(ImageButton),
+                new PropertyMetadata(default(ImageSource)));
 
         /// <summary>
         /// Gets or sets DisabledImageSource.

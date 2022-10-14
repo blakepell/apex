@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
 namespace Apex.Consistency
 {
-  /// <summary>
-  /// Provides a Silverlight/WPF indenpendent way to hit-test a point on the screen.
-  /// </summary>
+    /// <summary>
+    /// Provides a Silverlight/WPF indenpendent way to hit-test a point on the screen.
+    /// </summary>
     public class HitTest
     {
-      /// <summary>
-      /// The set of hit test results.
-      /// </summary>
+        /// <summary>
+        /// The set of hit test results.
+        /// </summary>
         private List<UIElement> results = new List<UIElement>();
 
         /// <summary>
@@ -28,7 +25,7 @@ namespace Apex.Consistency
             results = VisualTreeHelper.FindElementsInHostCoordinates(point, rootElement).ToList();
 #else
             results.Clear();
-            VisualTreeHelper.HitTest(rootElement, null, 
+            VisualTreeHelper.HitTest(rootElement, null,
                 new HitTestResultCallback(HitTestCallback), new PointHitTestParameters(point));
 #endif
         }
@@ -50,9 +47,6 @@ namespace Apex.Consistency
         /// <summary>
         /// Gets the hit-test hits.
         /// </summary>
-        public List<UIElement> Hits
-        {
-            get { return results; }
-        }
+        public List<UIElement> Hits => results;
     }
 }

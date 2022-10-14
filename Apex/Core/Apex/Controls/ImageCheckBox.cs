@@ -13,7 +13,8 @@ namespace Apex.Controls
         static ImageCheckBox()
         {
             //  Override the default style. 
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageCheckBox), new FrameworkPropertyMetadata(typeof(ImageCheckBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageCheckBox),
+                new FrameworkPropertyMetadata(typeof(ImageCheckBox)));
         }
 #else
         public ImageCheckBox()
@@ -22,13 +23,13 @@ namespace Apex.Controls
             DefaultStyleKey = typeof(ImageCheckBox);
         }
 #endif
-        
+
         /// <summary>
         /// The DependencyProperty for the CheckedImageSource property.
         /// </summary>
         public static readonly DependencyProperty CheckedImageSourceProperty =
-          DependencyProperty.Register("CheckedImageSource", typeof(ImageSource), typeof(ImageCheckBox),
-          new PropertyMetadata(default(ImageSource), OnCheckedImageSourceChanged));
+            DependencyProperty.Register("CheckedImageSource", typeof(ImageSource), typeof(ImageCheckBox),
+                new PropertyMetadata(default(ImageSource), OnCheckedImageSourceChanged));
 
         /// <summary>
         /// Gets or sets CheckedImageSource.
@@ -50,13 +51,13 @@ namespace Apex.Controls
             var me = o as ImageCheckBox;
         }
 
-        
+
         /// <summary>
         /// The DependencyProperty for the UncheckedImageSource property.
         /// </summary>
         public static readonly DependencyProperty UncheckedImageSourceProperty =
-          DependencyProperty.Register("UncheckedImageSource", typeof(ImageSource), typeof(ImageCheckBox),
-          new PropertyMetadata(default(ImageSource), OnUncheckedImageSourceChanged));
+            DependencyProperty.Register("UncheckedImageSource", typeof(ImageSource), typeof(ImageCheckBox),
+                new PropertyMetadata(default(ImageSource), OnUncheckedImageSourceChanged));
 
         /// <summary>
         /// Gets or sets UncheckedImageSource.

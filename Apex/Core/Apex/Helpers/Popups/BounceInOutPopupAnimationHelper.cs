@@ -33,9 +33,10 @@ namespace Apex.Helpers.Popups
         protected override void AnimatePopupShow(Grid popupHost, Grid popupBackground, UIElement popupElement)
         {
             //  Cast the data.
-            if(!(popupElement is FrameworkElement popupFrameworkElement))
+            if (!(popupElement is FrameworkElement popupFrameworkElement))
             {
-                throw new ArgumentException("To use a Bounce Up and Down popup animation, the popup must be a framework element.");
+                throw new ArgumentException(
+                    "To use a Bounce Up and Down popup animation, the popup must be a framework element.");
             }
 
             //  Get a sensible bounce in distance.
@@ -62,13 +63,16 @@ namespace Apex.Helpers.Popups
 
             //  Now create a storyboard to animate a fade in.
             var storyboard = new Storyboard();
-            
+
             //  Create an animation for the opacity.
-            var popupBackgroundOpacityAnimation = new DoubleAnimation() { From = 0, To = 0.5, Duration = this.BounceInDuration };
+            var popupBackgroundOpacityAnimation = new DoubleAnimation()
+                { From = 0, To = 0.5, Duration = this.BounceInDuration };
             var popupTranslateXAnimation = new DoubleAnimation() { To = 0, Duration = this.BounceInDuration };
             var popupTranslateYAnimation = new DoubleAnimation() { To = 0, Duration = this.BounceInDuration };
-            popupTranslateXAnimation.EasingFunction = new ElasticEase() { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 8 };
-            popupTranslateYAnimation.EasingFunction = new ElasticEase() { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 8 };
+            popupTranslateXAnimation.EasingFunction = new ElasticEase()
+                { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 8 };
+            popupTranslateYAnimation.EasingFunction = new ElasticEase()
+                { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 8 };
             var popupOpacityAnimation = new DoubleAnimation { From = 0, To = 1, Duration = this.BounceInDuration };
 
             //  Set the targets for the animations
@@ -77,8 +81,10 @@ namespace Apex.Helpers.Popups
             Storyboard.SetTarget(popupTranslateYAnimation, popupFrameworkElement);
             Storyboard.SetTarget(popupOpacityAnimation, popupElement);
             Storyboard.SetTargetProperty(popupBackgroundOpacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-            Storyboard.SetTargetProperty(popupTranslateXAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
-            Storyboard.SetTargetProperty(popupTranslateYAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+            Storyboard.SetTargetProperty(popupTranslateXAnimation,
+                new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
+            Storyboard.SetTargetProperty(popupTranslateYAnimation,
+                new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
             Storyboard.SetTargetProperty(popupOpacityAnimation, new PropertyPath(UIElement.OpacityProperty));
 
             //  Add the animation to the storyboard.
@@ -106,7 +112,8 @@ namespace Apex.Helpers.Popups
             //  Cast the data.
             if (!(popupElement is FrameworkElement popupFrameworkElement))
             {
-                throw new ArgumentException("To use a Bounce Up and Down popup animation, the popup must be a framework element.");
+                throw new ArgumentException(
+                    "To use a Bounce Up and Down popup animation, the popup must be a framework element.");
             }
 
             //  Get a sensible bounce in distance.
@@ -115,16 +122,16 @@ namespace Apex.Helpers.Popups
             //  Get the X/Y values.
             var x = bounceOutDistance * Math.Sin(this.BounceOutDirection * Math.PI / 180);
             var y = -bounceOutDistance * Math.Cos(this.BounceOutDirection * Math.PI / 180);
-            
+
             //  Now create a storyboard to animate a fade out.
             var storyboard = new Storyboard();
-            
+
             //  Create an animation for the opacity.
             var popupBackgroundOpacityAnimation = new DoubleAnimation() { To = 0, Duration = this.BounceOutDuration };
             var popupOpacityAnimation = new DoubleAnimation() { To = 0, Duration = this.BounceOutDuration };
             var popupTranslateXAnimation = new DoubleAnimation() { To = x, Duration = this.BounceOutDuration };
             var popupTranslateYAnimation = new DoubleAnimation() { To = y, Duration = this.BounceOutDuration };
-            
+
             //  Set the targets for the animations
             Storyboard.SetTarget(popupBackgroundOpacityAnimation, popupBackground);
             Storyboard.SetTarget(popupOpacityAnimation, popupElement);
@@ -132,9 +139,11 @@ namespace Apex.Helpers.Popups
             Storyboard.SetTarget(popupTranslateYAnimation, popupFrameworkElement);
             Storyboard.SetTargetProperty(popupBackgroundOpacityAnimation, new PropertyPath(UIElement.OpacityProperty));
             Storyboard.SetTargetProperty(popupOpacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-            Storyboard.SetTargetProperty(popupTranslateXAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
-            Storyboard.SetTargetProperty(popupTranslateYAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-            
+            Storyboard.SetTargetProperty(popupTranslateXAnimation,
+                new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
+            Storyboard.SetTargetProperty(popupTranslateYAnimation,
+                new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+
             //  Add the animation to the storyboard.
             storyboard.Children.Add(popupBackgroundOpacityAnimation);
             storyboard.Children.Add(popupOpacityAnimation);

@@ -26,11 +26,12 @@ namespace Apex.Converters
             bool booleanValue;
             try
             {
-                booleanValue = (bool) value;
+                booleanValue = (bool)value;
             }
             catch (Exception exception)
             {
-                throw new InvalidOperationException("The value provided to an InvertedBooleanConverter could not be cast to a boolean.", exception);
+                throw new InvalidOperationException(
+                    "The value provided to an InvertedBooleanConverter could not be cast to a boolean.", exception);
             }
 
             return !booleanValue;
@@ -46,7 +47,8 @@ namespace Apex.Converters
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException("ConvertBack is NOT supported for the InvertedBooleanConverter.");
         }

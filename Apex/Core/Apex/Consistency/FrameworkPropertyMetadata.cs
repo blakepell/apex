@@ -26,10 +26,6 @@
 * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
 namespace System.Windows
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
@@ -46,16 +42,11 @@ namespace System.Windows
 
         #region properties
 
-        public string MethodName
-        {
-            get;
-            private set;
-        }
+        public string MethodName { get; private set; }
 
         #endregion
 
 #if SILVERLIGHT
-
         #region methods
 
         public static void CoerceValue(DependencyObject d, DependencyProperty dp)
@@ -67,7 +58,8 @@ namespace System.Windows
         {
             foreach (FieldInfo fi in type.GetFields(BindingFlags.Public | BindingFlags.Static))
             {
-                SilverlightCoercionHelper coercionInfo = fi.GetCustomAttributes(typeof(SilverlightCoercionHelper), false).FirstOrDefault() as SilverlightCoercionHelper;
+                SilverlightCoercionHelper coercionInfo =
+ fi.GetCustomAttributes(typeof(SilverlightCoercionHelper), false).FirstOrDefault() as SilverlightCoercionHelper;
                 if (coercionInfo != null)
                 {
                     DependencyProperty dp = fi.GetValue(null) as DependencyProperty;
@@ -84,7 +76,6 @@ namespace System.Windows
     }
 
 #if SILVERLIGHT
-
     [Flags]
     public enum FrameworkPropertyMetadataOptions : int
     {
@@ -460,7 +451,8 @@ namespace System.Windows
 
                     // perform the coercion
                     bool isReentrantImplicitCoercion = false;
-                    effectiveValue = DoCoercion(d, e.Property, _coerceValueCallback, effectiveValue, true, out isReentrantImplicitCoercion);
+                    effectiveValue =
+ DoCoercion(d, e.Property, _coerceValueCallback, effectiveValue, true, out isReentrantImplicitCoercion);
 
                     // ignore reentrant calls
                     if (isReentrantImplicitCoercion) return;
@@ -575,7 +567,8 @@ namespace System.Windows
 
             #region fields
 
-            private static Dictionary<Type, Dictionary<string, CoerceValueCallback>> _knownValueCoercionMethods = new Dictionary<Type, Dictionary<string, CoerceValueCallback>>();
+            private static Dictionary<Type, Dictionary<string, CoerceValueCallback>> _knownValueCoercionMethods =
+ new Dictionary<Type, Dictionary<string, CoerceValueCallback>>();
 
             private CoerceValueCallback _coerceValueCallback;
             private FrameworkPropertyMetadataOptions _flags;
@@ -590,11 +583,11 @@ namespace System.Windows
 
         #region fields
 
-        private static Dictionary<DependencyProperty, CoerceValueCallback> _dependencyPropertyCoercionMap = new Dictionary<DependencyProperty, CoerceValueCallback>();
+        private static Dictionary<DependencyProperty, CoerceValueCallback> _dependencyPropertyCoercionMap =
+ new Dictionary<DependencyProperty, CoerceValueCallback>();
 
         #endregion
     }
 
 #endif
-
 }

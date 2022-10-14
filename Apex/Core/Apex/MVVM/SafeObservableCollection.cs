@@ -27,7 +27,7 @@ namespace Apex.MVVM
         /// </summary>
         public SafeObservableCollection()
         {
-            dispatcher = Application.Current.Dispatcher; 
+            dispatcher = Application.Current.Dispatcher;
         }
 
         /// <summary>
@@ -191,6 +191,7 @@ namespace Apex.MVVM
                 sync.ReleaseWriterLock();
                 return false;
             }
+
             var result = collection.Remove(item);
             if (result && this.CollectionChanged != null)
             {
@@ -314,6 +315,7 @@ namespace Apex.MVVM
                 sync.ReleaseWriterLock();
                 return;
             }
+
             collection.RemoveAt(index);
             if (this.CollectionChanged != null)
             {
@@ -322,7 +324,6 @@ namespace Apex.MVVM
             }
 
             sync.ReleaseWriterLock();
-
         }
 
         /// <summary>
@@ -355,10 +356,10 @@ namespace Apex.MVVM
                     sync.ReleaseWriterLock();
                     return;
                 }
+
                 collection[index] = value;
                 sync.ReleaseWriterLock();
             }
-
         }
     }
 }

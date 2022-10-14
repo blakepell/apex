@@ -59,7 +59,6 @@ namespace Apex.Shells
         object ShowPopup(UIElement popup);
 
 #else
-
         /// <summary>
         /// Pushes a popup onto the popup stack and displays it.
         /// Once the popup is closed, this onPopupClosed action will be called 

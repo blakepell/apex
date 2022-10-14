@@ -14,11 +14,7 @@ namespace Apex.DragAndDrop
         /// <value>
         ///   <c>true</c> if the operation is allowed; otherwise, <c>false</c>.
         /// </value>
-        public bool Allow
-        {
-            get;
-            set;
-        }
+        public bool Allow { get; set; }
 
         /// <summary>
         /// Gets or sets the drag source.
@@ -26,11 +22,7 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The drag source.
         /// </value>
-        public FrameworkElement DragSource
-        {
-            get;
-            set;
-        }
+        public FrameworkElement DragSource { get; set; }
 
         /// <summary>
         /// Gets or sets the drag element.
@@ -38,11 +30,7 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The drag element.
         /// </value>
-        public FrameworkElement DragElement
-        {
-            get;
-            set;
-        }
+        public FrameworkElement DragElement { get; set; }
 
         /// <summary>
         /// Gets or sets the drag data.
@@ -50,11 +38,7 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The drag data.
         /// </value>
-        public object DragData
-        {
-            get;
-            set;
-        }
+        public object DragData { get; set; }
 
         /// <summary>
         /// Gets or sets the drop target.
@@ -62,11 +46,7 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The drop target.
         /// </value>
-        public FrameworkElement DropTarget
-        {
-            get;
-            set;
-        }
+        public FrameworkElement DropTarget { get; set; }
 
         /// <summary>
         /// Gets or sets the drag adorner.
@@ -74,11 +54,7 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The drag adorner.
         /// </value>
-        public Adorners.Adorner DragAdorner
-        {
-            get;
-            set;
-        }
+        public Adorners.Adorner DragAdorner { get; set; }
 
         /// <summary>
         /// Gets or sets the initial element offset.
@@ -86,10 +62,6 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The initial element offset.
         /// </value>
-        public Point InitialElementOffset
-        {
-            get;
-            set;
-        }
+        public Point InitialElementOffset { get; set; }
     }
 }

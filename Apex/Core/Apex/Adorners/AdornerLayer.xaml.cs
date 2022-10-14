@@ -31,7 +31,7 @@ namespace Apex.Adorners
             DependencyObject tla = this.GetTopLevelParent();
 
             //  Update the dictionary.
-            if(adornerLayers.ContainsKey(tla) == false)
+            if (adornerLayers.ContainsKey(tla) == false)
             {
                 adornerLayers.Add(tla, this);
             }

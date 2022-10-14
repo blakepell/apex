@@ -3,7 +3,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Apex.Extensions;
 
-namespace Apex.Adorners 
+namespace Apex.Adorners
 {
     /// <summary>
     /// A Visual Adorner.

@@ -41,13 +41,13 @@ namespace Apex.Controls
 
         private void HandleAnimationTick(object sender, EventArgs e)
         {
-            SpinnerRotate.Angle = (SpinnerRotate.Angle + 36)%360;
+            SpinnerRotate.Angle = (SpinnerRotate.Angle + 36) % 360;
         }
 
         private void HandleLoaded(object sender, RoutedEventArgs e)
         {
             const double offset = Math.PI;
-            const double step = Math.PI*2/10.0;
+            const double step = Math.PI * 2 / 10.0;
 
             this.SetPosition(C0, offset, 0.0, step);
             this.SetPosition(C1, offset, 1.0, step);
@@ -61,13 +61,13 @@ namespace Apex.Controls
         }
 
         private void SetPosition(Ellipse ellipse, double offset,
-                                 double posOffSet, double step)
+            double posOffSet, double step)
         {
             ellipse.SetValue(Canvas.LeftProperty, 50.0
-                                                  + Math.Sin(offset + posOffSet*step)*50.0);
+                                                  + Math.Sin(offset + posOffSet * step) * 50.0);
 
             ellipse.SetValue(Canvas.TopProperty, 50
-                                                 + Math.Cos(offset + posOffSet*step)*50.0);
+                                                 + Math.Cos(offset + posOffSet * step) * 50.0);
         }
 
         private void HandleUnloaded(object sender, RoutedEventArgs e)
@@ -76,9 +76,9 @@ namespace Apex.Controls
         }
 
         private void HandleVisibleChanged(object sender,
-                                          DependencyPropertyChangedEventArgs e)
+            DependencyPropertyChangedEventArgs e)
         {
-            bool isVisible = (bool) e.NewValue;
+            bool isVisible = (bool)e.NewValue;
 
             if (isVisible)
             {
@@ -97,7 +97,8 @@ namespace Apex.Controls
         /// <summary>
         /// The progress text property.
         /// </summary>
-        public static DependencyProperty ProgressTextProperty = DependencyProperty.Register("ProgressText", typeof (string), typeof (CircularProgressBar));
+        public static DependencyProperty ProgressTextProperty =
+            DependencyProperty.Register("ProgressText", typeof(string), typeof(CircularProgressBar));
 
         /// <summary>
         /// Gets or sets the progress text.

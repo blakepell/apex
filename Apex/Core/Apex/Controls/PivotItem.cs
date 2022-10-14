@@ -20,18 +20,21 @@ namespace Apex.Controls
         /// <summary>
         /// The Title dependency property.
         /// </summary>
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof (string), typeof (PivotItem));
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register("Title", typeof(string), typeof(PivotItem));
 
         /// <summary>
         /// The Content Dependency Property.
         /// </summary>
-        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof (object), typeof (PivotItem));
+        public static readonly DependencyProperty ContentProperty =
+            DependencyProperty.Register("Content", typeof(object), typeof(PivotItem));
 
         /// <summary>
         /// The IsSelected dependency property.
         /// </summary>
-        public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof (bool), typeof (PivotItem),
-                                                                                                   new PropertyMetadata(false));
+        public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected",
+            typeof(bool), typeof(PivotItem),
+            new PropertyMetadata(false));
 
         /// <summary>
         /// The Selected command.
@@ -79,8 +82,8 @@ namespace Apex.Controls
         /// The IsInitialPage property.
         /// </summary>
         private static readonly DependencyProperty IsInitialPageProperty =
-            DependencyProperty.Register("IsInitialPage", typeof (bool), typeof (PivotItem),
-                                        new PropertyMetadata(false));
+            DependencyProperty.Register("IsInitialPage", typeof(bool), typeof(PivotItem),
+                new PropertyMetadata(false));
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is initial page.

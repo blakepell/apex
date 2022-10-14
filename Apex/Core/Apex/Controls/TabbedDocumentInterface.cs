@@ -20,7 +20,8 @@ namespace Apex.Controls
         static TabbedDocumentInterface()
         {
             //  Override the default style. 
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TabbedDocumentInterface), new FrameworkPropertyMetadata(typeof(TabbedDocumentInterface)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TabbedDocumentInterface),
+                new FrameworkPropertyMetadata(typeof(TabbedDocumentInterface)));
         }
 #else
         public TabbedDocumentInterface()
@@ -51,7 +52,7 @@ namespace Apex.Controls
             this.WireUpCollectionChangedEventHandler(null, this.Documents);
 
             //  If we have any documents, add them.
-            if(this.Documents != null && this.Documents.Count > 0)
+            if (this.Documents != null && this.Documents.Count > 0)
             {
                 foreach (var document in this.Documents)
                 {
@@ -77,6 +78,7 @@ namespace Apex.Controls
             {
                 changed.CollectionChanged -= this.TabbedDocumentInterface_DocumentsCollectionChanged;
             }
+
             if (newValue is INotifyCollectionChanged collectionChanged)
             {
                 collectionChanged.CollectionChanged -= this.TabbedDocumentInterface_DocumentsCollectionChanged;
@@ -100,7 +102,7 @@ namespace Apex.Controls
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach(var newDocument in e.NewItems)
+                    foreach (var newDocument in e.NewItems)
                     {
                         this.AddDocumentTab(newDocument);
                     }
@@ -117,8 +119,9 @@ namespace Apex.Controls
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             //  Make sure the tabs visbility is correct.
-            this.UpdateTabsVisibility();    
+            this.UpdateTabsVisibility();
         }
 
         public static IList GetDocuments(DependencyObject obj)
@@ -139,18 +142,18 @@ namespace Apex.Controls
 
         public static readonly DependencyProperty DocumentsProperty =
             DependencyProperty.RegisterAttached("Documents", typeof(IList),
-                                                typeof (TabbedDocumentInterface), new UIPropertyMetadata(null, OnDocumentsChanged));
+                typeof(TabbedDocumentInterface), new UIPropertyMetadata(null, OnDocumentsChanged));
 
         private TabControl documentsTabControl;
         private ContentControl contentControl;
 
-        
+
         /// <summary>
         /// The DependencyProperty for the TabHeaderTemplate property.
         /// </summary>
         public static readonly DependencyProperty TabHeaderTemplateProperty =
-          DependencyProperty.Register("TabHeaderTemplate", typeof(DataTemplate), typeof(TabbedDocumentInterface),
-          new PropertyMetadata(default(DataTemplate), OnTabHeaderTemplateChanged));
+            DependencyProperty.Register("TabHeaderTemplate", typeof(DataTemplate), typeof(TabbedDocumentInterface),
+                new PropertyMetadata(default(DataTemplate), OnTabHeaderTemplateChanged));
 
         /// <summary>
         /// Gets or sets TabHeaderTemplate.
@@ -172,13 +175,13 @@ namespace Apex.Controls
             var me = o as TabbedDocumentInterface;
         }
 
-        
+
         /// <summary>
         /// The DependencyProperty for the TabContentTemplate property.
         /// </summary>
         public static readonly DependencyProperty TabContentTemplateProperty =
-          DependencyProperty.Register("TabContentTemplate", typeof(DataTemplate), typeof(TabbedDocumentInterface),
-          new PropertyMetadata(default(DataTemplate), OnTabContentTemplateChanged));
+            DependencyProperty.Register("TabContentTemplate", typeof(DataTemplate), typeof(TabbedDocumentInterface),
+                new PropertyMetadata(default(DataTemplate), OnTabContentTemplateChanged));
 
         /// <summary>
         /// Gets or sets TabContentTemplate.

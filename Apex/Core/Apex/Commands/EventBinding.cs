@@ -25,8 +25,8 @@ namespace Apex.Commands
         /// The EventName Dependency Property.
         /// </summary>
         private static readonly DependencyProperty EventNameProperty =
-          DependencyProperty.Register("EventName", typeof(string), typeof(EventBinding),
-          new PropertyMetadata(null));
+            DependencyProperty.Register("EventName", typeof(string), typeof(EventBinding),
+                new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets the name of the event.
@@ -44,8 +44,8 @@ namespace Apex.Commands
         /// The Command Dependency property.
         /// </summary>
         public static readonly DependencyProperty CommandProperty =
-          DependencyProperty.Register("Command", typeof(ICommand), typeof(EventBinding),
-          new PropertyMetadata(null));
+            DependencyProperty.Register("Command", typeof(ICommand), typeof(EventBinding),
+                new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets the command.
@@ -63,8 +63,8 @@ namespace Apex.Commands
         /// The command parameter dependency property.
         /// </summary>
         public static readonly DependencyProperty CommandParameterProperty =
-          DependencyProperty.Register("CommandParameter", typeof(object), typeof(EventBinding),
-          new PropertyMetadata(null));
+            DependencyProperty.Register("CommandParameter", typeof(object), typeof(EventBinding),
+                new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets the command parameter.
@@ -86,7 +86,6 @@ namespace Apex.Commands
         {
             try
             {
-
                 //  Get the event info from the event name.
                 var eventInfo = o.GetType().GetEvent(this.EventName);
 
@@ -112,9 +111,8 @@ namespace Apex.Commands
         /// <param name="o">The object.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void EventProxy(object o, EventArgs e)
-        {   
+        {
 #if SILVERLIGHT
-
             //  If we're in Silverlight, we have NOT inherited the data context
             //  because the EventBindingCollection is not a framework element and
             //  therefore out of the logical tree. However, we can set it here 
@@ -136,7 +134,6 @@ namespace Apex.Commands
         }
 
 #if SILVERLIGHT
-        
         /// <summary>
         /// Gets or sets the parent element. Only needed as a helper property in Silverlight.
         /// </summary>

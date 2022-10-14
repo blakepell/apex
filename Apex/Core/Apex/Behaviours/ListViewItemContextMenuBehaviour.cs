@@ -60,13 +60,13 @@ namespace Apex.Behaviours
             }
         }
 
-        
+
         /// <summary>
         /// The DependencyProperty for the ContextMenu property.
         /// </summary>
         public static readonly DependencyProperty ContextMenuProperty =
-          DependencyProperty.Register("ContextMenu", typeof(ContextMenu), typeof(ListViewItemContextMenuBehaviour),
-          new PropertyMetadata(default(ContextMenu), OnContextMenuChanged));
+            DependencyProperty.Register("ContextMenu", typeof(ContextMenu), typeof(ListViewItemContextMenuBehaviour),
+                new PropertyMetadata(default(ContextMenu), OnContextMenuChanged));
 
         /// <summary>
         /// Gets or sets ContextMenu.

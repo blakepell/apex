@@ -37,6 +37,7 @@ namespace Apex.Controls
                 {
                     continue;
                 }
+
                 double x = 0.0;
                 double y = 0.0;
                 double left = GetLeft(element);
@@ -53,12 +54,13 @@ namespace Apex.Controls
 
                 element.Arrange(new Rect(new Point(middle.X + x, middle.Y - y), element.DesiredSize));
             }
+
             return arrangeSize;
         }
 
         /// <summary>
         /// The origin.
         /// </summary>
-        protected Point origin = new Point(0,0);
+        protected Point origin = new Point(0, 0);
     }
 }

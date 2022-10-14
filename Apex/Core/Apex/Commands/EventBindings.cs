@@ -2,18 +2,17 @@
 
 namespace Apex.Commands
 {
-
     /// <summary>
     /// Common event bindings.
     /// </summary>
     public static class EventBindings
     {
-      /// <summary>
-      /// The Event Bindings Property.
-      /// </summary>
+        /// <summary>
+        /// The Event Bindings Property.
+        /// </summary>
         private static readonly DependencyProperty EventBindingsProperty =
-          DependencyProperty.RegisterAttached("EventBindings", typeof(EventBindingCollection), typeof(EventBindings),
-          new PropertyMetadata(null, OnEventBindingsChanged));
+            DependencyProperty.RegisterAttached("EventBindings", typeof(EventBindingCollection), typeof(EventBindings),
+                new PropertyMetadata(null, OnEventBindingsChanged));
 
         /// <summary>
         /// Gets the event bindings.
@@ -61,4 +60,3 @@ namespace Apex.Commands
         }
     }
 }
- 

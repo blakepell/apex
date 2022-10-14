@@ -29,7 +29,7 @@ namespace Apex.Helpers.Popups
                 PopupElement = popup,
                 Background = new Grid()
             };
-            
+
             //  Add the tuple to the internal collection.
             popupsAndBackgrounds.Add(popupAndBackground);
 
@@ -47,12 +47,14 @@ namespace Apex.Helpers.Popups
         public void ClosePopup(Grid popupHost, UIElement popup)
         {
             //  Find the tuple for the popup.
-            var popupAndBackground = (from pab in popupsAndBackgrounds where pab.PopupElement == popup select pab).FirstOrDefault();
+            var popupAndBackground = (from pab in popupsAndBackgrounds where pab.PopupElement == popup select pab)
+                .FirstOrDefault();
 
             //  If it's missing, then this popup was not shown in this instance of the helper.
-            if(popupAndBackground == null)
+            if (popupAndBackground == null)
             {
-                throw new InvalidOperationException("The popup to be hidden was not shown in this instance. Popups must be shown and then hidden by the same object.");
+                throw new InvalidOperationException(
+                    "The popup to be hidden was not shown in this instance. Popups must be shown and then hidden by the same object.");
             }
 
             //  Remove the popup and background from the internal collection.
@@ -89,6 +91,4 @@ namespace Apex.Helpers.Popups
             public Grid Background { get; set; }
         }
     }
-
-    
 }

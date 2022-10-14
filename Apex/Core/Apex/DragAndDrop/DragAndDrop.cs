@@ -11,9 +11,9 @@ namespace Apex.DragAndDrop
         /// <summary>
         /// The 'IsDragSource' dependency property.
         /// </summary>
-        public static readonly DependencyProperty IsDragSourceProperty = 
-          DependencyProperty.RegisterAttached("IsDragSource", typeof(bool), typeof(FrameworkElement),
-          new PropertyMetadata(false));
+        public static readonly DependencyProperty IsDragSourceProperty =
+            DependencyProperty.RegisterAttached("IsDragSource", typeof(bool), typeof(FrameworkElement),
+                new PropertyMetadata(false));
 
         /// <summary>
         /// Gets the 'IsDragSource' property.
@@ -22,7 +22,7 @@ namespace Apex.DragAndDrop
         /// <returns>The 'IsDragSource' property</returns>
         public static bool GetIsDragSource(FrameworkElement o)
         {
-          return (bool)o.GetValue(IsDragSourceProperty);
+            return (bool)o.GetValue(IsDragSourceProperty);
         }
 
         /// <summary>
@@ -32,15 +32,15 @@ namespace Apex.DragAndDrop
         /// <param name="value">if set to <c>true</c> [value].</param>
         public static void SetIsDragSource(FrameworkElement o, bool value)
         {
-          o.SetValue(IsDragSourceProperty, value);
+            o.SetValue(IsDragSourceProperty, value);
         }
 
         /// <summary>
         /// The 'IsDropTarget' property.
         /// </summary>
         private static readonly DependencyProperty IsDropTargetProperty =
-          DependencyProperty.RegisterAttached("IsDropTarget", typeof(bool), typeof(FrameworkElement),
-          new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached("IsDropTarget", typeof(bool), typeof(FrameworkElement),
+                new PropertyMetadata(false));
 
         /// <summary>
         /// Gets the 'IsDropTarget' property.
@@ -66,8 +66,8 @@ namespace Apex.DragAndDrop
         /// The 'IsDraggable' property.
         /// </summary>
         private static readonly DependencyProperty IsDraggableProperty =
-          DependencyProperty.RegisterAttached("IsDraggable", typeof(bool), typeof(FrameworkElement),
-          new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached("IsDraggable", typeof(bool), typeof(FrameworkElement),
+                new PropertyMetadata(false));
 
         /// <summary>
         /// Gets the 'IsDraggable' property.
@@ -89,5 +89,4 @@ namespace Apex.DragAndDrop
             o.SetValue(IsDraggableProperty, value);
         }
     }
-
 }

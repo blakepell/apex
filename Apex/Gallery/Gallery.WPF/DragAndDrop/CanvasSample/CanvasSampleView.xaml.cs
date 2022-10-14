@@ -2,7 +2,6 @@
 using Apex.DragAndDrop;
 using Apex.Adorners;
 using System.Windows.Controls;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Gallery.DragAndDrop.CanvasSample

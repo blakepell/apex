@@ -43,9 +43,10 @@ namespace Apex.Helpers.Popups
 
             //  Now create a storyboard to animate a fade in.
             var storyboard = new Storyboard();
-            
+
             //  Create an animation for the opacity.
-            var popupBackgroundOpacityAnimation = new DoubleAnimation() { From = 0, To = 0.5, Duration = this.FadeInDuration};
+            var popupBackgroundOpacityAnimation = new DoubleAnimation()
+                { From = 0, To = 0.5, Duration = this.FadeInDuration };
             var popupOpacityAnimation = new DoubleAnimation() { From = 0, To = 1, Duration = this.FadeInDuration };
 
             //  Set the targets for the animations
@@ -76,7 +77,7 @@ namespace Apex.Helpers.Popups
         {
             //  Now create a storyboard to animate a fade out.
             var storyboard = new Storyboard();
-            
+
             //  Create an animation for the opacity.
             var popupBackgroundOpacityAnimation = new DoubleAnimation() { To = 0, Duration = this.FadeOutDuration };
             var popupOpacityAnimation = new DoubleAnimation() { To = 0, Duration = this.FadeOutDuration };

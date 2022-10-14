@@ -4,22 +4,22 @@ using System.Linq;
 
 namespace Apex.Extensions
 {
-  /// <summary>
-  /// A set of useful extensions for the List interface.
-  /// </summary>
+    /// <summary>
+    /// A set of useful extensions for the List interface.
+    /// </summary>
     public static class ListExtensions
     {
-      /// <summary>
-      /// Some of these functions need random numbers - so keep a single
-      /// Random instance.
-      /// </summary>
-      private static Random rng = new Random();
+        /// <summary>
+        /// Some of these functions need random numbers - so keep a single
+        /// Random instance.
+        /// </summary>
+        private static Random rng = new Random();
 
-      /// <summary>
-      /// Shuffles the specified list.
-      /// </summary>
-      /// <typeparam name="T">The list type.</typeparam>
-      /// <param name="list">The list.</param>
+        /// <summary>
+        /// Shuffles the specified list.
+        /// </summary>
+        /// <typeparam name="T">The list type.</typeparam>
+        /// <param name="list">The list.</param>
         public static void Shuffle<T>(this IList<T> list)
         {
             int n = list.Count;
@@ -41,7 +41,7 @@ namespace Apex.Extensions
         /// <returns>A random element from the list.</returns>
         public static T RandomElement<T>(this IList<T> list)
         {
-          return list.ElementAt(rng.Next(0, list.Count));
+            return list.ElementAt(rng.Next(0, list.Count));
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Apex.MVVM
 
             //  Go through all properties, yield notifying properties.
             var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
-            if(declaredOnly)
+            if (declaredOnly)
             {
                 flags |= BindingFlags.DeclaredOnly;
             }
@@ -51,7 +51,7 @@ namespace Apex.MVVM
             //  Return the properties that are notifying properties.
             return from field in myType.GetFields(flags)
                    where
-                   field.FieldType == typeof(NotifyingProperty)
+                       field.FieldType == typeof(NotifyingProperty)
                    select field.GetValue(this) as NotifyingProperty;
         }
 
@@ -62,7 +62,7 @@ namespace Apex.MVVM
         public void SaveInitialState()
         {
             //  Go through each notifying property.
-            foreach(var notifyingProperty in this.GetNotifyingProperties())
+            foreach (var notifyingProperty in this.GetNotifyingProperties())
             {
                 //  Save it's initial state.
                 notifyingProperty.SaveInitialState();
@@ -187,13 +187,12 @@ namespace Apex.MVVM
             get => hasChanges;
             protected set
             {
-                if(hasChanges != value)
+                if (hasChanges != value)
                 {
                     hasChanges = value;
                     this.NotifyPropertyChanged("HasChanges");
                 }
             }
         }
-
     }
 }

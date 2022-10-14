@@ -14,10 +14,11 @@ namespace Apex.Controls
         /// </summary>
         /// <param name="dependencyObject">The dependency object.</param>
         /// <param name="args">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
-        private static void OnGridPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+        private static void OnGridPropertyChanged(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs args)
         {
             //  Get the grid.
-            var me = (VariableGrid) dependencyObject;
+            var me = (VariableGrid)dependencyObject;
 
             //  Clear the rows and columns.
             me.RowDefinitions.Clear();
@@ -34,40 +35,42 @@ namespace Apex.Controls
 
             //  Add each row.
             for (int i = 0; i < me.Rows; i++)
-                me.RowDefinitions.Add(new RowDefinition() {Height = gridLengthConverter.ConvertFromString(me.RowHeight)});
+                me.RowDefinitions.Add(new RowDefinition()
+                    { Height = gridLengthConverter.ConvertFromString(me.RowHeight) });
 
             //  Add each column.
             for (int i = 0; i < me.Columns; i++)
-                me.ColumnDefinitions.Add(new ColumnDefinition() {Width = gridLengthConverter.ConvertFromString(me.ColumnWidth)});
+                me.ColumnDefinitions.Add(new ColumnDefinition()
+                    { Width = gridLengthConverter.ConvertFromString(me.ColumnWidth) });
         }
 
         /// <summary>
         /// The rows dependency property.
         /// </summary>
         private static readonly DependencyProperty rowsProperty =
-            DependencyProperty.Register("Rows", typeof (int), typeof (VariableGrid),
-                                        new PropertyMetadata(1, OnGridPropertyChanged));
+            DependencyProperty.Register("Rows", typeof(int), typeof(VariableGrid),
+                new PropertyMetadata(1, OnGridPropertyChanged));
 
         /// <summary>
         /// The columns dependency property.
         /// </summary>
         private static readonly DependencyProperty columnsProperty =
-            DependencyProperty.Register("Columns", typeof (int), typeof (VariableGrid),
-                                        new PropertyMetadata(1, OnGridPropertyChanged));
+            DependencyProperty.Register("Columns", typeof(int), typeof(VariableGrid),
+                new PropertyMetadata(1, OnGridPropertyChanged));
 
         /// <summary>
         /// The rows dependency property.
         /// </summary>
         private static readonly DependencyProperty rowHeightProperty =
-            DependencyProperty.Register("RowHeight", typeof (string), typeof (VariableGrid),
-                                        new PropertyMetadata("Auto", OnGridPropertyChanged));
+            DependencyProperty.Register("RowHeight", typeof(string), typeof(VariableGrid),
+                new PropertyMetadata("Auto", OnGridPropertyChanged));
 
         /// <summary>
         /// The columns dependency property.
         /// </summary>
         private static readonly DependencyProperty columnsWidthProperty =
-            DependencyProperty.Register("ColumnWidth", typeof (string), typeof (VariableGrid),
-                                        new PropertyMetadata("Auto", OnGridPropertyChanged));
+            DependencyProperty.Register("ColumnWidth", typeof(string), typeof(VariableGrid),
+                new PropertyMetadata("Auto", OnGridPropertyChanged));
 
         /// <summary>
         /// Gets or sets the rows.

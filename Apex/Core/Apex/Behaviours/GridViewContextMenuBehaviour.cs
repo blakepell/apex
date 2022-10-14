@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
@@ -22,9 +21,11 @@ namespace Apex.Behaviours
 
             //  Get the list view.
             //  Ensure we have a grid view.
-            if (!(this.AssociatedObject is ListView element) || element.View == null || element.View is GridView == false)
+            if (!(this.AssociatedObject is ListView element) || element.View == null ||
+                element.View is GridView == false)
             {
-                throw new InvalidOperationException("The GridViewContextMenuBehaviour must be attached to a ListView with the GridView View.");
+                throw new InvalidOperationException(
+                    "The GridViewContextMenuBehaviour must be attached to a ListView with the GridView View.");
             }
 
             //  Store the gridview.

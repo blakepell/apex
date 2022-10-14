@@ -24,13 +24,15 @@ namespace Apex.Converters
             DateTime dateTime;
             try
             {
-                dateTime = (DateTime) value;
+                dateTime = (DateTime)value;
             }
             catch (Exception exception)
             {
-                throw new InvalidOperationException("The value provided to a DateTimeToSensibleStringConverter could not be cast to a DateTime.", exception);
+                throw new InvalidOperationException(
+                    "The value provided to a DateTimeToSensibleStringConverter could not be cast to a DateTime.",
+                    exception);
             }
-            
+
             //  Depending on the date portion, create the date part of the string.
             string datePart = dateTime.ToShortDateString() + " ";
             if (dateTime.Date == DateTime.Now.AddDays(1).Date)
@@ -59,7 +61,8 @@ namespace Apex.Converters
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException("ConvertBack is NOT supported for DateTimeToSensibleStringConverter.");
         }

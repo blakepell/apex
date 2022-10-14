@@ -11,12 +11,16 @@ namespace Apex.Controls
         /// <summary>
         /// Current Vertical Offset dependency property.
         /// </summary>
-        public static DependencyProperty CurrentVerticalOffsetProperty = DependencyProperty.Register("CurrentVerticalOffset", typeof (double), typeof (AnimatedScrollViewer), new PropertyMetadata(OnVerticalChanged));
+        public static DependencyProperty CurrentVerticalOffsetProperty =
+            DependencyProperty.Register("CurrentVerticalOffset", typeof(double), typeof(AnimatedScrollViewer),
+                new PropertyMetadata(OnVerticalChanged));
 
         /// <summary>
         /// Current horizontal offset dependency property.
         /// </summary>
-        public static DependencyProperty CurrentHorizontalOffsetProperty = DependencyProperty.Register("CurrentHorizontalOffsetOffset", typeof (double), typeof (AnimatedScrollViewer), new PropertyMetadata(OnHorizontalChanged));
+        public static DependencyProperty CurrentHorizontalOffsetProperty =
+            DependencyProperty.Register("CurrentHorizontalOffsetOffset", typeof(double), typeof(AnimatedScrollViewer),
+                new PropertyMetadata(OnHorizontalChanged));
 
         /// <summary>
         /// Called when vertical changed.
@@ -26,7 +30,7 @@ namespace Apex.Controls
         private static void OnVerticalChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var viewer = (AnimatedScrollViewer)d;
-            viewer.ScrollToVerticalOffset((double) e.NewValue);
+            viewer.ScrollToVerticalOffset((double)e.NewValue);
         }
 
         /// <summary>
@@ -37,7 +41,7 @@ namespace Apex.Controls
         private static void OnHorizontalChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var viewer = (AnimatedScrollViewer)d;
-            viewer.ScrollToHorizontalOffset((double) e.NewValue);
+            viewer.ScrollToHorizontalOffset((double)e.NewValue);
         }
 
         /// <summary>

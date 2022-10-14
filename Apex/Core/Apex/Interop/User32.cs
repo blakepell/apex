@@ -32,6 +32,7 @@ namespace Apex.Interop
         /// x coordinate of point.
         /// </summary>
         public int x;
+
         /// <summary>
         /// y coordinate of point.
         /// </summary>
@@ -85,10 +86,13 @@ namespace Apex.Interop
     {
         /// <summary> Win32 </summary>
         public int left;
+
         /// <summary> Win32 </summary>
         public int top;
+
         /// <summary> Win32 </summary>
         public int right;
+
         /// <summary> Win32 </summary>
         public int bottom;
 
@@ -128,14 +132,22 @@ namespace Apex.Interop
         /// <summary> Return a user friendly representation of this struct </summary>
         public override string ToString()
         {
-            if (this == Empty) { return "RECT {Empty}"; }
+            if (this == Empty)
+            {
+                return "RECT {Empty}";
+            }
+
             return "RECT { left : " + left + " / top : " + top + " / right : " + right + " / bottom : " + bottom + " }";
         }
 
         /// <summary> Determine if 2 RECT are equal (deep compare) </summary>
         public override bool Equals(object obj)
         {
-            if (!(obj is Rect)) { return false; }
+            if (!(obj is Rect))
+            {
+                return false;
+            }
+
             return (this == (RECT)obj);
         }
 
@@ -149,7 +161,8 @@ namespace Apex.Interop
         /// <summary> Determine if 2 RECT are equal (deep compare)</summary>
         public static bool operator ==(RECT rect1, RECT rect2)
         {
-            return (rect1.left == rect2.left && rect1.top == rect2.top && rect1.right == rect2.right && rect1.bottom == rect2.bottom);
+            return (rect1.left == rect2.left && rect1.top == rect2.top && rect1.right == rect2.right &&
+                    rect1.bottom == rect2.bottom);
         }
 
         /// <summary> Determine if 2 RECT are different(deep compare)</summary>

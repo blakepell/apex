@@ -29,11 +29,11 @@ namespace Apex.Behaviours
             if (horizontalPosition.HasValue)
             {
                 var horzAnim = new DoubleAnimation()
-                                   {
-                                       To = horizontalPosition.Value,
-                                       DecelerationRatio = 0.8,
-                                       Duration = TimeSpan.FromMilliseconds(300)
-                                   };
+                {
+                    To = horizontalPosition.Value,
+                    DecelerationRatio = 0.8,
+                    Duration = TimeSpan.FromMilliseconds(300)
+                };
 
                 storyBoard.Children.Add(horzAnim);
 
@@ -58,8 +58,6 @@ namespace Apex.Behaviours
             }
 
             storyBoard.Begin();
-
-
         }
 
         /// <summary>
@@ -70,7 +68,7 @@ namespace Apex.Behaviours
         {
             this.AssociatedObject.ScrollToVerticalOffset((double)e.NewValue);
         }
-        
+
         /// <summary>
         /// Called when smooth horizontal offset changed.
         /// </summary>
@@ -87,7 +85,7 @@ namespace Apex.Behaviours
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnSmoothVerticalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if(d is SmoothScrollingBehaviour me)
+            if (d is SmoothScrollingBehaviour me)
             {
                 me.OnSmoothVerticalOffsetChanged(e);
             }
@@ -109,16 +107,16 @@ namespace Apex.Behaviours
         /// <summary>
         /// The SmoothVerticalOffset dependency property.
         /// </summary>
-        public static readonly DependencyProperty SmoothVerticalOffsetProperty = 
+        public static readonly DependencyProperty SmoothVerticalOffsetProperty =
             DependencyProperty.Register("SmoothVerticalOffset", typeof(double),
-            typeof(SmoothScrollingBehaviour), new PropertyMetadata(OnSmoothVerticalOffsetChanged));
+                typeof(SmoothScrollingBehaviour), new PropertyMetadata(OnSmoothVerticalOffsetChanged));
 
         /// <summary>
         /// The SmoothHorizontalOffset dependency property.
         /// </summary>
-        public static readonly DependencyProperty SmoothHorizonalOffsetProperty = 
+        public static readonly DependencyProperty SmoothHorizonalOffsetProperty =
             DependencyProperty.Register("SmoothHorizonalOffset", typeof(double),
-            typeof(SmoothScrollingBehaviour), new PropertyMetadata(OnSmoothHorizonalOffsetChanged));
+                typeof(SmoothScrollingBehaviour), new PropertyMetadata(OnSmoothHorizonalOffsetChanged));
 
         /// <summary>
         /// Gets or sets the smooth horizonal offset.

@@ -20,7 +20,7 @@ namespace Apex.Controls
             base.OnApplyTemplate();
 
             //  If we have no view model selected, we're done.
-            if(this.ViewModel == null)
+            if (this.ViewModel == null)
             {
                 return;
             }
@@ -36,8 +36,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the BrokerHint property.
         /// </summary>
         private static readonly DependencyProperty BrokerHintProperty =
-          DependencyProperty.Register("BrokerHint", typeof(string), typeof(ViewBroker),
-          new PropertyMetadata(null));
+            DependencyProperty.Register("BrokerHint", typeof(string), typeof(ViewBroker),
+                new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets BrokerHint.
@@ -49,13 +49,13 @@ namespace Apex.Controls
             set => this.SetValue(BrokerHintProperty, value);
         }
 
-        
+
         /// <summary>
         /// The DependencyProperty for the AllowUnknownViewModels property.
         /// </summary>
         public static readonly DependencyProperty AllowUnknownViewModelsProperty =
-          DependencyProperty.Register("AllowUnknownViewModels", typeof(bool), typeof(ViewBroker),
-          new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("AllowUnknownViewModels", typeof(bool), typeof(ViewBroker),
+                new PropertyMetadata(default(bool)));
 
         /// <summary>
         /// Gets or sets AllowUnknownViewModels.
@@ -71,8 +71,8 @@ namespace Apex.Controls
         /// The DependencyProperty for the ViewModel property.
         /// </summary>
         private static readonly DependencyProperty ViewModelProperty =
-          DependencyProperty.Register("ViewModel", typeof(object), typeof(ViewBroker),
-          new PropertyMetadata(null, OnViewModelChanged));
+            DependencyProperty.Register("ViewModel", typeof(object), typeof(ViewBroker),
+                new PropertyMetadata(null, OnViewModelChanged));
 
         /// <summary>
         /// Gets or sets ViewModel.
@@ -92,7 +92,7 @@ namespace Apex.Controls
         private static void OnViewModelChanged(DependencyObject o, DependencyPropertyChangedEventArgs args)
         {
             var me = o as ViewBroker;
-            
+
             //  If the viewmodel is null, show the default content.
             if (me.ViewModel == null)
             {
@@ -113,7 +113,7 @@ namespace Apex.Controls
         {
             //  Before we set the view as the content, if the current content is a view,
             //  we can deactivate it.
-            if(this.Content is IView view1)
+            if (this.Content is IView view1)
             {
                 ((IView)this.Content).OnDeactivated();
             }
@@ -143,9 +143,10 @@ namespace Apex.Controls
             {
                 return null;
             }
-            else if(viewType == null)
+            else if (viewType == null)
             {
-                throw new InvalidOperationException("Cannot broker a view for the view model type " + viewModel.GetType().Name);
+                throw new InvalidOperationException("Cannot broker a view for the view model type " +
+                                                    viewModel.GetType().Name);
             }
 
             //  We have the view type, now we must create an instance of it.
@@ -159,7 +160,7 @@ namespace Apex.Controls
             }
 
             //  Set the data context.
-            ((FrameworkElement) viewInstance).DataContext = viewModel;
+            ((FrameworkElement)viewInstance).DataContext = viewModel;
 
             //  Return the view instance.
             return viewInstance;
