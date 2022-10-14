@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Markup;
 using System.Windows.Media.Animation;
-using Apex.Extensions;
 using System.Collections.ObjectModel;
 using Apex.MVVM;
-using Apex.DragAndDrop;
 
 namespace Apex.Controls
 {
@@ -56,35 +45,37 @@ namespace Apex.Controls
 
             try
             {
-                itemsControl = (ItemsControl) GetTemplateChild("PART_ItemsControl");
-                pivotScrollViewer = (AnimatedScrollViewer) GetTemplateChild("PART_PivotScrollViewer");
+                itemsControl = (ItemsControl)this.GetTemplateChild("PART_ItemsControl");
+                pivotScrollViewer = (AnimatedScrollViewer)this.GetTemplateChild("PART_PivotScrollViewer");
             }
             catch
             {
                 throw new Exception("Unable to access the internal elements of the Pivot control.");
             }
-            selectPivotItemCommand = new Command(SelectPivotItem, true);
+            selectPivotItemCommand = new Command(this.SelectPivotItem, true);
 
-            SizeChanged += new SizeChangedEventHandler(PivotControl_SizeChanged);
+            this.SizeChanged += this.PivotControl_SizeChanged;
 
-            Loaded += new RoutedEventHandler(PivotControl_Loaded);
+            this.Loaded += this.PivotControl_Loaded;
 
         }
 
         private void PivotControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (SelectedPivotItem == null && PivotItems.Count > 0)
+            if (this.SelectedPivotItem == null && this.PivotItems.Count > 0)
             {
-                foreach (var pivotItem in PivotItems)
+                foreach (var pivotItem in this.PivotItems)
                 {
                     if (pivotItem.IsInitialPage)
                     {
-                        SelectedPivotItem = pivotItem;
+                        this.SelectedPivotItem = pivotItem;
                         break;
                     }
                 }
-                if (SelectedPivotItem == null)
-                    SelectedPivotItem = PivotItems[0];
+                if (this.SelectedPivotItem == null)
+                {
+                    this.SelectedPivotItem = this.PivotItems[0];
+                }
             }
         }
 
@@ -94,16 +85,16 @@ namespace Apex.Controls
         private void PivotControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             //  Go through each pivot item and set the size.
-            foreach (var pivotItem in PivotItems)
+            foreach (var pivotItem in this.PivotItems)
             {
-                if (pivotItem.Content is FrameworkElement)
+                if (pivotItem.Content is FrameworkElement frameworkElement)
                 {
-                    FrameworkElement frameworkElement = pivotItem.Content as FrameworkElement;
                     frameworkElement.Width = pivotScrollViewer.ActualWidth;
                     frameworkElement.Height = pivotScrollViewer.ActualHeight;
                 }
             }
-            UpdatePositioning(true);
+
+            this.UpdatePositioning(true);
         }
 
         /// <summary>
@@ -113,14 +104,18 @@ namespace Apex.Controls
         public void SelectPivotItem(object pivotItem)
         {
             //  Deselect all items.
-            foreach (var pitem in PivotItems)
+            foreach (var pitem in this.PivotItems)
+            {
                 pitem.IsSelected = false;
+            }
 
-            PivotItem item = pivotItem as PivotItem;
+            var item = pivotItem as PivotItem;
             if (item != null)
+            {
                 item.IsSelected = true;
+            }
 
-            SelectedPivotItem = item;
+            this.SelectedPivotItem = item;
         }
 
         /// <summary>
@@ -133,7 +128,7 @@ namespace Apex.Controls
         /// SelectedPivotItem dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedPivotItemProperty = DependencyProperty.Register("SelectedPivotItem",
-                                                                                                          typeof (PivotItem), typeof (PivotControl), new PropertyMetadata(null, new PropertyChangedCallback(OnSelectedPivotItemChanged)));
+                                                                                                          typeof (PivotItem), typeof (PivotControl), new PropertyMetadata(null, OnSelectedPivotItemChanged));
 
         private Command selectPivotItemCommand = null;
 
@@ -146,8 +141,8 @@ namespace Apex.Controls
         /// </value>
         public ObservableCollection<PivotItem> PivotItems
         {
-            get { return GetValue(PivotItemsProperty) as ObservableCollection<PivotItem>; }
-            set { SetValue(PivotItemsProperty, value); }
+            get => this.GetValue(PivotItemsProperty) as ObservableCollection<PivotItem>;
+            set => this.SetValue(PivotItemsProperty, value);
         }
 
 
@@ -159,17 +154,14 @@ namespace Apex.Controls
         /// </value>
         public PivotItem SelectedPivotItem
         {
-            get { return GetValue(SelectedPivotItemProperty) as PivotItem; }
-            set { SetValue(SelectedPivotItemProperty, value); }
+            get => this.GetValue(SelectedPivotItemProperty) as PivotItem;
+            set => this.SetValue(SelectedPivotItemProperty, value);
         }
 
         /// <summary>
         /// Gets the select pivot item command.
         /// </summary>
-        public ICommand SelectPivotItemCommand
-        {
-            get { return selectPivotItemCommand; }
-        }
+        public ICommand SelectPivotItemCommand => selectPivotItemCommand;
 
         /// <summary>
         /// Called when [selected pivot item changed].
@@ -179,12 +171,12 @@ namespace Apex.Controls
         public static void OnSelectedPivotItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             //  Get the pivot control and pivot item.
-            PivotControl me = d as PivotControl;
-            PivotItem item = e.NewValue as PivotItem;
 
             //  Continue only if we have non-null objects.
-            if (me == null || item == null)
+            if (!(d is PivotControl me) || !(e.NewValue is PivotItem item))
+            {
                 return;
+            }
 
             me.PivotControl_SizeChanged(me, null);
             me.UpdatePositioning(e.OldValue == null ? true : false);
@@ -192,25 +184,29 @@ namespace Apex.Controls
 
         private void UpdatePositioning(bool immediate)
         {
-            if (SelectedPivotItem == null || SelectedPivotItem.Content is FrameworkElement == false)
+            if (this.SelectedPivotItem == null || this.SelectedPivotItem.Content is FrameworkElement == false)
+            {
                 return;
+            }
 
             //  Get the pivot content.
-            FrameworkElement pivotContent = ((FrameworkElement) SelectedPivotItem.Content);
+            var pivotContent = ((FrameworkElement)this.SelectedPivotItem.Content);
 
             itemsControl.UpdateLayout();
-            Point relativePoint = pivotContent.TransformToAncestor(this).Transform(new Point(0, 0));
+            var relativePoint = pivotContent.TransformToAncestor(this).Transform(new Point(0, 0));
 
             //  We'll actually move the item to the centre of the screen.
-            relativePoint.X += (pivotContent.ActualWidth/2) - (ActualWidth/2);
+            relativePoint.X += (pivotContent.ActualWidth/2) - (this.ActualWidth/2);
 
-            DoubleAnimation horzAnim = new DoubleAnimation();
-            horzAnim.From = pivotScrollViewer.HorizontalOffset;
-            horzAnim.To = pivotScrollViewer.HorizontalOffset + relativePoint.X;
-            horzAnim.DecelerationRatio = .8;
-            horzAnim.Duration = new Duration(TimeSpan.FromMilliseconds(immediate ? 0 : 300));
+            var horzAnim = new DoubleAnimation
+            {
+                From = pivotScrollViewer.HorizontalOffset,
+                To = pivotScrollViewer.HorizontalOffset + relativePoint.X,
+                DecelerationRatio = .8,
+                Duration = new Duration(TimeSpan.FromMilliseconds(immediate ? 0 : 300))
+            };
 
-            Storyboard sb = new Storyboard();
+            var sb = new Storyboard();
             sb.Children.Add(horzAnim);
 
             Storyboard.SetTarget(horzAnim, pivotScrollViewer);
@@ -232,8 +228,8 @@ namespace Apex.Controls
         /// </value>
         public bool ShowPivotHeadings
         {
-            get { return (bool) GetValue(ShowPivotHeadingsProperty); }
-            set { SetValue(ShowPivotHeadingsProperty, value); }
+            get => (bool)this.GetValue(ShowPivotHeadingsProperty);
+            set => this.SetValue(ShowPivotHeadingsProperty, value);
         }
     }
 }

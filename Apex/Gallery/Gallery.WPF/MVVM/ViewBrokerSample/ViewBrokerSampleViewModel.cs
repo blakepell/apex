@@ -14,7 +14,7 @@ namespace Gallery.MVVM.ViewBrokerSample
         /// </summary>
         public ViewBrokerSampleViewModel()
         {
-            Title = "View Broker Sample";
+            this.Title = "View Broker Sample";
 
             //  Create some devices.
             var docs = new FolderViewModel() { Name = "Documents", Description = "The documents folder.", Files = new ObservableCollection<FileViewModel>() };
@@ -29,8 +29,8 @@ namespace Gallery.MVVM.ViewBrokerSample
 
         public object SelectedItem
         {
-            get { return (object)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
+            get => this.GetValue(SelectedItemProperty);
+            set => this.SetValue(SelectedItemProperty, value);
         }
                 
 
@@ -43,10 +43,6 @@ namespace Gallery.MVVM.ViewBrokerSample
         /// <summary>
         /// Gets the devices.
         /// </summary>
-        public ObservableCollection<FolderViewModel> Folders
-        {
-            get { return folders; }
-        }
-
+        public ObservableCollection<FolderViewModel> Folders => folders;
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Apex.MVVM;
+﻿using Apex.MVVM;
 
 namespace Gallery.PivotControl
 {
@@ -11,7 +7,7 @@ namespace Gallery.PivotControl
     {
         public PivotControlViewModel()
         {
-            Title = "PivotControl";
+            this.Title = "PivotControl";
         }
     }
 }

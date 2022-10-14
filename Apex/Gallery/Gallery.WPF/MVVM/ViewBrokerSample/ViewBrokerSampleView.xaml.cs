@@ -16,15 +16,15 @@ namespace Gallery.MVVM.ViewBrokerSample
             ApexBroker.RegisterViewForViewModel(typeof(FolderViewModel), typeof(FolderView));
             ApexBroker.RegisterViewForViewModel(typeof(FileViewModel), typeof(FileView));
 
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
-        public ViewBrokerSampleViewModel ViewModel { get { return (ViewBrokerSampleViewModel) DataContext; } }
+        public ViewBrokerSampleViewModel ViewModel => (ViewBrokerSampleViewModel)this.DataContext;
 
         private void TreeView_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
         {
             //  Set the selected item.
-            ViewModel.SelectedItem = treeView.SelectedItem;
+            this.ViewModel.SelectedItem = treeView.SelectedItem;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Gallery.MVVM.ViewBrokerActivationSample
     {
         public ViewBrokerActivationSampleView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         public ImageCheckBoxViewModel()
         {
-            Title = "ImageCheckBox";
+            this.Title = "ImageCheckBox";
         }
     }
 }

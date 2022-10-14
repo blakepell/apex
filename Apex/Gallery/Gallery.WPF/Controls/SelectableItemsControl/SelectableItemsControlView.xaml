@@ -40,7 +40,7 @@
                     Background="#E9E9E9">
                         <apexControls:SelectableItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"></StackPanel>
+                                <StackPanel Orientation="Horizontal" />
                             </ItemsPanelTemplate>
                         </apexControls:SelectableItemsControl.ItemsPanel>
                         <apexControls:SelectableItemsControl.ItemTemplate>
@@ -54,9 +54,7 @@
                             </DataTemplate>
                         </apexControls:SelectableItemsControl.ItemTemplate>
                     </apexControls:SelectableItemsControl>
-                    <TextBlock Grid.Row="2" TextWrapping="Wrap" Padding="10" Background="White" Text="{Binding SelectedItem.Details}">
-
-                    </TextBlock>
+                    <TextBlock Grid.Row="2" TextWrapping="Wrap" Padding="10" Background="White" Text="{Binding SelectedItem.Details}" />
                 </apexControls:ApexGrid>
             </Grid>
         </apexControls:PaddedGrid>

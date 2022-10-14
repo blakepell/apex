@@ -28,10 +28,10 @@ namespace Apex.Controls
         /// </returns>
         protected override Size ArrangeOverride(Size arrangeSize)
         {
-            Point middle = new Point(arrangeSize.Width / 2, arrangeSize.Height / 2);
+            var middle = new Point(arrangeSize.Width / 2, arrangeSize.Height / 2);
             origin = middle;
 
-            foreach (UIElement element in base.InternalChildren)
+            foreach (UIElement element in this.InternalChildren)
             {
                 if (element == null)
                 {

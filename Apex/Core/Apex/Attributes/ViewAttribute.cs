@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Apex.MVVM
 {
@@ -9,7 +6,7 @@ namespace Apex.MVVM
     /// The View attribute marks a class as a View . This is used
     /// to allow the Apex SDK to help build Views and ViewModels.
     /// </summary>
-    [AttributeUsage(System.AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class ViewAttribute : Attribute
     {
         /// <summary>
@@ -18,7 +15,7 @@ namespace Apex.MVVM
         public ViewAttribute()
         {
             //  Assume the ViewModel is simply an object.
-            ViewModelType = typeof(object);
+            this.ViewModelType = typeof(object);
         }
 
         /// <summary>
@@ -28,7 +25,7 @@ namespace Apex.MVVM
         public ViewAttribute(Type viewModelType)
         {
             //  Store the view model type.
-            ViewModelType = viewModelType;
+            this.ViewModelType = viewModelType;
         }
 
         /// <summary>
@@ -39,8 +36,8 @@ namespace Apex.MVVM
         public ViewAttribute(Type viewModelType, string hint)
         {
             //  Store the view model type.
-            ViewModelType = viewModelType;
-            Hint = hint;
+            this.ViewModelType = viewModelType;
+            this.Hint = hint;
         }
 
         /// <summary>

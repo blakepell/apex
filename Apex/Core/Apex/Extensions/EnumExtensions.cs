@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.ComponentModel;
 
 namespace Apex.Extensions
@@ -23,12 +21,11 @@ namespace Apex.Extensions
       var enumType = me.GetType();
 
       //  Get the description attribute.
-      var descriptionAttribute = enumType.GetField(me.ToString())
-        .GetCustomAttributes(typeof(DescriptionAttribute), false)
-        .FirstOrDefault() as DescriptionAttribute;
 
       //  Get the description (if there is one) or the name of the enum otherwise.
-      return descriptionAttribute != null
+      return enumType.GetField(me.ToString())
+          .GetCustomAttributes(typeof(DescriptionAttribute), false)
+          .FirstOrDefault() is DescriptionAttribute descriptionAttribute
         ? descriptionAttribute.Description
         : me.ToString();
     }

@@ -1,21 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Extensions", "2. Extensions", "{E70E7B68-B67E-4A6B-AA43-5C8DD38686DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snippets", "Extensions\Snippets\Snippets.csproj", "{F8C6FFCD-C814-46D3-AC79-7D36C4D614DE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApexWizards", "Extensions\ApexWizards\ApexWizards.csproj", "{07F81CED-6B5E-48B2-A935-81C289E995C8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApexVsix", "Extensions\ApexVsix\ApexVsix.csproj", "{33CCC542-0C41-4230-BEEC-9A09B4B2267A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Core", "1. Core", "{6685A8B7-9331-4950-A189-8D4CAD5B00FB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apex", "Core\Apex\Apex.csproj", "{67D54A68-A287-4797-9667-ACCBF9683119}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apex.WinForms", "Core\Apex.WinForms\Apex.WinForms.csproj", "{A479105C-717B-4500-8FFC-B3D12BEEF13E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apex.WP7", "Core\Apex.WP7\Apex.WP7.csproj", "{9BC524A0-83F9-4864-A1E5-F93EB7DDAF8A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Solution Items", "{145D0D4D-D218-432D-B7DB-9E6094117FF5}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,15 +14,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Sol
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectTemplates", "ProjectTemplates", "{3830FB7B-9AB1-4DCB-816F-4A7CC10ACC3D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemTemplates", "ItemTemplates", "{7A235DAF-F174-4388-80B7-D6A92B4C84E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{246C6B54-4B69-4A81-B62E-FC4332F8C812}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{74AA33D3-E5E1-470F-A289-05C83540DE7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{12691B81-92AC-43B5-BD26-D8ACF28C6130}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snippets", "Extensions\Snippets\Snippets.csproj", "{F8C6FFCD-C814-46D3-AC79-7D36C4D614DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApexWizards", "Extensions\ApexWizards\ApexWizards.csproj", "{07F81CED-6B5E-48B2-A935-81C289E995C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApexVsix", "Extensions\ApexVsix\ApexVsix.csproj", "{33CCC542-0C41-4230-BEEC-9A09B4B2267A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apex", "Core\Apex\Apex.csproj", "{67D54A68-A287-4797-9667-ACCBF9683119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apex.WinForms", "Core\Apex.WinForms\Apex.WinForms.csproj", "{A479105C-717B-4500-8FFC-B3D12BEEF13E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apex.WP7", "Core\Apex.WP7\Apex.WP7.csproj", "{9BC524A0-83F9-4864-A1E5-F93EB7DDAF8A}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDialogApplication", "Extensions\ProjectTemplates\WPF\WpfDialogApplication\WpfDialogApplication.csproj", "{44644E74-1118-444E-B337-BEB5FA3F67DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZuneStyleApplication", "Extensions\ProjectTemplates\WPF\ZuneStyleApplication\ZuneStyleApplication.csproj", "{F9D779D2-A509-4FA7-B399-45215FFBDAD7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apex.Silverlight", "Core\Apex.Silverlight\Apex.Silverlight.csproj", "{A9132C33-99DE-4780-BD39-99D7CF1E2345}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemTemplates", "ItemTemplates", "{7A235DAF-F174-4388-80B7-D6A92B4C84E1}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{246C6B54-4B69-4A81-B62E-FC4332F8C812}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApexViewAndViewModelItemTemplate", "Extensions\ItemTemplates\WPF\ApexViewAndViewModelItemTemplate\ApexViewAndViewModelItemTemplate.csproj", "{781CF2CC-231E-4948-AF40-1B87A46ED559}"
 EndProject
@@ -41,10 +47,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApexViewModelItemTemplate", "Extensions\ItemTemplates\WPF\ApexViewModelItemTemplate\ApexViewModelItemTemplate.csproj", "{A2D2AA8F-A963-442D-AE52-F6543A375696}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonItemTemplate", "Extensions\ItemTemplates\WPF\SingletonItemTemplate\SingletonItemTemplate.csproj", "{CC481432-5733-4103-A7C7-CCDC4C7049BB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{74AA33D3-E5E1-470F-A289-05C83540DE7A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{12691B81-92AC-43B5-BD26-D8ACF28C6130}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZuneStyleApplication", "Extensions\ProjectTemplates\Silverlight\ZuneStyleApplication\ZuneStyleApplication.csproj", "{50819296-DB19-4B13-8EA7-8E4B45CB45BF}"
 EndProject
@@ -55,83 +57,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApexModelItemTemplate", "Extensions\ItemTemplates\WPF\ApexModelItemTemplate\ApexModelItemTemplate.csproj", "{65E06D7C-F88B-45BE-8886-F9CFA514EC27}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 18
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs33
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Extensions\\Snippets\\Snippets.csproj
-		SccProjectTopLevelParentUniqueName1 = Apex.Extensions.VS2012.sln
-		SccProjectName1 = Extensions/Snippets
-		SccLocalPath1 = Extensions\\Snippets
-		SccProjectUniqueName2 = Extensions\\ApexWizards\\ApexWizards.csproj
-		SccProjectTopLevelParentUniqueName2 = Apex.Extensions.VS2012.sln
-		SccProjectName2 = Extensions/ApexWizards
-		SccLocalPath2 = Extensions\\ApexWizards
-		SccProjectUniqueName3 = Extensions\\ApexVsix\\ApexVsix.csproj
-		SccProjectTopLevelParentUniqueName3 = Apex.Extensions.VS2012.sln
-		SccProjectName3 = Extensions/ApexVsix
-		SccLocalPath3 = Extensions\\ApexVsix
-		SccProjectUniqueName4 = Core\\Apex.WinForms\\Apex.WinForms.csproj
-		SccProjectTopLevelParentUniqueName4 = Apex.Extensions.VS2012.sln
-		SccProjectName4 = Core/Apex.WinForms
-		SccLocalPath4 = Core\\Apex.WinForms
-		SccProjectUniqueName5 = Core\\Apex\\Apex.csproj
-		SccProjectTopLevelParentUniqueName5 = Apex.Extensions.VS2012.sln
-		SccProjectName5 = Core/Apex
-		SccLocalPath5 = Core\\Apex
-		SccProjectUniqueName6 = Core\\Apex.WP7\\Apex.WP7.csproj
-		SccProjectTopLevelParentUniqueName6 = Apex.Extensions.VS2012.sln
-		SccProjectName6 = Core/Apex.WP7
-		SccLocalPath6 = Core\\Apex.WP7
-		SccProjectUniqueName7 = Core\\Apex.Silverlight\\Apex.Silverlight.csproj
-		SccProjectTopLevelParentUniqueName7 = Apex.Extensions.VS2012.sln
-		SccProjectName7 = Core/Apex.Silverlight
-		SccLocalPath7 = Core\\Apex.Silverlight
-		SccProjectUniqueName8 = Extensions\\ItemTemplates\\WPF\\ApexViewAndViewModelItemTemplate\\ApexViewAndViewModelItemTemplate.csproj
-		SccProjectTopLevelParentUniqueName8 = Apex.Extensions.VS2012.sln
-		SccProjectName8 = Extensions/ItemTemplates/WPF/ApexViewAndViewModelItemTemplate
-		SccLocalPath8 = Extensions\\ItemTemplates\\WPF\\ApexViewAndViewModelItemTemplate
-		SccProjectUniqueName9 = Extensions\\ItemTemplates\\WPF\\ApexViewItemTemplate\\ApexViewItemTemplate.csproj
-		SccProjectTopLevelParentUniqueName9 = Apex.Extensions.VS2012.sln
-		SccProjectName9 = Extensions/ItemTemplates/WPF/ApexViewItemTemplate
-		SccLocalPath9 = Extensions\\ItemTemplates\\WPF\\ApexViewItemTemplate
-		SccProjectUniqueName10 = Extensions\\ItemTemplates\\WPF\\ApexViewModelItemTemplate\\ApexViewModelItemTemplate.csproj
-		SccProjectTopLevelParentUniqueName10 = Apex.Extensions.VS2012.sln
-		SccProjectName10 = Extensions/ItemTemplates/WPF/ApexViewModelItemTemplate
-		SccLocalPath10 = Extensions\\ItemTemplates\\WPF\\ApexViewModelItemTemplate
-		SccProjectUniqueName11 = Extensions\\ItemTemplates\\WPF\\SingletonItemTemplate\\SingletonItemTemplate.csproj
-		SccProjectTopLevelParentUniqueName11 = Apex.Extensions.VS2012.sln
-		SccProjectName11 = Extensions/ItemTemplates/WPF/SingletonItemTemplate
-		SccLocalPath11 = Extensions\\ItemTemplates\\WPF\\SingletonItemTemplate
-		SccProjectUniqueName12 = Extensions\\ProjectTemplates\\WPF\\ZuneStyleApplication\\ZuneStyleApplication.csproj
-		SccProjectTopLevelParentUniqueName12 = Apex.Extensions.VS2012.sln
-		SccProjectName12 = Extensions/ProjectTemplates/WPF/ZuneStyleApplication
-		SccLocalPath12 = Extensions\\ProjectTemplates\\WPF\\ZuneStyleApplication
-		SccProjectUniqueName13 = Extensions\\ProjectTemplates\\WPF\\WpfDialogApplication\\WpfDialogApplication.csproj
-		SccProjectTopLevelParentUniqueName13 = Apex.Extensions.VS2012.sln
-		SccProjectName13 = Extensions/ProjectTemplates/WPF/WpfDialogApplication
-		SccLocalPath13 = Extensions\\ProjectTemplates\\WPF\\WpfDialogApplication
-		SccProjectUniqueName14 = Extensions\\ProjectTemplates\\Silverlight\\ZuneStyleApplication\\ZuneStyleApplication.csproj
-		SccProjectTopLevelParentUniqueName14 = Apex.Extensions.VS2012.sln
-		SccProjectName14 = Extensions/ProjectTemplates/Silverlight/ZuneStyleApplication
-		SccLocalPath14 = Extensions\\ProjectTemplates\\Silverlight\\ZuneStyleApplication
-		SccProjectUniqueName15 = Extensions\\ProjectTemplates\\Silverlight\\ZuneStyleApplicationTemplate\\SilverlightZuneStyleApplicationTemplate.csproj
-		SccProjectTopLevelParentUniqueName15 = Apex.Extensions.VS2012.sln
-		SccProjectName15 = Extensions/ProjectTemplates/Silverlight/ZuneStyleApplicationTemplate
-		SccLocalPath15 = Extensions\\ProjectTemplates\\Silverlight\\ZuneStyleApplicationTemplate
-		SccProjectUniqueName16 = Extensions\\ProjectTemplates\\WPF\\ZuneStyleApplicationTemplate\\WpfZuneStyleApplicationTemplate.csproj
-		SccProjectTopLevelParentUniqueName16 = Apex.Extensions.VS2012.sln
-		SccProjectName16 = Extensions/ProjectTemplates/WPF/ZuneStyleApplicationTemplate
-		SccLocalPath16 = Extensions\\ProjectTemplates\\WPF\\ZuneStyleApplicationTemplate
-		SccProjectUniqueName17 = Extensions\\ItemTemplates\\WPF\\ApexModelItemTemplate\\ApexModelItemTemplate.csproj
-		SccProjectTopLevelParentUniqueName17 = Apex.Extensions.VS2012.sln
-		SccProjectName17 = Extensions/ItemTemplates/WPF/ApexModelItemTemplate
-		SccLocalPath17 = Extensions\\ItemTemplates\\WPF\\ApexModelItemTemplate
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Apex.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -386,27 +311,33 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{3830FB7B-9AB1-4DCB-816F-4A7CC10ACC3D} = {E70E7B68-B67E-4A6B-AA43-5C8DD38686DC}
+		{7A235DAF-F174-4388-80B7-D6A92B4C84E1} = {E70E7B68-B67E-4A6B-AA43-5C8DD38686DC}
+		{246C6B54-4B69-4A81-B62E-FC4332F8C812} = {7A235DAF-F174-4388-80B7-D6A92B4C84E1}
+		{74AA33D3-E5E1-470F-A289-05C83540DE7A} = {3830FB7B-9AB1-4DCB-816F-4A7CC10ACC3D}
+		{12691B81-92AC-43B5-BD26-D8ACF28C6130} = {3830FB7B-9AB1-4DCB-816F-4A7CC10ACC3D}
 		{F8C6FFCD-C814-46D3-AC79-7D36C4D614DE} = {E70E7B68-B67E-4A6B-AA43-5C8DD38686DC}
 		{07F81CED-6B5E-48B2-A935-81C289E995C8} = {E70E7B68-B67E-4A6B-AA43-5C8DD38686DC}
 		{33CCC542-0C41-4230-BEEC-9A09B4B2267A} = {E70E7B68-B67E-4A6B-AA43-5C8DD38686DC}
-		{3830FB7B-9AB1-4DCB-816F-4A7CC10ACC3D} = {E70E7B68-B67E-4A6B-AA43-5C8DD38686DC}
-		{7A235DAF-F174-4388-80B7-D6A92B4C84E1} = {E70E7B68-B67E-4A6B-AA43-5C8DD38686DC}
 		{67D54A68-A287-4797-9667-ACCBF9683119} = {6685A8B7-9331-4950-A189-8D4CAD5B00FB}
 		{A479105C-717B-4500-8FFC-B3D12BEEF13E} = {6685A8B7-9331-4950-A189-8D4CAD5B00FB}
 		{9BC524A0-83F9-4864-A1E5-F93EB7DDAF8A} = {6685A8B7-9331-4950-A189-8D4CAD5B00FB}
-		{A9132C33-99DE-4780-BD39-99D7CF1E2345} = {6685A8B7-9331-4950-A189-8D4CAD5B00FB}
-		{74AA33D3-E5E1-470F-A289-05C83540DE7A} = {3830FB7B-9AB1-4DCB-816F-4A7CC10ACC3D}
-		{12691B81-92AC-43B5-BD26-D8ACF28C6130} = {3830FB7B-9AB1-4DCB-816F-4A7CC10ACC3D}
-		{F9D779D2-A509-4FA7-B399-45215FFBDAD7} = {74AA33D3-E5E1-470F-A289-05C83540DE7A}
 		{44644E74-1118-444E-B337-BEB5FA3F67DB} = {74AA33D3-E5E1-470F-A289-05C83540DE7A}
-		{9595B8A7-722F-4D54-8142-7F64E0AAA5A8} = {74AA33D3-E5E1-470F-A289-05C83540DE7A}
-		{246C6B54-4B69-4A81-B62E-FC4332F8C812} = {7A235DAF-F174-4388-80B7-D6A92B4C84E1}
+		{F9D779D2-A509-4FA7-B399-45215FFBDAD7} = {74AA33D3-E5E1-470F-A289-05C83540DE7A}
+		{A9132C33-99DE-4780-BD39-99D7CF1E2345} = {6685A8B7-9331-4950-A189-8D4CAD5B00FB}
 		{781CF2CC-231E-4948-AF40-1B87A46ED559} = {246C6B54-4B69-4A81-B62E-FC4332F8C812}
 		{BDE45320-0EDB-4AF6-8782-C3983DD285C7} = {246C6B54-4B69-4A81-B62E-FC4332F8C812}
 		{A2D2AA8F-A963-442D-AE52-F6543A375696} = {246C6B54-4B69-4A81-B62E-FC4332F8C812}
 		{CC481432-5733-4103-A7C7-CCDC4C7049BB} = {246C6B54-4B69-4A81-B62E-FC4332F8C812}
-		{65E06D7C-F88B-45BE-8886-F9CFA514EC27} = {246C6B54-4B69-4A81-B62E-FC4332F8C812}
 		{50819296-DB19-4B13-8EA7-8E4B45CB45BF} = {12691B81-92AC-43B5-BD26-D8ACF28C6130}
 		{7866F157-5838-4392-A2F5-1C5494B84086} = {12691B81-92AC-43B5-BD26-D8ACF28C6130}
+		{9595B8A7-722F-4D54-8142-7F64E0AAA5A8} = {74AA33D3-E5E1-470F-A289-05C83540DE7A}
+		{65E06D7C-F88B-45BE-8886-F9CFA514EC27} = {246C6B54-4B69-4A81-B62E-FC4332F8C812}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3C87F66-D6BF-4717-AAF7-0F1D75919A2A}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Apex.vsmdi
 	EndGlobalSection
 EndGlobal

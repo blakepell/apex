@@ -12,7 +12,7 @@ namespace Gallery.MVVM.ViewBrokerActivationSample
     {
         public Page1View()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public void OnActivated()

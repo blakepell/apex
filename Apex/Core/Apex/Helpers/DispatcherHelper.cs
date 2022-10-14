@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 
 namespace Apex.Helpers
 {
@@ -16,7 +12,7 @@ namespace Apex.Helpers
     /// </summary>
     public static void DoEvents()
     {
-      DispatcherFrame frame = new DispatcherFrame();
+      var frame = new DispatcherFrame();
       Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(ExitFrame), frame);
       Dispatcher.PushFrame(frame);
     }

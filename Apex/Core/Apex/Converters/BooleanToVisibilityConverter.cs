@@ -38,7 +38,10 @@ namespace Apex.Converters
 
             //  Return the appropriate visibility.
             if(invert)
+            {
                 return booleanValue ? Visibility.Collapsed : Visibility.Visible;
+            }
+
             return booleanValue ? Visibility.Visible : Visibility.Collapsed;
         }
 

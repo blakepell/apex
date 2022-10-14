@@ -11,7 +11,7 @@ namespace Gallery.MVVM.ViewBrokerSample
     {
         public FileView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

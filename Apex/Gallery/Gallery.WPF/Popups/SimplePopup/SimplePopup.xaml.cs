@@ -11,7 +11,7 @@ namespace Gallery.Popups.SimplePopup
     {
         public SimplePopup()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

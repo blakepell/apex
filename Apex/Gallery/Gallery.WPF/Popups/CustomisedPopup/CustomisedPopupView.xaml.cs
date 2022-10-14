@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using Apex;
 using Apex.Helpers.Popups;
 using Apex.MVVM;
@@ -14,19 +13,19 @@ namespace Gallery.Popups.CustomisedPopup
     {
         public CustomisedPopupView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public void OnActivated()
         {
-            ViewModel.ShowBouncePopupCommand.Executing += ShowBouncePopupCommandOnExecuting;
-            ViewModel.ShowFadePopupCommand.Executing += ShowFadePopupCommandOnExecuting;
+            this.ViewModel.ShowBouncePopupCommand.Executing += this.ShowBouncePopupCommandOnExecuting;
+            this.ViewModel.ShowFadePopupCommand.Executing += this.ShowFadePopupCommandOnExecuting;
         }
 
         public void OnDeactivated()
         {
-            ViewModel.ShowBouncePopupCommand.Executing -= ShowBouncePopupCommandOnExecuting;
-            ViewModel.ShowFadePopupCommand.Executing -= ShowFadePopupCommandOnExecuting;
+            this.ViewModel.ShowBouncePopupCommand.Executing -= this.ShowBouncePopupCommandOnExecuting;
+            this.ViewModel.ShowFadePopupCommand.Executing -= this.ShowFadePopupCommandOnExecuting;
         }
 
         private void ShowBouncePopupCommandOnExecuting(object sender, CancelCommandEventArgs args)
@@ -43,6 +42,6 @@ namespace Gallery.Popups.CustomisedPopup
             shell.ShowPopup(new CustomisedPopup());
         }
 
-        public CustomisedPopupViewModel ViewModel { get { return (CustomisedPopupViewModel)DataContext; } }
+        public CustomisedPopupViewModel ViewModel => (CustomisedPopupViewModel)this.DataContext;
     }
 }

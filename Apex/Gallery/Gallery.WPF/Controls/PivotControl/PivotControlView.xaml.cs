@@ -11,7 +11,7 @@ namespace Gallery.PivotControl
     {
         public PivotControlView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

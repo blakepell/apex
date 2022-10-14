@@ -6,17 +6,14 @@ namespace Gallery.MVVM.ViewBrokerActivationSample
     [ViewModel]
     public class Page2ViewModel : ViewModel, ISelectableItem 
     {
-        public string Title
-        {
-            get { return "Page 2"; }
-        }
-        
+        public string Title => "Page 2";
+
         private readonly NotifyingProperty isSelectedProperty = new NotifyingProperty("IsSelected", typeof(bool), default(bool));
 
         public bool IsSelected
         {
-            get { return (bool)GetValue(isSelectedProperty); }
-            set { SetValue(isSelectedProperty, value); }
+            get => (bool)this.GetValue(isSelectedProperty);
+            set => this.SetValue(isSelectedProperty, value);
         }
     }
 }

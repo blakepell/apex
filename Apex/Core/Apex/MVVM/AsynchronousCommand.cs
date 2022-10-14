@@ -19,7 +19,7 @@ namespace Apex.MVVM
             : base(action, canExecute)
         {
             //  Initialise the command.
-            Initialise();
+            this.Initialise();
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Apex.MVVM
         {
 
             //  Initialise the command.
-            Initialise();
+            this.Initialise();
         }
 
         /// <summary>
@@ -41,11 +41,11 @@ namespace Apex.MVVM
         private void Initialise()
         {
             //  Construct the cancel command.
-            CancelCommand = new Command(
+            this.CancelCommand = new Command(
                 () =>
                     {
                         //  Set the Is Cancellation Requested flag.
-                        IsCancellationRequested = true;
+                        this.IsCancellationRequested = true;
                     });
         }
 
@@ -56,54 +56,66 @@ namespace Apex.MVVM
         public override void DoExecute(object param)
         {
             //  If we are already executing, do not continue.
-            if (IsExecuting)
+            if (this.IsExecuting)
+            {
                 return;
+            }
 
             //  Invoke the executing command, allowing the command to be cancelled.
             var args = new CancelCommandEventArgs {Parameter = param, Cancel = false};
-            InvokeExecuting(args);
+            this.InvokeExecuting(args);
 
             //  If the event has been cancelled, bail now.
             if (args.Cancel)
+            {
                 return;
+            }
 
             //  We are executing.
-            IsExecuting = true;
+            this.IsExecuting = true;
 
             //  If we disable during execution, disable now.
-            if (DisableDuringExecution)
-                CanExecute = false;
+            if (this.DisableDuringExecution)
+            {
+                this.CanExecute = false;
+            }
 
             //  Store the calling dispatcher. Use the Consistency object
             //  so that the same call works properly in WPF/SL/WP7.
-            callingDispatcher = Consistency.DispatcherHelper.CurrentDispatcher;
+            callingDispatcher = Dispatcher.CurrentDispatcher;
 
             // Run the action on a new thread from the thread pool (this will therefore work in SL and WP7 as well).
             ThreadPool.QueueUserWorkItem(
                 state =>
                     {
                         //  Invoke the action.
-                        InvokeAction(param);
+                        this.InvokeAction(param);
 
                         //  Fire the executed event and set the executing state.
-                        ReportProgress(
+                        this.ReportProgress(
                             () =>
                                 {
                                     //  We are no longer executing.
-                                    IsExecuting = false;
+                                    this.IsExecuting = false;
 
                                     //  If we were cancelled, invoke the cancelled event - otherwise invoke executed.
-                                    if (IsCancellationRequested)
-                                        InvokeCancelled(new CommandEventArgs {Parameter = param});
+                                    if (this.IsCancellationRequested)
+                                    {
+                                        this.InvokeCancelled(new CommandEventArgs {Parameter = param});
+                                    }
                                     else
-                                        InvokeExecuted(new CommandEventArgs {Parameter = param});
+                                    {
+                                        this.InvokeExecuted(new CommandEventArgs {Parameter = param});
+                                    }
 
                                     //  We are no longer requesting cancellation.
-                                    IsCancellationRequested = false;
+                                    this.IsCancellationRequested = false;
 
                                     //  If we disable during execution, re-enable now.
-                                    if (DisableDuringExecution)
-                                        CanExecute = true;
+                                    if (this.DisableDuringExecution)
+                                    {
+                                        this.CanExecute = true;
+                                    }
                                 }
                             );
                     }
@@ -118,11 +130,13 @@ namespace Apex.MVVM
         {
             //  Store the event handler - in case it changes between
             //  the line to check it and the line to fire it.
-            var propertyChanged = PropertyChanged;
+            var propertyChanged = this.PropertyChanged;
 
             //  If the event has been subscribed to, fire it.
             if (propertyChanged != null)
+            {
                 propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>
@@ -132,13 +146,19 @@ namespace Apex.MVVM
         public void ReportProgress(Action progressAction)
         {
             //  If we're not executing, no need to report anything.
-            if (!IsExecuting) 
+            if (!this.IsExecuting)
+            {
                 return;
+            }
 
             if (callingDispatcher.CheckAccess())
+            {
                 progressAction();
+            }
             else
+            {
                 callingDispatcher.BeginInvoke(progressAction);
+            }
         }
 
         /// <summary>
@@ -148,8 +168,10 @@ namespace Apex.MVVM
         public bool CancelIfRequested()
         {
             //  If we haven't requested cancellation, there's nothing to do.
-            if (IsCancellationRequested == false)
+            if (this.IsCancellationRequested == false)
+            {
                 return false;
+            }
 
             //  We're done.
             return true;
@@ -162,11 +184,13 @@ namespace Apex.MVVM
         protected void InvokeCancelled(CommandEventArgs args)
         {
             //  Get the event.
-            var cancelled = Cancelled;
+            var cancelled = this.Cancelled;
 
             //  Call the cancelled event.
             if (cancelled != null)
+            {
                 cancelled(this, args);
+            }
         }
 
         /// <summary>
@@ -207,13 +231,13 @@ namespace Apex.MVVM
         /// </value>
         public bool IsExecuting
         {
-            get { return isExecuting; }
+            get => isExecuting;
             set
             {
                 if (isExecuting != value)
                 {
                     isExecuting = value;
-                    NotifyPropertyChanged("IsExecuting");
+                    this.NotifyPropertyChanged("IsExecuting");
                 }
             }
         }
@@ -226,13 +250,13 @@ namespace Apex.MVVM
         /// </value>
         public bool IsCancellationRequested
         {
-            get { return isCancellationRequested; }
+            get => isCancellationRequested;
             set
             {
                 if (isCancellationRequested != value)
                 {
                     isCancellationRequested = value;
-                    NotifyPropertyChanged("IsCancellationRequested");
+                    this.NotifyPropertyChanged("IsCancellationRequested");
                 }
             }
         }
@@ -245,13 +269,13 @@ namespace Apex.MVVM
         /// </value>
         public bool DisableDuringExecution
         {
-            get { return disableDuringExecuting; }
+            get => disableDuringExecuting;
             set
             {
                 if (disableDuringExecuting != value)
                 {
                     disableDuringExecuting = value;
-                    NotifyPropertyChanged("DisableDuringExecution");
+                    this.NotifyPropertyChanged("DisableDuringExecution");
                 }
             }
         }

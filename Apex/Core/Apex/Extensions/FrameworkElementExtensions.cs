@@ -1,49 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Apex.Extensions
 {
-  internal static class FrameworkElementExtensions
-  {
+    internal static class FrameworkElementExtensions
+    {
 #if !SILVERLIGHT
 
-    /// <summary>
-    /// Get the window container of framework element.
-    /// </summary>
-    public static Window GetParentWindow(this FrameworkElement element)
-    {
-      DependencyObject dp = element;
-      while (dp != null)
-      {
-        DependencyObject tp = LogicalTreeHelper.GetParent(dp);
-        if (tp is Window) return tp as Window;
-        else dp = tp;
-      }
-      return null;
-    }
+        /// <summary>
+        /// Get the window container of framework element.
+        /// </summary>
+        public static Window GetParentWindow(this FrameworkElement element)
+        {
+            DependencyObject dp = element;
+            while (dp != null)
+            {
+                var tp = LogicalTreeHelper.GetParent(dp);
+                if (tp is Window window)
+                {
+                    return window;
+                }
+                else
+                {
+                    dp = tp;
+                }
+            }
+            return null;
+        }
 
 #endif
 
-    public static FrameworkElement GetTopLevelParent(this FrameworkElement element)
-    {
-      FrameworkElement p = element;
-      while(p != null)
-      {
-        if (p.Parent == null)
-          return p;
-        p = p.Parent as FrameworkElement;
-      }
-      return null;
-    }
+        public static FrameworkElement GetTopLevelParent(this FrameworkElement element)
+        {
+            var p = element;
+            while (p != null)
+            {
+                if (p.Parent == null)
+                {
+                    return p;
+                }
 
-    public static BitmapSource RenderBitmap(this FrameworkElement element)
-    {
+                p = p.Parent as FrameworkElement;
+            }
+            return null;
+        }
+
+        public static BitmapSource RenderBitmap(this FrameworkElement element)
+        {
 #if SILVERLIGHT
 
       //  We'll use the writable bitmap.
@@ -54,36 +58,36 @@ namespace Apex.Extensions
 
 #else
 
-      //  We're in WPF, so use the render bitmap.
+            //  We're in WPF, so use the render bitmap.
 
 
-      
-      //  Create a visual brush from the element.
-        VisualBrush elementBrush = new VisualBrush(element);
 
-      //  Create a visual.
-        DrawingVisual visual = new DrawingVisual();
+            //  Create a visual brush from the element.
+            var elementBrush = new VisualBrush(element);
 
-      //  Open the visual to get a drawing context.
-        DrawingContext dc = visual.RenderOpen();
+            //  Create a visual.
+            var visual = new DrawingVisual();
 
-      //  Draw the element in the appropriately sized rectangle.
-        dc.DrawRectangle(elementBrush, null, new Rect(0, 0, element.ActualWidth, element.ActualHeight));
+            //  Open the visual to get a drawing context.
+            var dc = visual.RenderOpen();
 
-      //  Close the drawing context.
-        dc.Close();
-      
-      //  WPF uses 96 DPI - this is defined in System.Windows.SystemParameters.DPI
-      //  but it is internal, so we must use a magic number.
-      double systemDPI = 96;
-      
-      //  Create the bitmap and render it.
-      RenderTargetBitmap bitmap = new RenderTargetBitmap((int)element.ActualWidth, (int)element.ActualHeight, systemDPI, systemDPI, PixelFormats.Default);
-      bitmap.Render(visual);
+            //  Draw the element in the appropriately sized rectangle.
+            dc.DrawRectangle(elementBrush, null, new Rect(0, 0, element.ActualWidth, element.ActualHeight));
 
-      //  Return the bitmap.
-        return bitmap;
+            //  Close the drawing context.
+            dc.Close();
+
+            //  WPF uses 96 DPI - this is defined in System.Windows.SystemParameters.DPI
+            //  but it is internal, so we must use a magic number.
+            double systemDPI = 96;
+
+            //  Create the bitmap and render it.
+            var bitmap = new RenderTargetBitmap((int)element.ActualWidth, (int)element.ActualHeight, systemDPI, systemDPI, PixelFormats.Default);
+            bitmap.Render(visual);
+
+            //  Return the bitmap.
+            return bitmap;
 #endif
+        }
     }
-  }
 }

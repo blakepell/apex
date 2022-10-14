@@ -42,7 +42,10 @@ namespace Apex.Consistency
             _LastClickTicks = clickTicks;
             _LastPosition = position;
             if (!quickClick)
+            {
                 _LastSender = new WeakReference(sender);
+            }
+
             return false;
         }
 

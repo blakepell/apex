@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Apex.Controls
 {
@@ -52,8 +42,8 @@ namespace Apex.Controls
         /// <value>The value of NormalBackgroundBrush.</value>
         public Brush NormalBackgroundBrush
         {
-            get { return (Brush)GetValue(NormalBackgroundBrushProperty); }
-            set { SetValue(NormalBackgroundBrushProperty, value); }
+            get => (Brush)this.GetValue(NormalBackgroundBrushProperty);
+            set => this.SetValue(NormalBackgroundBrushProperty, value);
         }
 
         /// <summary>
@@ -69,8 +59,8 @@ namespace Apex.Controls
         /// <value>The value of NormalCrossBrush.</value>
         public Brush NormalCrossBrush
         {
-            get { return (Brush)GetValue(NormalCrossBrushProperty); }
-            set { SetValue(NormalCrossBrushProperty, value); }
+            get => (Brush)this.GetValue(NormalCrossBrushProperty);
+            set => this.SetValue(NormalCrossBrushProperty, value);
         }
 
         /// <summary>
@@ -86,8 +76,8 @@ namespace Apex.Controls
         /// <value>The value of HoverBackgroundBrush.</value>
         public Brush HoverBackgroundBrush
         {
-            get { return (Brush)GetValue(HoverBackgroundBrushProperty); }
-            set { SetValue(HoverBackgroundBrushProperty, value); }
+            get => (Brush)this.GetValue(HoverBackgroundBrushProperty);
+            set => this.SetValue(HoverBackgroundBrushProperty, value);
         }
 
         /// <summary>
@@ -103,8 +93,8 @@ namespace Apex.Controls
         /// <value>The value of HoverCrossBrush.</value>
         public Brush HoverCrossBrush
         {
-            get { return (Brush)GetValue(HoverCrossBrushProperty); }
-            set { SetValue(HoverCrossBrushProperty, value); }
+            get => (Brush)this.GetValue(HoverCrossBrushProperty);
+            set => this.SetValue(HoverCrossBrushProperty, value);
         }
 
         /// <summary>
@@ -120,8 +110,8 @@ namespace Apex.Controls
         /// <value>The value of PressedBackgroundBrush.</value>
         public Brush PressedBackgroundBrush
         {
-            get { return (Brush)GetValue(PressedBackgroundBrushProperty); }
-            set { SetValue(PressedBackgroundBrushProperty, value); }
+            get => (Brush)this.GetValue(PressedBackgroundBrushProperty);
+            set => this.SetValue(PressedBackgroundBrushProperty, value);
         }
 
         /// <summary>
@@ -137,8 +127,8 @@ namespace Apex.Controls
         /// <value>The value of PressedCrossBrush.</value>
         public Brush PressedCrossBrush
         {
-            get { return (Brush)GetValue(PressedCrossBrushProperty); }
-            set { SetValue(PressedCrossBrushProperty, value); }
+            get => (Brush)this.GetValue(PressedCrossBrushProperty);
+            set => this.SetValue(PressedCrossBrushProperty, value);
         }
     }
 }

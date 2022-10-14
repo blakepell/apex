@@ -14,114 +14,118 @@ namespace Gallery.MVVM.CommandingSample
         /// </summary>
         public CommandingSampleViewModel()
         {
-            Title = "Commanding Sample";
+            this.Title = "Commanding Sample";
 
             //  Create the simple command - calls DoSimpleCommand.
-            SimpleCommand = new Command(DoSimpleCommand);
+            this.SimpleCommand = new Command(this.DoSimpleCommand);
 
             //  Create the lambda command, no extra function necessary.
-            LambdaCommand = new Command(
+            this.LambdaCommand = new Command(
               () =>
               {
-                  Messages.Add("Calling the Lamba Command - no explicit function necessary.");
+                  this.Messages.Add("Calling the Lamba Command - no explicit function necessary.");
               });
 
             //  Create the parameterized command.
-            ParameterisedCommand = new Command(DoParameterisedCommand, true);
+            this.ParameterisedCommand = new Command(this.DoParameterisedCommand, true);
 
             //  Create the enable/disable command, initially disabled.
-            EnableDisableCommand = new Command(
+            this.EnableDisableCommand = new Command(
                 () =>
                 {
-                    Messages.Add("Enable/Disable command called.");
+                    this.Messages.Add("Enable/Disable command called.");
                 }, false);
 
             //  Create the events command.
-            EventsCommand = new Command(
+            this.EventsCommand = new Command(
                 () =>
                 {
-                    Messages.Add("Calling the Events Command.");
+                    this.Messages.Add("Calling the Events Command.");
                 });
 
             //  Create the async command.
-            AsyncCommand1 = new AsynchronousCommand(
+            this.AsyncCommand1 = new AsynchronousCommand(
                 () =>
                 {
                     for (int i = 1; i <= 10; i++)
                     {
                         //  Report progress.
-                        AsyncCommand1.ReportProgress(() => { Messages.Add(i.ToString()); });
+                        this.AsyncCommand1.ReportProgress(() => { this.Messages.Add(i.ToString()); });
 
                         System.Threading.Thread.Sleep(200);
                     }
                 });
 
             //  Create the async command.
-            AsyncCommand2 = new AsynchronousCommand(
+            this.AsyncCommand2 = new AsynchronousCommand(
                 () =>
                 {
                     for (char c = 'A'; c <= 'Z'; c++)
                     {
                         //  Report progress.
-                        AsyncCommand2.ReportProgress(() => { Messages.Add(c.ToString()); });
+                        this.AsyncCommand2.ReportProgress(() => { this.Messages.Add(c.ToString()); });
 
                         System.Threading.Thread.Sleep(100);
                     }
                 });
 
             //  Create the cancellable async command.
-            CancellableAsyncCommand = new AsynchronousCommand(
+            this.CancellableAsyncCommand = new AsynchronousCommand(
               () =>
               {
                   for (int i = 1; i <= 100; i++)
                   {
                       //  Do we need to cancel?
-                      if (CancellableAsyncCommand.CancelIfRequested())
+                      if (this.CancellableAsyncCommand.CancelIfRequested())
+                      {
                           return;
+                      }
 
                       //  Report progress.
-                      CancellableAsyncCommand.ReportProgress(() => { Messages.Add(i.ToString()); });
+                      this.CancellableAsyncCommand.ReportProgress(() => { this.Messages.Add(i.ToString()); });
 
                       System.Threading.Thread.Sleep(100);
                   }
               });
 
             //  Create the disable during execution command.
-            DisabledDuringExecutionAsyncCommand = new AsynchronousCommand(
+            this.DisabledDuringExecutionAsyncCommand = new AsynchronousCommand(
                 () =>
                 {
                     for (int i = 1; i <= 10; i++)
                     {
                         //  Report progress.
-                        DisabledDuringExecutionAsyncCommand.ReportProgress(() => { Messages.Add(i.ToString()); });
+                        this.DisabledDuringExecutionAsyncCommand.ReportProgress(() => { this.Messages.Add(i.ToString()); });
 
                         System.Threading.Thread.Sleep(200);
                     }
-                });
-            DisabledDuringExecutionAsyncCommand.DisableDuringExecution = true;
+                })
+            {
+                DisableDuringExecution = true
+            };
 
             //  Create the event binding command.
-            EventBindingCommand = new Command(DoEventBindingCommand);
+            this.EventBindingCommand = new Command(this.DoEventBindingCommand);
 
             //  Create the typed commands.
-            IntTypedCommand = new Command<int>(DoIntTypedCommand);
-            StringTypedCommand = new Command<string>(DoStringTypedCommand);
+            this.IntTypedCommand = new Command<int>(this.DoIntTypedCommand);
+            this.StringTypedCommand = new Command<string>(this.DoStringTypedCommand);
         }
 
         private void DoSimpleCommand()
         {
             //  Add a message.
-            Messages.Add("Calling 'DoSimpleCommand'.");
+            this.Messages.Add("Calling 'DoSimpleCommand'.");
         }
 
         private void DoParameterisedCommand(object parameter)
         {
-            Messages.Add("Calling a Parameterised Command - the Parameter is '" + parameter.ToString() + "'.");
+            this.Messages.Add("Calling a Parameterised Command - the Parameter is '" + parameter.ToString() + "'.");
         }
 
         private void DoEventBindingCommand()
         {
-            Messages.Add("Called a command via an event.");
+            this.Messages.Add("Called a command via an event.");
         }
 
         /// <summary>
@@ -130,7 +134,7 @@ namespace Gallery.MVVM.CommandingSample
         /// <param name="parameter">The parameter.</param>
         private void DoIntTypedCommand(int parameter)
         {
-            Messages.Add("Received an int parameter: " + parameter);
+            this.Messages.Add("Received an int parameter: " + parameter);
         }
 
         /// <summary>
@@ -139,7 +143,7 @@ namespace Gallery.MVVM.CommandingSample
         /// <param name="parameter">The parameter.</param>
         private void DoStringTypedCommand(string parameter)
         {
-            Messages.Add("Received a string parameter: " + parameter);
+            this.Messages.Add("Received a string parameter: " + parameter);
         }
         
         public Command SimpleCommand
@@ -216,9 +220,6 @@ namespace Gallery.MVVM.CommandingSample
         /// <summary>
         /// Gets the messages.
         /// </summary>
-        public ObservableCollection<string> Messages
-        {
-            get { return messages; }
-        }
+        public ObservableCollection<string> Messages => messages;
     }
 }

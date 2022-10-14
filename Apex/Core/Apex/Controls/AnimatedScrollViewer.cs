@@ -11,12 +11,12 @@ namespace Apex.Controls
         /// <summary>
         /// Current Vertical Offset dependency property.
         /// </summary>
-        public static DependencyProperty CurrentVerticalOffsetProperty = DependencyProperty.Register("CurrentVerticalOffset", typeof (double), typeof (AnimatedScrollViewer), new PropertyMetadata(new PropertyChangedCallback(OnVerticalChanged)));
+        public static DependencyProperty CurrentVerticalOffsetProperty = DependencyProperty.Register("CurrentVerticalOffset", typeof (double), typeof (AnimatedScrollViewer), new PropertyMetadata(OnVerticalChanged));
 
         /// <summary>
         /// Current horizontal offset dependency property.
         /// </summary>
-        public static DependencyProperty CurrentHorizontalOffsetProperty = DependencyProperty.Register("CurrentHorizontalOffsetOffset", typeof (double), typeof (AnimatedScrollViewer), new PropertyMetadata(new PropertyChangedCallback(OnHorizontalChanged)));
+        public static DependencyProperty CurrentHorizontalOffsetProperty = DependencyProperty.Register("CurrentHorizontalOffsetOffset", typeof (double), typeof (AnimatedScrollViewer), new PropertyMetadata(OnHorizontalChanged));
 
         /// <summary>
         /// Called when vertical changed.
@@ -48,8 +48,8 @@ namespace Apex.Controls
         /// </value>
         public double CurrentHorizontalOffset
         {
-            get { return (double) GetValue(CurrentHorizontalOffsetProperty); }
-            set { SetValue(CurrentHorizontalOffsetProperty, value); }
+            get => (double)this.GetValue(CurrentHorizontalOffsetProperty);
+            set => this.SetValue(CurrentHorizontalOffsetProperty, value);
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace Apex.Controls
         /// </value>
         public double CurrentVerticalOffset
         {
-            get { return (double) GetValue(CurrentVerticalOffsetProperty); }
-            set { SetValue(CurrentVerticalOffsetProperty, value); }
+            get => (double)this.GetValue(CurrentVerticalOffsetProperty);
+            set => this.SetValue(CurrentVerticalOffsetProperty, value);
         }
     }
 }

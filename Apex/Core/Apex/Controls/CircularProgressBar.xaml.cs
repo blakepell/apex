@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -26,25 +16,27 @@ namespace Apex.Controls
         /// </summary>
         public CircularProgressBar()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             animationTimer = new DispatcherTimer(
-                DispatcherPriority.ContextIdle, Dispatcher);
-            animationTimer.Interval = new TimeSpan(0, 0, 0, 0, 75);
+                DispatcherPriority.ContextIdle, this.Dispatcher)
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 75)
+            };
         }
 
         private readonly DispatcherTimer animationTimer;
 
         private void Start()
         {
-            animationTimer.Tick += HandleAnimationTick;
+            animationTimer.Tick += this.HandleAnimationTick;
             animationTimer.Start();
         }
 
         private void Stop()
         {
             animationTimer.Stop();
-            animationTimer.Tick -= HandleAnimationTick;
+            animationTimer.Tick -= this.HandleAnimationTick;
         }
 
         private void HandleAnimationTick(object sender, EventArgs e)
@@ -57,15 +49,15 @@ namespace Apex.Controls
             const double offset = Math.PI;
             const double step = Math.PI*2/10.0;
 
-            SetPosition(C0, offset, 0.0, step);
-            SetPosition(C1, offset, 1.0, step);
-            SetPosition(C2, offset, 2.0, step);
-            SetPosition(C3, offset, 3.0, step);
-            SetPosition(C4, offset, 4.0, step);
-            SetPosition(C5, offset, 5.0, step);
-            SetPosition(C6, offset, 6.0, step);
-            SetPosition(C7, offset, 7.0, step);
-            SetPosition(C8, offset, 8.0, step);
+            this.SetPosition(C0, offset, 0.0, step);
+            this.SetPosition(C1, offset, 1.0, step);
+            this.SetPosition(C2, offset, 2.0, step);
+            this.SetPosition(C3, offset, 3.0, step);
+            this.SetPosition(C4, offset, 4.0, step);
+            this.SetPosition(C5, offset, 5.0, step);
+            this.SetPosition(C6, offset, 6.0, step);
+            this.SetPosition(C7, offset, 7.0, step);
+            this.SetPosition(C8, offset, 8.0, step);
         }
 
         private void SetPosition(Ellipse ellipse, double offset,
@@ -80,7 +72,7 @@ namespace Apex.Controls
 
         private void HandleUnloaded(object sender, RoutedEventArgs e)
         {
-            Stop();
+            this.Stop();
         }
 
         private void HandleVisibleChanged(object sender,
@@ -89,9 +81,13 @@ namespace Apex.Controls
             bool isVisible = (bool) e.NewValue;
 
             if (isVisible)
-                Start();
+            {
+                this.Start();
+            }
             else
-                Stop();
+            {
+                this.Stop();
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -111,8 +107,8 @@ namespace Apex.Controls
         /// </value>
         public string ProgressText
         {
-            get { return (string) GetValue(ProgressTextProperty); }
-            set { SetValue(ProgressTextProperty, value); }
+            get => (string)this.GetValue(ProgressTextProperty);
+            set => this.SetValue(ProgressTextProperty, value);
         }
     }
 }

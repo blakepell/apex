@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Apex.MVVM;
+﻿using Apex.MVVM;
 
 namespace Gallery.Behaviours.ListViewItemContextMenuBehaviour
 {
@@ -21,8 +17,8 @@ namespace Gallery.Behaviours.ListViewItemContextMenuBehaviour
         /// <value>The value of FirstName.</value>
         public string FirstName
         {
-            get { return (string)GetValue(FirstNameProperty); }
-            set { SetValue(FirstNameProperty, value); }
+            get => (string)this.GetValue(FirstNameProperty);
+            set => this.SetValue(FirstNameProperty, value);
         }
 
         
@@ -38,8 +34,8 @@ namespace Gallery.Behaviours.ListViewItemContextMenuBehaviour
         /// <value>The value of LastName.</value>
         public string LastName
         {
-            get { return (string)GetValue(LastNameProperty); }
-            set { SetValue(LastNameProperty, value); }
+            get => (string)this.GetValue(LastNameProperty);
+            set => this.SetValue(LastNameProperty, value);
         }
     }
 }

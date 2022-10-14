@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Apex.MVVM;
+﻿using Apex.MVVM;
 using Gallery.Controls.ApexGrid;
 using Gallery.Controls.CrossButton;
 using Gallery.Controls.EnumComboBox;
@@ -25,22 +21,22 @@ namespace Gallery.Controls
     {
         public ControlsViewModel()
         {
-            Title = "Controls";
+            this.Title = "Controls";
 
-            GalleryItems.Add(new ApexGridViewModel());
-            GalleryItems.Add(new CrossButtonViewModel());
-            GalleryItems.Add(new CueTextBoxViewModel());
-            GalleryItems.Add(new EnumComboBoxViewModel());
-            GalleryItems.Add(new FolderTextBoxViewModel());
-            GalleryItems.Add(new ImageButtonViewModel());
-            GalleryItems.Add(new ImageCheckBoxViewModel());
-            GalleryItems.Add(new MultiBorderViewModel());
-            GalleryItems.Add(new PaddedGridViewModel());
-            GalleryItems.Add(new PathTextBoxViewModel());
-            GalleryItems.Add(new PivotControlViewModel());
-            GalleryItems.Add(new SearchTextBoxViewModel());
-            GalleryItems.Add(new SelectableItemsControlViewModel());
-            GalleryItems.Add(new TabbedDocumentInterfaceViewModel());
+            this.GalleryItems.Add(new ApexGridViewModel());
+            this.GalleryItems.Add(new CrossButtonViewModel());
+            this.GalleryItems.Add(new CueTextBoxViewModel());
+            this.GalleryItems.Add(new EnumComboBoxViewModel());
+            this.GalleryItems.Add(new FolderTextBoxViewModel());
+            this.GalleryItems.Add(new ImageButtonViewModel());
+            this.GalleryItems.Add(new ImageCheckBoxViewModel());
+            this.GalleryItems.Add(new MultiBorderViewModel());
+            this.GalleryItems.Add(new PaddedGridViewModel());
+            this.GalleryItems.Add(new PathTextBoxViewModel());
+            this.GalleryItems.Add(new PivotControlViewModel());
+            this.GalleryItems.Add(new SearchTextBoxViewModel());
+            this.GalleryItems.Add(new SelectableItemsControlViewModel());
+            this.GalleryItems.Add(new TabbedDocumentInterfaceViewModel());
         }
     }
 }

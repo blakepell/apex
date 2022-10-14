@@ -5,7 +5,7 @@ namespace Apex.MVVM
     /// <summary>
     /// The Model Attribute marks a class as a model.
     /// </summary>
-    [AttributeUsage(System.AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class ModelAttribute : Attribute
     {
         /// <summary>
@@ -14,7 +14,7 @@ namespace Apex.MVVM
         public ModelAttribute()
         {
             //  Use the standard execution context.
-            Context = ExecutionContext.Standard;
+            this.Context = ExecutionContext.Standard;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Apex.MVVM
         public ModelAttribute(ExecutionContext context)
         {
             //  Store the execution context.
-            Context = context;
+            this.Context = context;
         }
 
         /// <summary>

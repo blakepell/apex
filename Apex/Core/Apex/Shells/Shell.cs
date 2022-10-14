@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using Apex.Controls;
 using Apex.DragAndDrop;
 using Apex.Helpers.Popups;
 using Apex.Extensions;
@@ -50,14 +47,14 @@ namespace Apex.Shells
             ApexBroker.RegisterShell(this);
 
             //  Wire up the close event handler.
-            PopupClosed += OnPopupClosed;
+            this.PopupClosed += this.OnPopupClosed;
             
             //  Get the template parts.
             try
             {
-                applicationHost = (Grid)GetTemplateChild("PART_ApplicationHost");
+                applicationHost = (Grid)this.GetTemplateChild("PART_ApplicationHost");
                // dragAndDropHost = (DragAndDropHost)GetTemplateChild("PART_DragAndDropHost");
-                popupHost = (Grid)GetTemplateChild("PART_PopupHost");
+                popupHost = (Grid)this.GetTemplateChild("PART_PopupHost");
             }
             catch
             {
@@ -76,7 +73,10 @@ namespace Apex.Shells
             //  Get the parent window.
             var parentWindow = this.GetParentWindow();
             if (parentWindow == null)
+            {
                 throw new InvalidOperationException("Cannot minimize shell - parent window cannot be found.");
+            }
+
             parentWindow.WindowState = WindowState.Minimized;
         }
 
@@ -88,7 +88,10 @@ namespace Apex.Shells
             //  Get the parent window.
             var parentWindow = this.GetParentWindow();
             if (parentWindow == null)
+            {
                 throw new InvalidOperationException("Cannot maximize shell - parent window cannot be found.");
+            }
+
             parentWindow.WindowState = WindowState.Maximized;
         }
 
@@ -100,7 +103,10 @@ namespace Apex.Shells
             //  Get the parent window.
             var parentWindow = this.GetParentWindow();
             if (parentWindow == null)
+            {
                 throw new InvalidOperationException("Cannot restore shell - parent window cannot be found.");
+            }
+
             parentWindow.WindowState = WindowState.Normal;
         }
 
@@ -112,17 +118,17 @@ namespace Apex.Shells
             //  Get the parent window.
             var parentWindow = this.GetParentWindow();
             if (parentWindow == null)
+            {
                 throw new InvalidOperationException("Cannot close shell - parent window cannot be found.");
+            }
+
             parentWindow.Close();
         }
 
         /// <summary>
         /// Gets the drag and drop host.
         /// </summary>
-        public DragAndDrop.DragAndDropHost DragAndDropHost 
-        {
-            get { return dragAndDropHost; }
-        }
+        public DragAndDropHost DragAndDropHost => dragAndDropHost;
 
 #endif
 
@@ -147,7 +153,7 @@ namespace Apex.Shells
         {
             //  Raise the popup opened event.
             var args = new RoutedEventArgs(PopupOpenedEvent);
-            RaiseEvent(args);
+            this.RaiseEvent(args);
 
             //  Create a new popup state with a new dispatcher frame.
             var popupState = new PopupState()
@@ -239,7 +245,9 @@ namespace Apex.Shells
         {
             //  Make sure we're the top of the stack.
             if(popupStack.Peek().PopupElement != popup)
+            {
                 throw new InvalidOperationException("Cannot close the specified popup - it is not the top of the popup stack.");
+            }
 
             //  Store the popup result.
             popupStack.Peek().PopupResult = result;
@@ -248,7 +256,7 @@ namespace Apex.Shells
             popupAnimationHelper.ClosePopup(popupHost, popup);
 
             //  Raise the close event.
-            FirePopupClosed();
+            this.FirePopupClosed();
         }
 
         /// <summary>
@@ -259,7 +267,7 @@ namespace Apex.Shells
 #if !SILVERLIGHT
             //  Raise the popup opened event.
             var args = new RoutedEventArgs(PopupOpenedEvent);
-            RaiseEvent(args);
+            this.RaiseEvent(args);
 #else
             //  Raise the popup opened event.
             var theEvent = PopupOpened;
@@ -276,7 +284,7 @@ namespace Apex.Shells
 #if !SILVERLIGHT
             //  Raise the popup closed event.
             var args = new RoutedEventArgs(PopupClosedEvent);
-            RaiseEvent(args);
+            this.RaiseEvent(args);
 #else
             //  Raise the popup closed event.
             var theEvent = PopupClosed;
@@ -331,8 +339,8 @@ namespace Apex.Shells
         /// </summary>
         public event RoutedEventHandler PopupOpened
         {
-            add { AddHandler(PopupOpenedEvent, value); }
-            remove { RemoveHandler(PopupOpenedEvent, value); }
+            add => this.AddHandler(PopupOpenedEvent, value);
+            remove => this.RemoveHandler(PopupOpenedEvent, value);
         }
 
         /// <summary>
@@ -340,8 +348,8 @@ namespace Apex.Shells
         /// </summary>
         public event RoutedEventHandler PopupClosed
         {
-            add { AddHandler(PopupClosedEvent, value); }
-            remove { RemoveHandler(PopupClosedEvent, value); }
+            add => this.AddHandler(PopupClosedEvent, value);
+            remove => this.RemoveHandler(PopupClosedEvent, value);
         }
 
 #else
@@ -366,13 +374,19 @@ namespace Apex.Shells
         /// </value>
         public PopupAnimationHelper PopupAnimationHelper
         {
-            get { return popupAnimationHelper; }
+            get => popupAnimationHelper;
             set 
             {
-                if(value == null) 
+                if(value == null)
+                {
                     throw new ArgumentException("Popup animation helper cannot be null.");
+                }
+
                 if(popupAnimationHelper.OpenPopupsCount > 0)
+                {
                     throw new InvalidOperationException("Cannot change the popup animation helper - there are popups open.");
+                }
+
                 popupAnimationHelper = value;
             }
         }

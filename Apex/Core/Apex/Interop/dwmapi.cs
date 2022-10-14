@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing.Printing;
 
@@ -31,7 +28,7 @@ namespace Apex.Interop
 
                 if (ret1 == 0)
                 {
-                    Margins m = new Margins { Bottom = 0, Left = 0, Right = 0, Top = 0 };
+                    var m = new Margins { Bottom = 0, Left = 0, Right = 0, Top = 0 };
                     int ret2 = DwmExtendFrameIntoClientArea(windowHandle, ref m);
                     return ret2 == 0;
                 }

@@ -13,7 +13,7 @@ namespace Apex.Adorners
         /// <param name="uiElement">The UI element.</param>
         public UIElementAdorner(UIElement uiElement)
         {
-            UIElement = uiElement;
+            this.UIElement = uiElement;
         }
     }
 }

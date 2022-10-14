@@ -5,8 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Gallery"
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
-            xmlns:cueTextBox="clr-namespace:Gallery.CueTextBox"
-            xmlns:searchTextBox="clr-namespace:Gallery.SearchTextBox"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1024">
     

@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Apex.Adorners;
 using Apex.Consistency;
 
@@ -51,8 +45,8 @@ namespace Apex.DragAndDrop
             //  Get the template parts.
             try
             {
-                host = (Grid)GetTemplateChild("PART_Host");
-                adornerLayer = (AdornerLayer)GetTemplateChild("PART_AdornerLayer");
+                host = (Grid)this.GetTemplateChild("PART_Host");
+                adornerLayer = (AdornerLayer)this.GetTemplateChild("PART_AdornerLayer");
             }
             catch
             {
@@ -61,12 +55,12 @@ namespace Apex.DragAndDrop
             
             //  Register the appropriate events.
 #if !SILVERLIGHT
-            host.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(host_MouseDown);
+            host.PreviewMouseLeftButtonDown += this.host_MouseDown;
 #else
             host.MouseLeftButtonDown += new MouseButtonEventHandler(host_MouseDown);
 #endif
-            host.MouseMove += new MouseEventHandler(host_MouseMove);
-            host.MouseLeftButtonUp += new MouseButtonEventHandler(host_MouseUp);
+            host.MouseMove += this.host_MouseMove;
+            host.MouseLeftButtonUp += this.host_MouseUp;
         }
 
         /// <summary>
@@ -78,16 +72,14 @@ namespace Apex.DragAndDrop
         {
 
             //  Perform a hist test.
-            HitTest hitTest = new HitTest();
+            var hitTest = new HitTest();
             hitTest.DoHitTest(host, e.GetPosition(host));
 
             //  Go through the hits, looking for a draggable object.
             foreach (var hit in hitTest.Hits)
             {
                 //  Is this a draggable object?
-                FrameworkElement foundDragElement, foundDragSource;
-                if (hit is FrameworkElement &&
-                    IsInDraggableElement((FrameworkElement)hit, out foundDragElement, out foundDragSource))
+                if (hit is FrameworkElement element && this.IsInDraggableElement(element, out var foundDragElement, out var foundDragSource))
                 {
                     //  We've found an object to drag - store its data.
                     dragElement = foundDragElement;
@@ -110,7 +102,9 @@ namespace Apex.DragAndDrop
         {
             //  We only care about mouse moves if we have a drag element.
             if (dragElement == null)
+            {
                 return;
+            }
 
             //  Update the current mouse position.
             currentMousePosition = e.GetPosition(host);
@@ -122,21 +116,23 @@ namespace Apex.DragAndDrop
                 //  Apex.Consistency.SystemParamters returns drag distances
                 //  as SystemParameters doesn't have it in silverlight.
                 if (
-                    (Math.Abs(initialMousePosition.X - currentMousePosition.X) >=
-                MinimumHorizontalDragDistance) ||
-                    (Math.Abs(initialMousePosition.Y - currentMousePosition.Y) >=
-                MinimumHorizontalDragDistance))
+                    (Math.Abs(initialMousePosition.X - currentMousePosition.X) >= this.MinimumHorizontalDragDistance) ||
+                    (Math.Abs(initialMousePosition.Y - currentMousePosition.Y) >= this.MinimumHorizontalDragDistance))
                 {
                     //  We'll try starting a drag and drop.
-                    DoDragAndDropStart(dragSource, dragElement, dragData);
+                    this.DoDragAndDropStart(dragSource, dragElement, dragData);
                     if (dragging)
+                    {
                         host.CaptureMouse();
+                    }
                 }
             }
 
             //  If we're still not dragging, we're done.
             if (dragging == false)
+            {
                 return;
+            }
 
             //  If we have an adorner, move it.
             if (dragAdorner != null)
@@ -149,16 +145,14 @@ namespace Apex.DragAndDrop
             FrameworkElement dropTargetOver = null;
 
             //  Perform a hist test.
-            HitTest hitTest = new HitTest();
+            var hitTest = new HitTest();
             hitTest.DoHitTest(host, e.GetPosition(host));
 
             //  Go through each hit.
             foreach (var dt in hitTest.Hits)
             {
                 //  Are we in a drop target?
-                FrameworkElement foundDropTarget;
-                if (dt is FrameworkElement && 
-                    IsInDropTarget((FrameworkElement)dt, out foundDropTarget))
+                if (dt is FrameworkElement element && this.IsInDropTarget(element, out var foundDropTarget))
                 {
                     //  We're in a drop target, store which one it is.
                     dropTargetOver = foundDropTarget;
@@ -176,7 +170,9 @@ namespace Apex.DragAndDrop
             //  If we are over a drop target and it's a new one, check
             //  for continuing.
             if (dropTargetOver != dropTarget)
-                DoContinueDragAndDrop(dropTargetOver);
+            {
+                this.DoContinueDragAndDrop(dropTargetOver);
+            }
         }
 
         /// <summary>
@@ -194,10 +190,12 @@ namespace Apex.DragAndDrop
 
                 //  If we have an adorner, remove it.
                 if (dragAdorner != null)
+                {
                     adornerLayer.RemoveAdorner(dragAdorner);
+                }
 
                 //  End drag and drop.
-                DoDragAndDropEnd(dropTarget);
+                this.DoDragAndDropEnd(dropTarget);
             }
 
             //  Clear all drag and drop data.
@@ -218,11 +216,11 @@ namespace Apex.DragAndDrop
             object dragData)
         {
             //  If we have a start handler, call it.
-            DragAndDropDelegate dragAndDropStart = DragAndDropStart;
+            var dragAndDropStart = this.DragAndDropStart;
             if (dragAndDropStart != null)
             {
                 //  Create the drag args.
-                DragAndDropEventArgs args = new DragAndDropEventArgs()
+                var args = new DragAndDropEventArgs()
                 {
                     DragSource = dragSource,
                     DragElement = dragElement,
@@ -266,11 +264,11 @@ namespace Apex.DragAndDrop
         private void DoContinueDragAndDrop(FrameworkElement potentialDropTarget)
         {
             //  If we have a start handler, call it.
-            DragAndDropDelegate dragAndDropContinue = DragAndDropContinue;
+            var dragAndDropContinue = this.DragAndDropContinue;
             if (dragAndDropContinue != null)
             {
                 //  Create the drag and drop event args.
-                DragAndDropEventArgs args = new DragAndDropEventArgs()
+                var args = new DragAndDropEventArgs()
                 {
                     DragSource = dragSource,
                     DragElement = dragElement,
@@ -284,7 +282,9 @@ namespace Apex.DragAndDrop
                 
                 //  If the operation has been disallowed, return.
                 if (args.Allow == false)
+                {
                     return;
+                }
             }
 
             //  Store the potential drop target.
@@ -298,13 +298,13 @@ namespace Apex.DragAndDrop
         private void DoDragAndDropEnd(FrameworkElement dropTarget)
         {
             //  Get the event handler.
-            DragAndDropDelegate dragAndDropEnd = DragAndDropEnd;
+            var dragAndDropEnd = this.DragAndDropEnd;
 
             //  If we have the event handler, fire it.
             if (dragAndDropEnd != null)
             {
                 //  Create the drag and drop args.
-                DragAndDropEventArgs args = new DragAndDropEventArgs()
+                var args = new DragAndDropEventArgs()
                 {
                     Allow = true,
                     DragSource = dragSource,
@@ -343,7 +343,7 @@ namespace Apex.DragAndDrop
             dragSource = null;
 
             //  Search to see if it's a draggable element.
-            FrameworkElement searchElement = element;
+            var searchElement = element;
             do
             {
                 if(DragAndDrop.GetIsDraggable(searchElement))
@@ -356,10 +356,12 @@ namespace Apex.DragAndDrop
 
             //  If we didn't find a draggable element, we're done.
             if (dragElement == null)
+            {
                 return false;
+            }
 
             //  Find the drag source that this draggable item belongs to.
-            FrameworkElement findDragSource = dragElement;
+            var findDragSource = dragElement;
             do
             {
                 if (DragAndDrop.GetIsDragSource(findDragSource) == true)
@@ -387,7 +389,7 @@ namespace Apex.DragAndDrop
             dropTarget = null;
 
             //  Search to see if it's a draggable element.
-            FrameworkElement searchElement = element;
+            var searchElement = element;
             do
             {
                 if (DragAndDrop.GetIsDropTarget(searchElement))
@@ -461,14 +463,14 @@ namespace Apex.DragAndDrop
         /// </summary>
         private static readonly DependencyProperty MinimumHorizontalDragDistanceProperty =
           DependencyProperty.Register("MinimumHorizontalDragDistance", typeof(double), typeof(DragAndDropHost),
-          new PropertyMetadata(Apex.Consistency.SystemParameters.MinimumHorizontalDragDistance));
+          new PropertyMetadata(Consistency.SystemParameters.MinimumHorizontalDragDistance));
 
         /// <summary>
         /// The MinimumVerticalDragDistance property.
         /// </summary>
         private static readonly DependencyProperty MinimumVerticalDragDistanceProperty =
           DependencyProperty.Register("MinimumVerticalDragDistance", typeof(double), typeof(DragAndDropHost),
-          new PropertyMetadata(Apex.Consistency.SystemParameters.MinimumVerticalDragDistance));
+          new PropertyMetadata(Consistency.SystemParameters.MinimumVerticalDragDistance));
 
         /// <summary>
         /// Gets or sets the minimum horizontal drag distance.
@@ -478,8 +480,8 @@ namespace Apex.DragAndDrop
         /// </value>
         public double MinimumHorizontalDragDistance
         {
-            get { return (double)GetValue(MinimumHorizontalDragDistanceProperty); }
-            set { SetValue(MinimumHorizontalDragDistanceProperty, value); }
+            get => (double)this.GetValue(MinimumHorizontalDragDistanceProperty);
+            set => this.SetValue(MinimumHorizontalDragDistanceProperty, value);
         }
 
         /// <summary>
@@ -490,8 +492,8 @@ namespace Apex.DragAndDrop
         /// </value>
         public double MinimumVerticalDragDistance
         {
-            get { return (double)GetValue(MinimumVerticalDragDistanceProperty); }
-            set { SetValue(MinimumVerticalDragDistanceProperty, value); }
+            get => (double)this.GetValue(MinimumVerticalDragDistanceProperty);
+            set => this.SetValue(MinimumVerticalDragDistanceProperty, value);
         }
 
         /// <summary>

@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Apex.Extensions;
+using Microsoft.Xaml.Behaviors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Interactivity;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Apex.Extensions;
 
 namespace Apex.Behaviours
 {
@@ -24,7 +22,7 @@ namespace Apex.Behaviours
             base.OnAttached();
 
             //  TODO: In the designer this makes the element invisible, another way?
-            AssociatedObject.Opacity = 0;
+            this.AssociatedObject.Opacity = 0;
         }
 
         /// <summary>
@@ -56,7 +54,9 @@ namespace Apex.Behaviours
             //  Create a storyboard, add the animations.
             var storyboard = new Storyboard();
             foreach (var animation in animations)
+            {
                 storyboard.Children.Add(animation);
+            }
 
             //  Start the storyboard.
 #if !SILVERLIGHT
@@ -74,18 +74,23 @@ namespace Apex.Behaviours
         {
             //  Create and set the translation.
             var translation = new TranslateTransform() { X = -SlideDistance, Y = 0 };
-            AssociatedObject.RenderTransform = translation;
+            this.AssociatedObject.RenderTransform = translation;
 
             //  Create an animation for the opacity.
-            var opacityAnimation = new DoubleAnimation() { From = 0, To = 1, Duration = Duration, BeginTime = BeginTime};
+            var opacityAnimation = new DoubleAnimation() { From = 0, To = 1, Duration = this.Duration, BeginTime = this.BeginTime };
 
             //  Create an animation for the slide in.
-            var slideInAnimation = new DoubleAnimation() { To = 0, Duration = Duration, BeginTime = BeginTime };
-            slideInAnimation.EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut };
+            var slideInAnimation = new DoubleAnimation
+            {
+                To = 0,
+                Duration = this.Duration,
+                BeginTime = this.BeginTime,
+                EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut }
+            };
 
             //  Set the targets for the animations.
-            Storyboard.SetTarget(opacityAnimation, AssociatedObject);
-            Storyboard.SetTarget(slideInAnimation, AssociatedObject);
+            Storyboard.SetTarget(opacityAnimation, this.AssociatedObject);
+            Storyboard.SetTarget(slideInAnimation, this.AssociatedObject);
             Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
             Storyboard.SetTargetProperty(slideInAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
 
@@ -110,8 +115,8 @@ namespace Apex.Behaviours
         /// </value>
         public Duration Duration
         {
-            get { return (Duration)GetValue(DurationProperty); }
-            set { SetValue(DurationProperty, value); }
+            get => (Duration)this.GetValue(DurationProperty);
+            set => this.SetValue(DurationProperty, value);
         }
 
         /// <summary>
@@ -127,8 +132,8 @@ namespace Apex.Behaviours
         /// <value>The value of BeginTime.</value>
         public TimeSpan BeginTime
         {
-            get { return (TimeSpan)GetValue(BeginTimeProperty); }
-            set { SetValue(BeginTimeProperty, value); }
+            get => (TimeSpan)this.GetValue(BeginTimeProperty);
+            set => this.SetValue(BeginTimeProperty, value);
         }
     }
 }

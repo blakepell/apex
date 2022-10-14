@@ -28,11 +28,19 @@ namespace Apex.Consistency
             var kids = TryGetChildren(current);
 
             if (content != null && content is DependencyObject)
+            {
                 children.Add((DependencyObject)content);
+            }
+
             if (kids != null)
+            {
                 foreach (var child in kids)
                     if (child is DependencyObject)
+                    {
                         children.Add((DependencyObject) child);
+                    }
+            }
+
             return children;
         }
 
@@ -45,7 +53,10 @@ namespace Apex.Consistency
         {
             var prop = dependencyObject.GetType().GetProperty("Content");
             if (prop != null)
+            {
                 return prop.GetValue(dependencyObject, null);
+            }
+
             return null;
         }
 
@@ -59,7 +70,10 @@ namespace Apex.Consistency
         {
             var prop = dependencyObject.GetType().GetProperty("Children");
             if (prop != null)
+            {
                 return prop.GetValue(dependencyObject, null) as IEnumerable;
+            }
+
             return null;
         }
     }

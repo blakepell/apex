@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
-using System.Windows.Interactivity;
+using Microsoft.Xaml.Behaviors;
 
 namespace Apex.Behaviours
 {
@@ -21,22 +21,23 @@ namespace Apex.Behaviours
             base.OnAttached();
 
             //  Get the list view.
-            var element = AssociatedObject as ListView;
             //  Ensure we have a grid view.
-            if (element == null || element.View == null || element.View is GridView == false)
+            if (!(this.AssociatedObject is ListView element) || element.View == null || element.View is GridView == false)
+            {
                 throw new InvalidOperationException("The GridViewContextMenuBehaviour must be attached to a ListView with the GridView View.");
+            }
 
             //  Store the gridview.
             gridView = ((GridView)element.View);
 
             //  Create a context menu.
-            ContextMenu contextMenu = new ContextMenu();
+            var contextMenu = new ContextMenu();
 
             //  Go through the columns.
             foreach (var column in ((GridView)element.View).Columns)
             {
                 //  Create the menu item.
-                MenuItem menuItem = new MenuItem()
+                var menuItem = new MenuItem()
                 {
                     Header = column.Header,
                     IsCheckable = true,
@@ -61,7 +62,10 @@ namespace Apex.Behaviours
                         removedColumns.Remove(theTuple);
                         int pos = theTuple.Item1;
                         if (pos > gridView.Columns.Count)
+                        {
                             pos = gridView.Columns.Count;
+                        }
+
                         gridView.Columns.Insert(pos, theTuple.Item2);
                     }
                 };

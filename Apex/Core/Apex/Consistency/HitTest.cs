@@ -39,7 +39,10 @@ namespace Apex.Consistency
         private HitTestResultBehavior HitTestCallback(HitTestResult result)
         {
             if (result.VisualHit is UIElement)
+            {
                 results.Add(result.VisualHit as UIElement);
+            }
+
             return HitTestResultBehavior.Continue;
         }
 

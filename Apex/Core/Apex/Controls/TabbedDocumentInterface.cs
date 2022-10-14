@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -42,8 +39,8 @@ namespace Apex.Controls
 
             try
             {
-                documentsTabControl = (TabControl)GetTemplateChild("PART_DocumentsTabControl");
-                contentControl = (ContentControl)GetTemplateChild("PART_ContentControl");
+                documentsTabControl = (TabControl)this.GetTemplateChild("PART_DocumentsTabControl");
+                contentControl = (ContentControl)this.GetTemplateChild("PART_ContentControl");
             }
             catch
             {
@@ -51,39 +48,39 @@ namespace Apex.Controls
             }
 
             //  If we already have documents, wire up the handler.
-            WireUpCollectionChangedEventHandler(null, Documents);
+            this.WireUpCollectionChangedEventHandler(null, this.Documents);
 
             //  If we have any documents, add them.
-            if(Documents != null && Documents.Count > 0)
+            if(this.Documents != null && this.Documents.Count > 0)
             {
-                foreach (var document in Documents)
+                foreach (var document in this.Documents)
                 {
-                    AddDocumentTab(document);
+                    this.AddDocumentTab(document);
                 }
             }
 
             //  Update the visiblity of the tabs.
-            UpdateTabsVisibility();
+            this.UpdateTabsVisibility();
         }
 
         private void UpdateTabsVisibility()
         {
             //  The tabs are visbile only if we have documents.
-            bool showTabs = Documents != null && Documents.Count > 0;
+            bool showTabs = this.Documents != null && this.Documents.Count > 0;
             documentsTabControl.Visibility = showTabs ? Visibility.Visible : Visibility.Collapsed;
             contentControl.Visibility = showTabs ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void WireUpCollectionChangedEventHandler(object oldValue, object newValue)
         {
-            if (oldValue is INotifyCollectionChanged)
+            if (oldValue is INotifyCollectionChanged changed)
             {
-                ((INotifyCollectionChanged)(oldValue)).CollectionChanged -= TabbedDocumentInterface_DocumentsCollectionChanged;
+                changed.CollectionChanged -= this.TabbedDocumentInterface_DocumentsCollectionChanged;
             }
-            if (newValue is INotifyCollectionChanged)
+            if (newValue is INotifyCollectionChanged collectionChanged)
             {
-                ((INotifyCollectionChanged)(newValue)).CollectionChanged -= TabbedDocumentInterface_DocumentsCollectionChanged;
-                ((INotifyCollectionChanged)(newValue)).CollectionChanged += TabbedDocumentInterface_DocumentsCollectionChanged;
+                collectionChanged.CollectionChanged -= this.TabbedDocumentInterface_DocumentsCollectionChanged;
+                collectionChanged.CollectionChanged += this.TabbedDocumentInterface_DocumentsCollectionChanged;
             }
         }
 
@@ -98,13 +95,16 @@ namespace Apex.Controls
             documentsTabControl.Items.Add(document);
         }
 
-        void TabbedDocumentInterface_DocumentsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        void TabbedDocumentInterface_DocumentsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
                     foreach(var newDocument in e.NewItems)
-                        AddDocumentTab(newDocument);
+                    {
+                        this.AddDocumentTab(newDocument);
+                    }
+
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     break;
@@ -118,7 +118,7 @@ namespace Apex.Controls
                     throw new ArgumentOutOfRangeException();
             }
             //  Make sure the tabs visbility is correct.
-            UpdateTabsVisibility();    
+            this.UpdateTabsVisibility();    
         }
 
         public static IList GetDocuments(DependencyObject obj)
@@ -133,8 +133,8 @@ namespace Apex.Controls
 
         public IList Documents
         {
-            get { return (IList) GetValue(DocumentsProperty); }
-            set{ SetValue(DocumentsProperty, value);}
+            get => (IList)this.GetValue(DocumentsProperty);
+            set => this.SetValue(DocumentsProperty, value);
         }
 
         public static readonly DependencyProperty DocumentsProperty =
@@ -150,7 +150,7 @@ namespace Apex.Controls
         /// </summary>
         public static readonly DependencyProperty TabHeaderTemplateProperty =
           DependencyProperty.Register("TabHeaderTemplate", typeof(DataTemplate), typeof(TabbedDocumentInterface),
-          new PropertyMetadata(default(DataTemplate), new PropertyChangedCallback(OnTabHeaderTemplateChanged)));
+          new PropertyMetadata(default(DataTemplate), OnTabHeaderTemplateChanged));
 
         /// <summary>
         /// Gets or sets TabHeaderTemplate.
@@ -158,8 +158,8 @@ namespace Apex.Controls
         /// <value>The value of TabHeaderTemplate.</value>
         public DataTemplate TabHeaderTemplate
         {
-            get { return (DataTemplate)GetValue(TabHeaderTemplateProperty); }
-            set { SetValue(TabHeaderTemplateProperty, value); }
+            get => (DataTemplate)this.GetValue(TabHeaderTemplateProperty);
+            set => this.SetValue(TabHeaderTemplateProperty, value);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Apex.Controls
         /// <param name="args">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnTabHeaderTemplateChanged(DependencyObject o, DependencyPropertyChangedEventArgs args)
         {
-            TabbedDocumentInterface me = o as TabbedDocumentInterface;
+            var me = o as TabbedDocumentInterface;
         }
 
         
@@ -178,7 +178,7 @@ namespace Apex.Controls
         /// </summary>
         public static readonly DependencyProperty TabContentTemplateProperty =
           DependencyProperty.Register("TabContentTemplate", typeof(DataTemplate), typeof(TabbedDocumentInterface),
-          new PropertyMetadata(default(DataTemplate), new PropertyChangedCallback(OnTabContentTemplateChanged)));
+          new PropertyMetadata(default(DataTemplate), OnTabContentTemplateChanged));
 
         /// <summary>
         /// Gets or sets TabContentTemplate.
@@ -186,8 +186,8 @@ namespace Apex.Controls
         /// <value>The value of TabContentTemplate.</value>
         public DataTemplate TabContentTemplate
         {
-            get { return (DataTemplate)GetValue(TabContentTemplateProperty); }
-            set { SetValue(TabContentTemplateProperty, value); }
+            get => (DataTemplate)this.GetValue(TabContentTemplateProperty);
+            set => this.SetValue(TabContentTemplateProperty, value);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Apex.Controls
         /// <param name="args">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnTabContentTemplateChanged(DependencyObject o, DependencyPropertyChangedEventArgs args)
         {
-            TabbedDocumentInterface me = o as TabbedDocumentInterface;
+            var me = o as TabbedDocumentInterface;
         }
     }
 }

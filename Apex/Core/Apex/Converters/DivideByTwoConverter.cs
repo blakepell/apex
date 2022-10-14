@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
-using System.Windows;
 
 namespace Apex.Converters
 {
@@ -26,13 +22,16 @@ namespace Apex.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value != null && value is double)
+            if (value != null && value is double d)
             {
-                if (parameter != null && parameter is string && (string) parameter == "Negative")
-                    return -((double) value)/2;
+                if (parameter != null && parameter is string s && s == "Negative")
+                {
+                    return -d/2;
+                }
                 else
-                    return ((double) value)/2;
-
+                {
+                    return d/2;
+                }
             }
             return 0.0;
         }

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Data;
 using System.ComponentModel;
 
 #if !SILVERLIGHT
-using System.Windows.Markup.Primitives;
 #endif
 
 namespace Apex.Extensions
@@ -27,14 +25,18 @@ namespace Apex.Extensions
         public static T GetParent<T>(this DependencyObject child) where T : DependencyObject
         {
             //  Get the visual parent.
-            DependencyObject dependencyObject = VisualTreeHelper.GetParent(child);
+            var dependencyObject = VisualTreeHelper.GetParent(child);
 
             //  If we've got the parent, return it if it is the correct type - otherwise
             //  continue up the tree.
             if (dependencyObject != null)
-                return dependencyObject is T ? dependencyObject as T : GetParent<T>(dependencyObject);
+            {
+                return dependencyObject is T o ? o : GetParent<T>(dependencyObject);
+            }
             else
+            {
                 return null;
+            }
         }
 
         /// <summary>
@@ -44,7 +46,7 @@ namespace Apex.Extensions
         /// <returns></returns>
         public static DependencyObject GetTopLevelParent(this DependencyObject child)
         {
-            DependencyObject tmp = child;
+            var tmp = child;
             DependencyObject parent = null;
             while ((tmp = VisualTreeHelper.GetParent(tmp)) != null)
             {
@@ -64,12 +66,16 @@ namespace Apex.Extensions
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(me); i++)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(me, i);
-                if (child != null && child is T)
-                    yield return (T) child;
+                var child = VisualTreeHelper.GetChild(me, i);
+                if (child != null && child is T dependencyObject)
+                {
+                    yield return dependencyObject;
+                }
 
                 foreach (T childOfChild in child.GetVisualChildren<T>())
+                {
                     yield return childOfChild;
+                }
             }
         }
 
@@ -89,15 +95,20 @@ namespace Apex.Extensions
 #endif
             {
                 //  If the child is not a dependency object, we can't use it.
-                var childDependencyObject = child as DependencyObject;
-                if (childDependencyObject == null)
+                if (!(child is DependencyObject childDependencyObject))
+                {
                     continue;
+                }
 
-                if (childDependencyObject != null && childDependencyObject is T)
-                    yield return (T) childDependencyObject;
+                if (childDependencyObject != null && childDependencyObject is T dependencyObject)
+                {
+                    yield return dependencyObject;
+                }
 
                 foreach (T childOfChild in childDependencyObject.GetLogicalChildren<T>())
+                {
                     yield return childOfChild;
+                }
             }
         }
 
@@ -112,7 +123,10 @@ namespace Apex.Extensions
         public static T FindChild<T>(this DependencyObject me, string childName) where T : DependencyObject
         {
             // Confirm parent and childName are valid. 
-            if (me == null) return null;
+            if (me == null)
+            {
+                return null;
+            }
 
             T foundChild = null;
 
@@ -121,20 +135,21 @@ namespace Apex.Extensions
             {
                 var child = VisualTreeHelper.GetChild(me, i);
                 // If the child is not of the request child type child
-                T childType = child as T;
-                if (childType == null)
+                if (!(child is T childType))
                 {
                     // recursively drill down the tree
                     foundChild = FindChild<T>(child, childName);
 
                     // If the child is found, break so we do not overwrite the found child. 
-                    if (foundChild != null) break;
+                    if (foundChild != null)
+                    {
+                        break;
+                    }
                 }
                 else if (!string.IsNullOrEmpty(childName))
                 {
-                    var frameworkElement = child as FrameworkElement;
                     // If the child's name is set for search
-                    if (frameworkElement != null && frameworkElement.Name == childName)
+                    if (child is FrameworkElement frameworkElement && frameworkElement.Name == childName)
                     {
                         // if the child's name is of the request name
                         foundChild = (T) child;

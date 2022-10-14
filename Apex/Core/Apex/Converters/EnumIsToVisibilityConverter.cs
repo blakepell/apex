@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
 using System.Windows;
 
@@ -29,13 +26,17 @@ namespace Apex.Converters
         {
             //  The value must be an enumerator.
             if (value == null || value is Enum == false)
+            {
                 throw new InvalidOperationException(
                     "The value passed to an EnumIsToVisibilityConverter must be an enumeration.");
+            }
 
             //  The parameter must be a string.
             if (parameter == null || parameter is string == false)
+            {
                 throw new InvalidOperationException(
                     "The parameter passed to an EnumIsVisibilityConverter must be a string.");
+            }
 
             //  Convert it to a string.
             var enumString = value.ToString();

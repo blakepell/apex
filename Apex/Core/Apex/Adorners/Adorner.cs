@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
+// ReSharper disable InconsistentNaming
 
 namespace Apex.Adorners
 {
-  /// <summary>
-  /// The adorner class is used a base for any kind of adornment of a UI element via
-  /// the AdornerLayer.
-  /// </summary>
+    /// <summary>
+    /// The adorner class is used a base for any kind of adornment of a UI element via
+    /// the AdornerLayer.
+    /// </summary>
     public class Adorner : DependencyObject
     {
-      /// <summary>
-      /// The translation used to position the adorner.
-      /// </summary>
-        private TranslateTransform translation = new TranslateTransform();
-
         /// <summary>
         /// The UI Element being Adorned.
         /// </summary>
@@ -28,10 +20,7 @@ namespace Apex.Adorners
         /// <summary>
         /// Gets the translation.
         /// </summary>
-        public TranslateTransform Translation
-        {
-            get { return translation; }
-        }
+        public TranslateTransform Translation { get; } = new TranslateTransform();
 
         /// <summary>
         /// Gets or sets the parent adorner layer.
@@ -39,11 +28,7 @@ namespace Apex.Adorners
         /// <value>
         /// The parent adorner layer.
         /// </value>
-        public AdornerLayer ParentAdornerLayer
-        {
-            get;
-            set;
-        }
+        public AdornerLayer ParentAdornerLayer { get; set; }
 
         /// <summary>
         /// Gets or sets the UI element.
@@ -53,8 +38,8 @@ namespace Apex.Adorners
         /// </value>
         public UIElement UIElement
         {
-            get { return (UIElement)GetValue(UIElementProperty); }
-            set { SetValue(UIElementProperty, value); }
+            get => (UIElement)this.GetValue(UIElementProperty);
+            set => this.SetValue(UIElementProperty, value);
         }
     }
 }

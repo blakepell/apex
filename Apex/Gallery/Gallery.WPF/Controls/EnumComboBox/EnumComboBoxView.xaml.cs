@@ -11,7 +11,7 @@ namespace Gallery.Controls.EnumComboBox
     {
         public EnumComboBoxView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

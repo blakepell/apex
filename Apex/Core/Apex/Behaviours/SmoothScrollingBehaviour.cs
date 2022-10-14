@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Xaml.Behaviors;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interactivity;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Apex.Controls;
-using Apex.Extensions;
 
 namespace Apex.Behaviours
 {
@@ -74,7 +68,7 @@ namespace Apex.Behaviours
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private void OnSmoothVerticalOffsetChanged(DependencyPropertyChangedEventArgs e)
         {
-            AssociatedObject.ScrollToVerticalOffset((double)e.NewValue);
+            this.AssociatedObject.ScrollToVerticalOffset((double)e.NewValue);
         }
         
         /// <summary>
@@ -83,7 +77,7 @@ namespace Apex.Behaviours
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private void OnSmoothHorizonalOffsetChanged(DependencyPropertyChangedEventArgs e)
         {
-            AssociatedObject.ScrollToHorizontalOffset((double)e.NewValue);
+            this.AssociatedObject.ScrollToHorizontalOffset((double)e.NewValue);
         }
 
         /// <summary>
@@ -93,9 +87,10 @@ namespace Apex.Behaviours
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnSmoothVerticalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var me = d as SmoothScrollingBehaviour;
-            if(me != null)
+            if(d is SmoothScrollingBehaviour me)
+            {
                 me.OnSmoothVerticalOffsetChanged(e);
+            }
         }
 
         /// <summary>
@@ -105,9 +100,10 @@ namespace Apex.Behaviours
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnSmoothHorizonalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var me = d as SmoothScrollingBehaviour;
-            if (me != null)
+            if (d is SmoothScrollingBehaviour me)
+            {
                 me.OnSmoothHorizonalOffsetChanged(e);
+            }
         }
 
         /// <summary>
@@ -115,14 +111,14 @@ namespace Apex.Behaviours
         /// </summary>
         public static readonly DependencyProperty SmoothVerticalOffsetProperty = 
             DependencyProperty.Register("SmoothVerticalOffset", typeof(double),
-            typeof(SmoothScrollingBehaviour), new PropertyMetadata(new PropertyChangedCallback(OnSmoothVerticalOffsetChanged)));
+            typeof(SmoothScrollingBehaviour), new PropertyMetadata(OnSmoothVerticalOffsetChanged));
 
         /// <summary>
         /// The SmoothHorizontalOffset dependency property.
         /// </summary>
         public static readonly DependencyProperty SmoothHorizonalOffsetProperty = 
             DependencyProperty.Register("SmoothHorizonalOffset", typeof(double),
-            typeof(SmoothScrollingBehaviour), new PropertyMetadata(new PropertyChangedCallback(OnSmoothHorizonalOffsetChanged)));
+            typeof(SmoothScrollingBehaviour), new PropertyMetadata(OnSmoothHorizonalOffsetChanged));
 
         /// <summary>
         /// Gets or sets the smooth horizonal offset.
@@ -132,8 +128,8 @@ namespace Apex.Behaviours
         /// </value>
         public double SmoothHorizonalOffset
         {
-            get { return (double)GetValue(SmoothHorizonalOffsetProperty); }
-            set { SetValue(SmoothHorizonalOffsetProperty, value); }
+            get => (double)this.GetValue(SmoothHorizonalOffsetProperty);
+            set => this.SetValue(SmoothHorizonalOffsetProperty, value);
         }
 
         /// <summary>
@@ -144,8 +140,8 @@ namespace Apex.Behaviours
         /// </value>
         public double SmoothVerticalOffset
         {
-            get { return (double)GetValue(SmoothVerticalOffsetProperty); }
-            set { SetValue(SmoothVerticalOffsetProperty, value); }
+            get => (double)this.GetValue(SmoothVerticalOffsetProperty);
+            set => this.SetValue(SmoothVerticalOffsetProperty, value);
         }
     }
 }

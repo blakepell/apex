@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using Apex.Interop;
@@ -24,9 +22,12 @@ namespace Apex.Helpers
                     }
                 case Shell32.BFFM_SELCHANGED:
                     {
-                        IntPtr pathPtr = Marshal.AllocHGlobal((int)(260 * Marshal.SystemDefaultCharSize));
+                        var pathPtr = Marshal.AllocHGlobal(260 * Marshal.SystemDefaultCharSize);
                         if (Shell32.SHGetPathFromIDList(lp, pathPtr))
+                        {
                             User32.SendMessage(new HandleRef(null, hWnd), Shell32.BFFM_SETSTATUSTEXTW, 0, pathPtr);
+                        }
+
                         Marshal.FreeHGlobal(pathPtr);
                         break;
                     }
@@ -37,24 +38,26 @@ namespace Apex.Helpers
 
         public bool? ShowDialog()
         {
-            SelectedFolderPath = SelectFolder(Caption, null, ParentWindowHandle);
-            return !string.IsNullOrEmpty(SelectedFolderPath);
+            this.SelectedFolderPath = this.SelectFolder(this.Caption, null, this.ParentWindowHandle);
+            return !string.IsNullOrEmpty(this.SelectedFolderPath);
         }
 
         private string SelectFolder(string caption, string initialPath, IntPtr parentHandle)
         {
             this.initialPath = initialPath;
-            StringBuilder sb = new StringBuilder(256);
-            IntPtr bufferAddress = Marshal.AllocHGlobal(256); ;
-            IntPtr pidl = IntPtr.Zero;
-            var bi = new BROWSEINFO();
-            bi.hwndOwner = parentHandle;
-            bi.pidlRoot = IntPtr.Zero;
-            bi.lpszTitle = caption;
-            bi.ulFlags = Shell32.BIF_NEWDIALOGSTYLE | Shell32.BIF_SHAREABLE;
-            bi.lpfn = new BrowseCallBackProc(OnBrowseEvent);
-            bi.lParam = IntPtr.Zero;
-            bi.iImage = 0;
+            var sb = new StringBuilder(256);
+            var bufferAddress = Marshal.AllocHGlobal(256);
+            var pidl = IntPtr.Zero;
+            var bi = new BROWSEINFO
+            {
+                hwndOwner = parentHandle,
+                pidlRoot = IntPtr.Zero,
+                lpszTitle = caption,
+                ulFlags = Shell32.BIF_NEWDIALOGSTYLE | Shell32.BIF_SHAREABLE,
+                lpfn = this.OnBrowseEvent,
+                lParam = IntPtr.Zero,
+                iImage = 0
+            };
 
             try
             {

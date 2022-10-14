@@ -11,7 +11,7 @@ namespace Gallery.MVVM.CommandingSample
     {
         public CommandingSampleView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

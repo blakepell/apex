@@ -2,7 +2,7 @@
 using System.Windows;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System;
+
 namespace Apex.Controls
 {
     /// <summary>
@@ -18,14 +18,16 @@ namespace Apex.Controls
         private static void OnRowsChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
             //  Get the apex grid.
-            ApexGrid apexGrid = dependencyObject as ApexGrid;
+            var apexGrid = dependencyObject as ApexGrid;
 
             //  Clear any current rows definitions.
             apexGrid.RowDefinitions.Clear();
 
             //  Add each row from the row lengths definition.
             foreach (var rowLength in StringLengthsToGridLengths(apexGrid.Rows))
+            {
                 apexGrid.RowDefinitions.Add(new RowDefinition() { Height = rowLength });
+            }
         }
 
         /// <summary>
@@ -36,14 +38,16 @@ namespace Apex.Controls
         private static void OnColumnsChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
             //  Get the apex grid.
-            ApexGrid apexGrid = dependencyObject as ApexGrid;
+            var apexGrid = dependencyObject as ApexGrid;
 
             //  Clear any current column definitions.
             apexGrid.ColumnDefinitions.Clear();
 
             //  Add each column from the column lengths definition.
             foreach (var columnLength in StringLengthsToGridLengths(apexGrid.Columns))
+            {
                 apexGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = columnLength });
+            }
         }
 
         /// <summary>
@@ -54,21 +58,25 @@ namespace Apex.Controls
         private static List<GridLength> StringLengthsToGridLengths(string lengths)
         {
             //  Create the list of GridLengths.
-            List<GridLength> gridLengths = new List<GridLength>();
+            var gridLengths = new List<GridLength>();
 
             //  If the string is null or empty, this is all we can do.
             if (string.IsNullOrEmpty(lengths))
+            {
                 return gridLengths;
+            }
 
             //  Split the string by comma.
             string[] theLengths = lengths.Split(',');
             
             //  Use a consistency grid length converter.
-            Consistency.GridLengthConverter gridLengthConverter = new Consistency.GridLengthConverter();
+            var gridLengthConverter = new Consistency.GridLengthConverter();
 
             //  Convert the lengths.
             foreach(var length in theLengths)
+            {
                 gridLengths.Add(gridLengthConverter.ConvertFromString(length));
+            }
 
             //  Return the grid lengths.
             return gridLengths;
@@ -79,14 +87,14 @@ namespace Apex.Controls
         /// </summary>
         private static readonly DependencyProperty rowsProperty =
             DependencyProperty.Register("Rows", typeof(string), typeof(ApexGrid),
-            new PropertyMetadata(null, new PropertyChangedCallback(OnRowsChanged)));
+            new PropertyMetadata(null, OnRowsChanged));
 
         /// <summary>
         /// The columns dependency property.
         /// </summary>
         private static readonly DependencyProperty columnsProperty =
             DependencyProperty.Register("Columns", typeof(string), typeof(ApexGrid),
-            new PropertyMetadata(null, new PropertyChangedCallback(OnColumnsChanged)));
+            new PropertyMetadata(null, OnColumnsChanged));
 
         /// <summary>
         /// Gets or sets the rows.
@@ -95,8 +103,8 @@ namespace Apex.Controls
         [Description("The rows property."), Category("Common Properties")]
         public string Rows
         {
-            get { return (string)GetValue(rowsProperty); }
-            set { SetValue(rowsProperty, value); }
+            get => (string)this.GetValue(rowsProperty);
+            set => this.SetValue(rowsProperty, value);
         }
 
         /// <summary>
@@ -106,8 +114,8 @@ namespace Apex.Controls
         [Description("The columns property."), Category("Common Properties")]
         public string Columns
         {
-            get { return (string)GetValue(columnsProperty); }
-            set { SetValue(columnsProperty, value); }
+            get => (string)this.GetValue(columnsProperty);
+            set => this.SetValue(columnsProperty, value);
         }
     }
 }

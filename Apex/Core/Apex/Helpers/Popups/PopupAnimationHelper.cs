@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using Apex.MVVM;
 
 namespace Apex.Helpers.Popups
 {
@@ -38,7 +34,7 @@ namespace Apex.Helpers.Popups
             popupsAndBackgrounds.Add(popupAndBackground);
 
             //  Animate the popup.
-            AnimatePopupShow(popupHost, popupAndBackground.Background, popup);
+            this.AnimatePopupShow(popupHost, popupAndBackground.Background, popup);
         }
 
         /// <summary>
@@ -55,13 +51,15 @@ namespace Apex.Helpers.Popups
 
             //  If it's missing, then this popup was not shown in this instance of the helper.
             if(popupAndBackground == null)
+            {
                 throw new InvalidOperationException("The popup to be hidden was not shown in this instance. Popups must be shown and then hidden by the same object.");
+            }
 
             //  Remove the popup and background from the internal collection.
             popupsAndBackgrounds.Remove(popupAndBackground);
 
             //  Animate the popup.
-            AnimatePopupHide(popupHost, popupAndBackground.Background, popup);
+            this.AnimatePopupHide(popupHost, popupAndBackground.Background, popup);
         }
 
         /// <summary>
@@ -83,10 +81,7 @@ namespace Apex.Helpers.Popups
         /// <summary>
         /// Gets the open popups count.
         /// </summary>
-        public int OpenPopupsCount
-        {
-            get { return popupsAndBackgrounds.Count; }   
-        }
+        public int OpenPopupsCount => popupsAndBackgrounds.Count;
 
         internal class PopupAndBackground
         {

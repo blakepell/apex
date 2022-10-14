@@ -35,12 +35,20 @@ namespace Apex.Controls
             base.OnApplyTemplate();
 
             //  If we're missing any images, use the normal one.
-            if(MouseOverImageSource == null)
-                MouseOverImageSource = NormalImageSource;
-            if(PressedImageSource == null)
-                PressedImageSource = NormalImageSource;
-            if(DisabledImageSource == null)
-                DisabledImageSource = NormalImageSource;
+            if(this.MouseOverImageSource == null)
+            {
+                this.MouseOverImageSource = this.NormalImageSource;
+            }
+
+            if(this.PressedImageSource == null)
+            {
+                this.PressedImageSource = this.NormalImageSource;
+            }
+
+            if(this.DisabledImageSource == null)
+            {
+                this.DisabledImageSource = this.NormalImageSource;
+            }
         }
 
         /// <summary>
@@ -56,8 +64,8 @@ namespace Apex.Controls
         /// <value>The value of NormalImageSource.</value>
         public ImageSource NormalImageSource
         {
-            get { return (ImageSource)GetValue(NormalImageSourceProperty); }
-            set { SetValue(NormalImageSourceProperty, value); }
+            get => (ImageSource)this.GetValue(NormalImageSourceProperty);
+            set => this.SetValue(NormalImageSourceProperty, value);
         }
         
         
@@ -74,8 +82,8 @@ namespace Apex.Controls
         /// <value>The value of MouseOverImageSource.</value>
         public ImageSource MouseOverImageSource
         {
-            get { return (ImageSource)GetValue(MouseOverImageSourceProperty); }
-            set { SetValue(MouseOverImageSourceProperty, value); }
+            get => (ImageSource)this.GetValue(MouseOverImageSourceProperty);
+            set => this.SetValue(MouseOverImageSourceProperty, value);
         }
         
         /// <summary>
@@ -91,8 +99,8 @@ namespace Apex.Controls
         /// <value>The value of PressedImageSource.</value>
         public ImageSource PressedImageSource
         {
-            get { return (ImageSource)GetValue(PressedImageSourceProperty); }
-            set { SetValue(PressedImageSourceProperty, value); }
+            get => (ImageSource)this.GetValue(PressedImageSourceProperty);
+            set => this.SetValue(PressedImageSourceProperty, value);
         }
         
         /// <summary>
@@ -108,8 +116,8 @@ namespace Apex.Controls
         /// <value>The value of DisabledImageSource.</value>
         public ImageSource DisabledImageSource
         {
-            get { return (ImageSource)GetValue(DisabledImageSourceProperty); }
-            set { SetValue(DisabledImageSourceProperty, value); }
+            get => (ImageSource)this.GetValue(DisabledImageSourceProperty);
+            set => this.SetValue(DisabledImageSourceProperty, value);
         }
     }
 }

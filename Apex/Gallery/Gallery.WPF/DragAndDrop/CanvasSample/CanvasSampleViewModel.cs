@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using Apex.MVVM;
-
-namespace Gallery.DragAndDrop.CanvasSample
+﻿namespace Gallery.DragAndDrop.CanvasSample
 {
     /// <summary>
     /// The CanvasSampleViewModel ViewModel class.
@@ -17,7 +10,7 @@ namespace Gallery.DragAndDrop.CanvasSample
         /// </summary>
         public CanvasSampleViewModel()
         {
-            Title = "Canvas Sample";
+            this.Title = "Canvas Sample";
         }
     }
 }

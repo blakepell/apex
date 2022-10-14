@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using Apex.MVVM;
 
 namespace Gallery
@@ -22,8 +18,8 @@ namespace Gallery
         /// <value>The value of Title.</value>
         public string Title
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get => (string)this.GetValue(TitleProperty);
+            set => this.SetValue(TitleProperty, value);
         }
         
         /// <summary>
@@ -36,11 +32,8 @@ namespace Gallery
         /// Gets the GalleryItems observable collection.
         /// </summary>
         /// <value>The GalleryItems observable collection.</value>
-        public ObservableCollection<GalleryItemViewModel> GalleryItems
-        {
-            get { return GalleryItemsProperty; }
-        }
-        
+        public ObservableCollection<GalleryItemViewModel> GalleryItems => GalleryItemsProperty;
+
         /// <summary>
         /// The PropertyName observable collection.
         /// </summary>
@@ -51,9 +44,6 @@ namespace Gallery
         /// Gets the PropertyName observable collection.
         /// </summary>
         /// <value>The PropertyName observable collection.</value>
-        public ObservableCollection<GalleryItemViewModel> PropertyName
-        {
-            get { return PropertyNameProperty; }
-        }
+        public ObservableCollection<GalleryItemViewModel> PropertyName => PropertyNameProperty;
     }
 }

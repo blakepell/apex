@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Apex.MVVM;
+﻿using Apex.MVVM;
 using Apex.DragAndDrop;
 using System.Collections.ObjectModel;
 using Apex.Adorners;
@@ -17,16 +14,16 @@ namespace Gallery.DragAndDrop.ItemsControlSample
     {
         public ItemsControlSampleView()
         {
-            InitializeComponent(); dragAndDropHost.DragAndDropStart += new DragAndDropDelegate(Instance_DragAndDropStart);
-            dragAndDropHost.DragAndDropContinue += new DragAndDropDelegate(Instance_DragAndDropContinue);
-            dragAndDropHost.DragAndDropEnd += new DragAndDropDelegate(Instance_DragAndDropEnd);
+            this.InitializeComponent(); dragAndDropHost.DragAndDropStart += this.Instance_DragAndDropStart;
+            dragAndDropHost.DragAndDropContinue += this.Instance_DragAndDropContinue;
+            dragAndDropHost.DragAndDropEnd += this.Instance_DragAndDropEnd;
         }
 
         void Instance_DragAndDropEnd(object sender, DragAndDropEventArgs args)
         {
-            ObservableCollection<string> from =
+            var from =
                 ((ItemsControl)args.DragSource).ItemsSource as ObservableCollection<string>;
-            ObservableCollection<string> to =
+            var to =
                 ((ItemsControl)args.DropTarget).ItemsSource as ObservableCollection<string>;
             from.Remove((string)args.DragData);
             to.Add((string)args.DragData);

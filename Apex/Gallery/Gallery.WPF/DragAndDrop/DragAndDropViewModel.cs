@@ -1,16 +1,6 @@
 ﻿using Apex.MVVM;
-using Gallery.Controls.ApexGrid;
-using Gallery.Controls.CrossButton;
-using Gallery.Controls.EnumComboBox;
-using Gallery.Controls.MultiBorder;
-using Gallery.Controls.PaddedGrid;
-using Gallery.Controls.TabbedDocumentInterface;
-using Gallery.CueTextBox;
 using Gallery.DragAndDrop.CanvasSample;
 using Gallery.DragAndDrop.ItemsControlSample;
-using Gallery.PathTextBox;
-using Gallery.PivotControl;
-using Gallery.SearchTextBox;
 
 namespace Gallery.DragAndDrop
 {
@@ -19,10 +9,10 @@ namespace Gallery.DragAndDrop
     {
         public DragAndDropViewModel()
         {
-            Title = "Drag & Drop";
+            this.Title = "Drag & Drop";
 
-            GalleryItems.Add(new CanvasSampleViewModel());
-            GalleryItems.Add(new ItemsControlSampleViewModel());
+            this.GalleryItems.Add(new CanvasSampleViewModel());
+            this.GalleryItems.Add(new ItemsControlSampleViewModel());
         }
     }
 }

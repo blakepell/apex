@@ -13,10 +13,10 @@ namespace Gallery.MVVM.SimpleSample
         /// </summary>
         public SimpleExampleViewModel()
         {
-            Title = "Simple MVVM Example";
+            this.Title = "Simple MVVM Example";
 
             //  Create the build name command.
-            BuildNameCommand = new Command(DoBuildNameCommand, false);
+            this.BuildNameCommand = new Command(this.DoBuildNameCommand, false);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Gallery.MVVM.SimpleSample
         private void DoBuildNameCommand()
         {
             //  Set the full name.
-            FullName = FirstName + " " + SecondName;
+            this.FullName = this.FirstName + " " + this.SecondName;
         }
 
         /// <summary>
@@ -52,11 +52,11 @@ namespace Gallery.MVVM.SimpleSample
         /// <value>The first name.</value>
         public string FirstName
         {
-            get { return (string)GetValue(firstNameProperty); }
+            get => (string)this.GetValue(firstNameProperty);
             set 
-            { 
-                SetValue(firstNameProperty, value);
-                BuildNameCommand.CanExecute = string.IsNullOrEmpty(FirstName) == false && string.IsNullOrEmpty(SecondName) == false;
+            {
+                this.SetValue(firstNameProperty, value);
+                this.BuildNameCommand.CanExecute = string.IsNullOrEmpty(this.FirstName) == false && string.IsNullOrEmpty(this.SecondName) == false;
             }
         }
 
@@ -66,11 +66,11 @@ namespace Gallery.MVVM.SimpleSample
         /// <value>The second name.</value>
         public string SecondName
         {
-            get { return (string)GetValue(secondNameProperty); }
+            get => (string)this.GetValue(secondNameProperty);
             set
             {
-                SetValue(secondNameProperty, value);
-                BuildNameCommand.CanExecute = string.IsNullOrEmpty(FirstName) == false && string.IsNullOrEmpty(SecondName) == false;
+                this.SetValue(secondNameProperty, value);
+                this.BuildNameCommand.CanExecute = string.IsNullOrEmpty(this.FirstName) == false && string.IsNullOrEmpty(this.SecondName) == false;
             }
         }
 
@@ -80,8 +80,8 @@ namespace Gallery.MVVM.SimpleSample
         /// <value>The full name.</value>
         public string FullName
         {
-            get { return (string)GetValue(fullNameProperty); }
-            set { SetValue(fullNameProperty, value); }
+            get => (string)this.GetValue(fullNameProperty);
+            set => this.SetValue(fullNameProperty, value);
         }
         
         /// <summary>

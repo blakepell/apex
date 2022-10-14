@@ -22,11 +22,13 @@ namespace Apex.Controls
         {
             //  Get the new item.
             if (e.AddedItems.Count == 0 || e.AddedItems[0] is NameValue == false)
+            {
                 return;
+            }
 
             //  Keep the selected enumeration up to date.
-            NameValue nameValue = e.AddedItems[0] as NameValue;
-            SelectedEnumeration = nameValue.Value;
+            var nameValue = e.AddedItems[0] as NameValue;
+            this.SelectedEnumeration = nameValue.Value;
         }
 
         /// <summary>
@@ -35,15 +37,17 @@ namespace Apex.Controls
         private void PopulateItemsSource()
         {
             //  We must have an items source and an item which is an enum.
-            if (ItemsSource != null || SelectedEnumeration is Enum == false)
+            if (this.ItemsSource != null || this.SelectedEnumeration is Enum == false)
+            {
                 return;
+            }
 
             //  Get the enum type.
-            var enumType = SelectedEnumeration.GetType();
+            var enumType = this.SelectedEnumeration.GetType();
 
             //  Get the enum values. Use the helper rather than Enum.GetValues
             //  as it works in Silverlight too.
-            var enumValues = Apex.Helpers.EnumHelper.GetValues(enumType);
+            var enumValues = Helpers.EnumHelper.GetValues(enumType);
 
             //  Create some enum value/descriptions.
             enumerations = new List<NameValue>();
@@ -56,10 +60,10 @@ namespace Apex.Controls
             }
 
             //  Set the items source.
-            ItemsSource = enumerations;
+            this.ItemsSource = enumerations;
 
             //  Initialise the control.
-            Initialise();
+            this.Initialise();
         }
 
         /// <summary>
@@ -68,22 +72,22 @@ namespace Apex.Controls
         private void Initialise()
         {
             //  Set the display member path and selected value path.
-            DisplayMemberPath = "Name";
+            this.DisplayMemberPath = "Name";
 
 #if !WINDOWS_PHONE
             //  TODO: Check what we can do for WP7.
-            SelectedValuePath = "Value";
+            this.SelectedValuePath = "Value";
 #endif
 
             //  If we have enumerations and a selected enumeration, set the selected item.
-            if (enumerations != null && SelectedEnumeration != null)
+            if (enumerations != null && this.SelectedEnumeration != null)
             {
-                var selectedEnum = from enumeration in enumerations where enumeration.Value.ToString() == SelectedEnumeration.ToString() select enumeration;
+                var selectedEnum = from enumeration in enumerations where enumeration.Value.ToString() == this.SelectedEnumeration.ToString() select enumeration;
                 this.SelectedItem = selectedEnum.FirstOrDefault();
             }
 
             //  Wait for selection changed events.
-            SelectionChanged += new SelectionChangedEventHandler(EnumerationComboBox_SelectionChanged);
+            this.SelectionChanged += this.EnumerationComboBox_SelectionChanged;
         }
 
         /// <summary>
@@ -92,7 +96,7 @@ namespace Apex.Controls
         public static readonly DependencyProperty SelectedEnumerationProperty =
           DependencyProperty.Register("SelectedEnumeration", typeof(object), typeof(EnumerationComboBox),
 #if !SILVERLIGHT
- new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnSelectedEnumerationChanged)));
+ new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedEnumerationChanged));
 #else
         new PropertyMetadata(null, new PropertyChangedCallback(OnSelectedEnumerationChanged)));
 #endif
@@ -105,8 +109,8 @@ namespace Apex.Controls
         /// </value>
         public object SelectedEnumeration
         {
-            get { return (object)GetValue(SelectedEnumerationProperty); }
-            set { SetValue(SelectedEnumerationProperty, value); }
+            get => this.GetValue(SelectedEnumerationProperty);
+            set => this.SetValue(SelectedEnumerationProperty, value);
         }
 
         /// <summary>
@@ -117,7 +121,7 @@ namespace Apex.Controls
         private static void OnSelectedEnumerationChanged(DependencyObject o, DependencyPropertyChangedEventArgs args)
         {
             //  Get the combo box.
-            EnumerationComboBox me = o as EnumerationComboBox;
+            var me = o as EnumerationComboBox;
 
             //  Populate the items source.
             me.PopulateItemsSource();
@@ -156,8 +160,8 @@ namespace Apex.Controls
         /// <param name="value">The value.</param>
         public NameValue(string name, object value)
         {
-            Name = name;
-            Value = value;
+            this.Name = name;
+            this.Value = value;
         }
 
         /// <summary>

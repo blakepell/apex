@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.ComponentModel;
-using Apex.MVVM;
 
 namespace Apex.Controls
 {
@@ -36,7 +25,9 @@ namespace Apex.Controls
 
             //  Rows and columns must be positive.
             if (me.Rows < 0 || me.Columns < 0)
+            {
                 return;
+            }
 
             //  Create a grid length converter.
             var gridLengthConverter = new Consistency.GridLengthConverter();
@@ -55,28 +46,28 @@ namespace Apex.Controls
         /// </summary>
         private static readonly DependencyProperty rowsProperty =
             DependencyProperty.Register("Rows", typeof (int), typeof (VariableGrid),
-                                        new PropertyMetadata(1, new PropertyChangedCallback(OnGridPropertyChanged)));
+                                        new PropertyMetadata(1, OnGridPropertyChanged));
 
         /// <summary>
         /// The columns dependency property.
         /// </summary>
         private static readonly DependencyProperty columnsProperty =
             DependencyProperty.Register("Columns", typeof (int), typeof (VariableGrid),
-                                        new PropertyMetadata(1, new PropertyChangedCallback(OnGridPropertyChanged)));
+                                        new PropertyMetadata(1, OnGridPropertyChanged));
 
         /// <summary>
         /// The rows dependency property.
         /// </summary>
         private static readonly DependencyProperty rowHeightProperty =
             DependencyProperty.Register("RowHeight", typeof (string), typeof (VariableGrid),
-                                        new PropertyMetadata("Auto", new PropertyChangedCallback(OnGridPropertyChanged)));
+                                        new PropertyMetadata("Auto", OnGridPropertyChanged));
 
         /// <summary>
         /// The columns dependency property.
         /// </summary>
         private static readonly DependencyProperty columnsWidthProperty =
             DependencyProperty.Register("ColumnWidth", typeof (string), typeof (VariableGrid),
-                                        new PropertyMetadata("Auto", new PropertyChangedCallback(OnGridPropertyChanged)));
+                                        new PropertyMetadata("Auto", OnGridPropertyChanged));
 
         /// <summary>
         /// Gets or sets the rows.
@@ -85,8 +76,8 @@ namespace Apex.Controls
         [Description("The number of rows."), Category("Common Properties")]
         public int Rows
         {
-            get { return (int) GetValue(rowsProperty); }
-            set { SetValue(rowsProperty, value); }
+            get => (int)this.GetValue(rowsProperty);
+            set => this.SetValue(rowsProperty, value);
         }
 
         /// <summary>
@@ -96,8 +87,8 @@ namespace Apex.Controls
         [Description("The number of columns."), Category("Common Properties")]
         public int Columns
         {
-            get { return (int) GetValue(columnsProperty); }
-            set { SetValue(columnsProperty, value); }
+            get => (int)this.GetValue(columnsProperty);
+            set => this.SetValue(columnsProperty, value);
         }
 
         /// <summary>
@@ -109,8 +100,8 @@ namespace Apex.Controls
         [Description("The row height property (used for all rows)."), Category("Common Properties")]
         public string RowHeight
         {
-            get { return (string) GetValue(rowHeightProperty); }
-            set { SetValue(rowHeightProperty, value); }
+            get => (string)this.GetValue(rowHeightProperty);
+            set => this.SetValue(rowHeightProperty, value);
         }
 
         /// <summary>
@@ -122,9 +113,8 @@ namespace Apex.Controls
         [Description("The column width property (used for all columns)."), Category("Common Properties")]
         public string ColumnWidth
         {
-            get { return (string) GetValue(columnsWidthProperty); }
-            set { SetValue(columnsWidthProperty, value); }
-
+            get => (string)this.GetValue(columnsWidthProperty);
+            set => this.SetValue(columnsWidthProperty, value);
         }
     }
 }

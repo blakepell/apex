@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows.Controls;
 using System.Windows;
 using Apex.MVVM;
-using Apex.Extensions;
-using System.Windows.Data;
-using System.Collections;
 
 namespace Apex.Controls
 {
@@ -36,7 +28,7 @@ namespace Apex.Controls
         /// </summary>
         public static readonly DependencyProperty IsSelectedProperty =
           DependencyProperty.Register("IsSelected", typeof(bool), typeof(SelectableItemsControlItem),
-          new PropertyMetadata(default(bool), new PropertyChangedCallback(OnIsSelectedChanged)));
+          new PropertyMetadata(default(bool), OnIsSelectedChanged));
 
         /// <summary>
         /// Gets or sets IsSelected.
@@ -44,8 +36,8 @@ namespace Apex.Controls
         /// <value>The value of IsSelected.</value>
         public bool IsSelected
         {
-            get { return (bool)GetValue(IsSelectedProperty); }
-            set { SetValue(IsSelectedProperty, value); }
+            get => (bool)this.GetValue(IsSelectedProperty);
+            set => this.SetValue(IsSelectedProperty, value);
         }
 
         /// <summary>
@@ -55,7 +47,7 @@ namespace Apex.Controls
         /// <param name="args">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnIsSelectedChanged(DependencyObject o, DependencyPropertyChangedEventArgs args)
         {
-            SelectableItemsControlItem me = o as SelectableItemsControlItem;
+            var me = o as SelectableItemsControlItem;
 
 #if SILVERLIGHT
             if(args.OldValue != args.NewValue)
@@ -78,7 +70,7 @@ namespace Apex.Controls
         public SelectableItemsControl()
         {
             //  Wire up commands.
-            SelectItemCommand = new Command(DoSelectItemCommand);
+            this.SelectItemCommand = new Command(this.DoSelectItemCommand);
         }
 
         protected override bool IsItemItsOwnContainerOverride(object item)
@@ -94,11 +86,13 @@ namespace Apex.Controls
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
         {
             base.PrepareContainerForItemOverride(element, item);
-            ((SelectableItemsControlItem)element).ContentTemplate = ItemTemplate;
+            ((SelectableItemsControlItem)element).ContentTemplate = this.ItemTemplate;
             ((SelectableItemsControlItem)element).Content = item;
 
-            if (ClickToSelectItem && item is ISelectableItem)
-                ((SelectableItemsControlItem) element).MouseLeftButtonDown += (sender, args) => DoSelectItemCommand(item);
+            if (this.ClickToSelectItem && item is ISelectableItem)
+            {
+                ((SelectableItemsControlItem) element).MouseLeftButtonDown += (sender, args) => this.DoSelectItemCommand(item);
+            }
         }
         
         /// <summary>
@@ -110,7 +104,7 @@ namespace Apex.Controls
             base.OnApplyTemplate();
 
             //  Set the Selected state of the items.
-            SetItemsSelectedState();
+            this.SetItemsSelectedState();
 
             //  The template has now been applied.
             isTemplateApplied = true;
@@ -122,21 +116,26 @@ namespace Apex.Controls
         private void SetItemsSelectedState()
         {
             //  If we have no items, we cannot set their state.
-            if (ItemsSource == null)
+            if (this.ItemsSource == null)
+            {
                 return;
+            }
 
             //  Go through every item.
-            foreach (var item in ItemsSource)
+            foreach (var item in this.ItemsSource)
             {
                 //  If the item is selectable, we can set it's selectable state.
                 var selectableItem = item as ISelectableItem;
                 if (selectableItem != null)
-                    selectableItem.IsSelected = selectableItem == SelectedItem;
+                {
+                    selectableItem.IsSelected = selectableItem == this.SelectedItem;
+                }
 
                 //  If the item has a selectable items control item container, we can set the selectable state.
-                var itemContainer = ItemContainerGenerator.ContainerFromItem(item) as SelectableItemsControlItem;
-                if (itemContainer != null)
-                    itemContainer.IsSelected = selectableItem == SelectedItem;
+                if (this.ItemContainerGenerator.ContainerFromItem(item) is SelectableItemsControlItem itemContainer)
+                {
+                    itemContainer.IsSelected = selectableItem == this.SelectedItem;
+                }
             }
         }
         
@@ -147,7 +146,7 @@ namespace Apex.Controls
             DependencyProperty.Register("SelectedItem", typeof(object), typeof(SelectableItemsControl),
             new FrameworkPropertyMetadata(default(object), 
 #if !SILVERLIGHT
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(SelectedItemChanged)));
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectedItemChanged));
 #else
  FrameworkPropertyMetadataOptions.None, new PropertyChangedCallback(SelectedItemChanged)));
 #endif
@@ -173,10 +172,12 @@ namespace Apex.Controls
         {
             //  We don't need to set state if we have no template.
             if (!isTemplateApplied)
+            {
                 return;
+            }
 
             //  Set the Selected state of the items.
-            SetItemsSelectedState();
+            this.SetItemsSelectedState();
         }
        
         /// <summary>
@@ -185,8 +186,8 @@ namespace Apex.Controls
         /// <value>The value of SelectedItem.</value>
         public object SelectedItem
         {
-            get { return (object)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
+            get => this.GetValue(SelectedItemProperty);
+            set => this.SetValue(SelectedItemProperty, value);
         }
 
         /// <summary>
@@ -195,12 +196,12 @@ namespace Apex.Controls
         /// <param name="itemToSelect">The item to select.</param>
         private void DoSelectItemCommand(object itemToSelect)
         {
-            SelectedItem = itemToSelect;
+            this.SelectedItem = itemToSelect;
         }
         
         private SelectableItemsControlItem GetItemContainerFromItem(object item)
         {
-            return Items.OfType<SelectableItemsControlItem>().FirstOrDefault(sici => sici.Content == item);
+            return this.Items.OfType<SelectableItemsControlItem>().FirstOrDefault(sici => sici.Content == item);
         }
 
         /// <summary>
@@ -231,8 +232,8 @@ namespace Apex.Controls
         /// <value>The value of ClickToSelectItem.</value>
         public bool ClickToSelectItem
         {
-            get { return (bool)GetValue(ClickToSelectItemProperty); }
-            set { SetValue(ClickToSelectItemProperty, value); }
+            get => (bool)this.GetValue(ClickToSelectItemProperty);
+            set => this.SetValue(ClickToSelectItemProperty, value);
         }
     }
 }

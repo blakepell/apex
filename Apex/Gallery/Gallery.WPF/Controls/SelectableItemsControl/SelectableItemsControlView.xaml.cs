@@ -11,7 +11,7 @@ namespace Gallery.Controls.SelectableItemsControl
     {
         public SelectableItemsControlView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

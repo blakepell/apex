@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Reflection;
-using Apex.Consistency;
 
 namespace Apex.Commands
 {
@@ -40,8 +36,8 @@ namespace Apex.Commands
         /// </value>
         public string EventName
         {
-            get { return (string)GetValue(EventNameProperty); }
-            set { SetValue(EventNameProperty, value); }
+            get => (string)this.GetValue(EventNameProperty);
+            set => this.SetValue(EventNameProperty, value);
         }
 
         /// <summary>
@@ -59,8 +55,8 @@ namespace Apex.Commands
         /// </value>
         public ICommand Command
         {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
+            get => (ICommand)this.GetValue(CommandProperty);
+            set => this.SetValue(CommandProperty, value);
         }
 
         /// <summary>
@@ -78,8 +74,8 @@ namespace Apex.Commands
         /// </value>
         public object CommandParameter
         {
-            get { return (object)GetValue(CommandParameterProperty); }
-            set { SetValue(CommandParameterProperty, value); }
+            get => this.GetValue(CommandParameterProperty);
+            set => this.SetValue(CommandParameterProperty, value);
         }
 
         /// <summary>
@@ -92,13 +88,13 @@ namespace Apex.Commands
             {
 
                 //  Get the event info from the event name.
-                EventInfo eventInfo = o.GetType().GetEvent(EventName);
+                var eventInfo = o.GetType().GetEvent(this.EventName);
 
                 //  Get the method info for the event proxy.
-                MethodInfo methodInfo = GetType().GetMethod("EventProxy", BindingFlags.NonPublic | BindingFlags.Instance);
+                var methodInfo = this.GetType().GetMethod("EventProxy", BindingFlags.NonPublic | BindingFlags.Instance);
 
                 //  Create a delegate for the event to the event proxy.
-                Delegate del = Delegate.CreateDelegate(eventInfo.EventHandlerType, this, methodInfo);
+                var del = Delegate.CreateDelegate(eventInfo.EventHandlerType, this, methodInfo);
 
                 //  Add the event handler. (Removing it first if it already exists!)
                 eventInfo.RemoveEventHandler(o, del);
@@ -133,8 +129,10 @@ namespace Apex.Commands
 
 #endif
 
-            if (Command != null)
-                Command.Execute(CommandParameter);
+            if (this.Command != null)
+            {
+                this.Command.Execute(this.CommandParameter);
+            }
         }
 
 #if SILVERLIGHT

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Apex.MVVM
 {
@@ -17,7 +12,7 @@ namespace Apex.MVVM
         /// </summary>
         private static readonly DependencyProperty ViewModelProperty =
           DependencyProperty.RegisterAttached("ViewModel", typeof(object), typeof(FrameworkElement),
-          new PropertyMetadata(default(object), new PropertyChangedCallback(OnViewModelChanged)));
+          new PropertyMetadata(default(object), OnViewModelChanged));
 
         /// <summary>
         /// Gets the value of the ViewModel property.
@@ -26,7 +21,7 @@ namespace Apex.MVVM
         /// <returns>The value of the ViewModel property.</returns>
         public static object GetViewModel(DependencyObject o)
         {
-            return (object)o.GetValue(ViewModelProperty);
+            return o.GetValue(ViewModelProperty);
         }
 
         /// <summary>
@@ -47,7 +42,7 @@ namespace Apex.MVVM
         private static void OnViewModelChanged(DependencyObject o, DependencyPropertyChangedEventArgs args)
         {
             //  Get the framework element.
-            FrameworkElement me = o as FrameworkElement;
+            var me = o as FrameworkElement;
 
             //  Set the data context as the view model.
             me.DataContext = GetViewModel(me);

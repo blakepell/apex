@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Controls;
 using System.Windows;
 using Microsoft.Win32;
@@ -34,8 +31,8 @@ namespace Apex.Controls
 
             try
             {
-                //  Get the cue labe.
-                browseButton = (Button)GetTemplateChild("PART_BrowseButton");
+                //  Get the cue label.
+                browseButton = (Button)this.GetTemplateChild("PART_BrowseButton");
             }
             catch
             {
@@ -43,7 +40,10 @@ namespace Apex.Controls
             }
 
             //  Handle the browse button click.
-            browseButton.Click += new RoutedEventHandler(browseButton_Click);
+            if (browseButton != null)
+            {
+                browseButton.Click += this.browseButton_Click;
+            }
         }
 
         /// <summary>
@@ -55,7 +55,9 @@ namespace Apex.Controls
         {
             var fileOpenDialog = new OpenFileDialog();
             if (fileOpenDialog.ShowDialog() == true)
-                Text = fileOpenDialog.FileName;
+            {
+                this.Text = fileOpenDialog.FileName;
+            }
         }
 
         /// <summary>

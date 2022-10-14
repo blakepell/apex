@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using Apex.Consistency;
 
 
 namespace Apex.Commands
@@ -17,9 +12,9 @@ namespace Apex.Commands
         //  Context menu operation are NOT available for silverlight.
 #if !SILVERLIGHT
 
-      /// <summary>
-      /// The ContextMenuDataContext dependency property.
-      /// </summary>
+        /// <summary>
+        /// The ContextMenuDataContext dependency property.
+        /// </summary>
         public static readonly DependencyProperty ContextMenuDataContextProperty =
             DependencyProperty.RegisterAttached("ContextMenuDataContext",
             typeof(object), typeof(ExtendedCommands),
@@ -52,14 +47,17 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnContextMenuDataContextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-          //  Cast the data.
-            FrameworkElement frameworkElement = d as FrameworkElement;
-            if (frameworkElement == null)
+            //  Cast the data.
+            if (!(d is FrameworkElement frameworkElement))
+            {
                 return;
+            }
 
-          //  Set the data context of the context menu.
+            //  Set the data context of the context menu.
             if (frameworkElement.ContextMenu != null)
+            {
                 frameworkElement.ContextMenu.DataContext = GetContextMenuDataContext(frameworkElement);
+            }
         }
 
 #endif
@@ -71,19 +69,19 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void Control_LeftClickMouseDown(object sender, MouseButtonEventArgs e)
         {
-            FrameworkElement element = sender as FrameworkElement;
-
             //  TODO Silverlight 5 actually provides the click count, we should use it.
             //  Silverlight doesn't give us quite as much help here as WPF does.
 #if SILVERLIGHT
             if (MouseClickDetector.IsDoubleClick(sender, e) || element == null /* TODO Ensure it's left button */)
                 return;
 #else
-            if (e.ClickCount != 1 || e.LeftButton != MouseButtonState.Pressed || element == null)
+            if (e.ClickCount != 1 || e.LeftButton != MouseButtonState.Pressed || !(sender is FrameworkElement element))
+            {
                 return;
+            }
 #endif
 
-            ICommand command = GetLeftClickCommand(element);
+            var command = GetLeftClickCommand(element);
             object param = GetLeftClickCommandParameter(element);
             if (command != null && command.CanExecute(param))
             {
@@ -99,17 +97,17 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void Control_RightClickMouseDown(object sender, MouseButtonEventArgs e)
         {
-            FrameworkElement element = sender as FrameworkElement;
-
             //  Silverlight doesn't give us quite as much help here as WPF does.
 #if SILVERLIGHT
             if (MouseClickDetector.IsDoubleClick(sender, e) || element == null /* TODO Ensure it's right button */)
                 return;
 #else
-            if (e.ClickCount != 1 || e.RightButton != MouseButtonState.Pressed || element == null)
+            if (e.ClickCount != 1 || e.RightButton != MouseButtonState.Pressed || !(sender is FrameworkElement element))
+            {
                 return;
+            }
 #endif
-            ICommand command = GetRightClickCommand(element);
+            var command = GetRightClickCommand(element);
             object param = GetRightClickCommandParameter(element);
             if (command != null && command.CanExecute(param))
             {
@@ -125,18 +123,18 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void Control_LeftDoubleClickMouseDown(object sender, MouseButtonEventArgs e)
         {
-            FrameworkElement element = sender as FrameworkElement;
-            
             //  Silverlight doesn't give us quite as much help here as WPF does.
 #if SILVERLIGHT
             if (MouseClickDetector.IsDoubleClick(sender, e) == false || element == null /* TODO Ensure it's right button */)
                 return;
 #else
-            if (e.ClickCount != 2 || e.LeftButton != MouseButtonState.Pressed || element == null)
+            if (e.ClickCount != 2 || e.LeftButton != MouseButtonState.Pressed || !(sender is FrameworkElement element))
+            {
                 return;
+            }
 #endif
 
-            ICommand command = GetLeftDoubleClickCommand(element);
+            var command = GetLeftDoubleClickCommand(element);
             object param = GetLeftDoubleClickCommandParameter(element);
             if (command != null && command.CanExecute(param))
             {
@@ -152,18 +150,18 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void Control_RightDoubleClickMouseDown(object sender, MouseButtonEventArgs e)
         {
-            FrameworkElement element = sender as FrameworkElement;
-
             //  Silverlight doesn't give us quite as much help here as WPF does.
 #if SILVERLIGHT
             if (MouseClickDetector.IsDoubleClick(sender, e) == false || element == null /* TODO Ensure it's right button */)
                 return;
 #else
-            if (e.ClickCount != 2 || e.RightButton != MouseButtonState.Pressed || element == null)
+            if (e.ClickCount != 2 || e.RightButton != MouseButtonState.Pressed || !(sender is FrameworkElement element))
+            {
                 return;
+            }
 #endif
 
-            ICommand command = GetRightDoubleClickCommand(element);
+            var command = GetRightDoubleClickCommand(element);
             object param = GetRightDoubleClickCommandParameter(element);
             if (command != null && command.CanExecute(param))
             {
@@ -208,8 +206,7 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnLeftClickCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var element = d as UIElement;
-            if (element != null)
+            if (d is UIElement element)
             {
 #if SILVERLIGHT
                 if (e.OldValue == null && e.NewValue != null)
@@ -218,13 +215,17 @@ namespace Apex.Commands
                     element.MouseLeftButtonDown -= new MouseButtonEventHandler(Control_LeftClickMouseDown);
 #else
                 if (e.OldValue == null && e.NewValue != null)
-                    element.MouseDown += new MouseButtonEventHandler(Control_LeftClickMouseDown);
+                {
+                    element.MouseDown += Control_LeftClickMouseDown;
+                }
                 else if (e.OldValue != null && e.NewValue == null)
-                    element.MouseDown -= new MouseButtonEventHandler(Control_LeftClickMouseDown);
+                {
+                    element.MouseDown -= Control_LeftClickMouseDown;
+                }
 #endif
             }
         }
-      
+
         /// <summary>
         /// The LeftClickCommandParameter dependency property.
         /// </summary>
@@ -239,7 +240,7 @@ namespace Apex.Commands
         /// <returns></returns>
         public static object GetLeftClickCommandParameter(FrameworkElement element)
         {
-            return (object)element.GetValue(LeftClickCommandParameterProperty);
+            return element.GetValue(LeftClickCommandParameterProperty);
         }
 
         /// <summary>
@@ -251,7 +252,7 @@ namespace Apex.Commands
         {
             element.SetValue(LeftClickCommandParameterProperty, value);
         }
-      
+
         /// <summary>
         /// The LeftDoubleClickCommand dependency property.
         /// </summary>
@@ -286,8 +287,7 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnLeftDoubleClickCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var element = d as UIElement;
-            if (element != null)
+            if (d is UIElement element)
             {
 #if SILVERLIGHT
                 if (e.OldValue == null && e.NewValue != null)
@@ -296,9 +296,13 @@ namespace Apex.Commands
                     element.MouseLeftButtonDown -= new MouseButtonEventHandler(Control_LeftDoubleClickMouseDown);
 #else
                 if (e.OldValue == null && e.NewValue != null)
-                    element.MouseDown += new MouseButtonEventHandler(Control_LeftDoubleClickMouseDown);
+                {
+                    element.MouseDown += Control_LeftDoubleClickMouseDown;
+                }
                 else if (e.OldValue != null && e.NewValue == null)
-                    element.MouseDown -= new MouseButtonEventHandler(Control_LeftDoubleClickMouseDown);
+                {
+                    element.MouseDown -= Control_LeftDoubleClickMouseDown;
+                }
 #endif
             }
         }
@@ -307,8 +311,8 @@ namespace Apex.Commands
         /// <summary>
         /// The LeftDoubleClickCommandParameter property.
         /// </summary>
-        public static readonly DependencyProperty LeftDoubleClickCommandParameterProperty = 
-          DependencyProperty.RegisterAttached("LeftDoubleClickCommandParameter", typeof(object), 
+        public static readonly DependencyProperty LeftDoubleClickCommandParameterProperty =
+          DependencyProperty.RegisterAttached("LeftDoubleClickCommandParameter", typeof(object),
           typeof(ExtendedCommands), new PropertyMetadata(default(object))
           );
 
@@ -319,7 +323,7 @@ namespace Apex.Commands
         /// <returns></returns>
         public static object GetLeftDoubleClickCommandParameter(FrameworkElement element)
         {
-           return (object)element.GetValue(LeftDoubleClickCommandParameterProperty);
+            return element.GetValue(LeftDoubleClickCommandParameterProperty);
         }
 
         /// <summary>
@@ -329,7 +333,7 @@ namespace Apex.Commands
         /// <param name="value">The value.</param>
         public static void SetLeftDoubleClickCommandParameter(FrameworkElement element, object value)
         {
-           element.SetValue(LeftDoubleClickCommandParameterProperty, value);
+            element.SetValue(LeftDoubleClickCommandParameterProperty, value);
         }
 
         /// <summary>
@@ -338,9 +342,9 @@ namespace Apex.Commands
         /// <param name="d">The dependency object.</param>
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnLeftDoubleClickCommandParameterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-         {
-           FrameworkElement me = d as FrameworkElement;
-         }
+        {
+            var me = d as FrameworkElement;
+        }
 
         /// <summary>
         /// The RightClickCommand dependency property.
@@ -377,8 +381,7 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnRightClickCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var element = d as UIElement;
-            if (element != null)
+            if (d is UIElement element)
             {
 #if SILVERLIGHT
                 if (e.OldValue == null && e.NewValue != null)
@@ -387,9 +390,13 @@ namespace Apex.Commands
                     element.MouseLeftButtonDown -= new MouseButtonEventHandler(Control_RightClickMouseDown);
 #else
                 if (e.OldValue == null && e.NewValue != null)
-                    element.MouseDown += new MouseButtonEventHandler(Control_RightClickMouseDown);
+                {
+                    element.MouseDown += Control_RightClickMouseDown;
+                }
                 else if (e.OldValue != null && e.NewValue == null)
-                    element.MouseDown -= new MouseButtonEventHandler(Control_RightClickMouseDown);
+                {
+                    element.MouseDown -= Control_RightClickMouseDown;
+                }
 #endif
             }
         }
@@ -408,7 +415,7 @@ namespace Apex.Commands
         /// <returns></returns>
         public static object GetRightClickCommandParameter(FrameworkElement element)
         {
-            return (object)element.GetValue(RightClickCommandParameterProperty);
+            return element.GetValue(RightClickCommandParameterProperty);
         }
 
         /// <summary>
@@ -456,8 +463,7 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnRightDoubleClickCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var element = d as UIElement;
-            if (element != null)
+            if (d is UIElement element)
             {
 #if SILVERLIGHT
                 if (e.OldValue == null && e.NewValue != null)
@@ -466,9 +472,13 @@ namespace Apex.Commands
                     element.MouseLeftButtonDown -= new MouseButtonEventHandler(Control_RightDoubleClickMouseDown);
 #else
                 if (e.OldValue == null && e.NewValue != null)
-                    element.MouseDown += new MouseButtonEventHandler(Control_RightDoubleClickMouseDown);
+                {
+                    element.MouseDown += Control_RightDoubleClickMouseDown;
+                }
                 else if (e.OldValue != null && e.NewValue == null)
-                    element.MouseDown -= new MouseButtonEventHandler(Control_RightDoubleClickMouseDown);
+                {
+                    element.MouseDown -= Control_RightDoubleClickMouseDown;
+                }
 #endif
             }
         }
@@ -488,7 +498,7 @@ namespace Apex.Commands
         /// <returns></returns>
         public static object GetRightDoubleClickCommandParameter(FrameworkElement element)
         {
-            return (object)element.GetValue(RightDoubleClickCommandParameterProperty);
+            return element.GetValue(RightDoubleClickCommandParameterProperty);
         }
 
         /// <summary>
@@ -500,6 +510,6 @@ namespace Apex.Commands
         {
             element.SetValue(RightDoubleClickCommandParameterProperty, value);
         }
-                
+
     }
 }

@@ -11,7 +11,7 @@ namespace Gallery.Popups.CustomisedPopup
     {
         public CustomisedPopup()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

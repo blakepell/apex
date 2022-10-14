@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Apex.MVVM
 {
@@ -9,7 +6,7 @@ namespace Apex.MVVM
     /// The ViewModel attribute marks a class as a ViewModel. This is used
     /// to allow the Apex SDK to help build Views and ViewModels.
     /// </summary>
-    [AttributeUsage(System.AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class ViewModelAttribute : Attribute
     {
         /// <summary>
@@ -18,7 +15,7 @@ namespace Apex.MVVM
         public ViewModelAttribute()
         {
             //  By default, a viewmodel is in the standard context.
-            Context = ExecutionContext.Standard;
+            this.Context = ExecutionContext.Standard;
         }
 
         /// <summary>
@@ -28,7 +25,7 @@ namespace Apex.MVVM
         public ViewModelAttribute(ExecutionContext context)
         {
             //  Store the context.
-            Context = context;
+            this.Context = context;
         }
 
         /// <summary>

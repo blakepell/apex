@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
 using System.Windows;
 
@@ -31,20 +28,24 @@ namespace Apex.Converters
         {
             //  If we don't have a string, we must fail.
             if (value is string == false)
+            {
                 return Visibility.Collapsed;
+            }
 
             //  Get the string.
             string str = (string)value;
 
             //  Determine whether we are inverting.
-            bool invert = (parameter is string && ((string)parameter).IndexOf("Invert", StringComparison.OrdinalIgnoreCase) != -1);
+            bool invert = (parameter is string s && s.IndexOf("Invert", StringComparison.OrdinalIgnoreCase) != -1);
 
             //  Are we collapsing?
             bool collapse = string.IsNullOrEmpty(str);
 
             //  Apply inversion.
             if (invert)
+            {
                 collapse = !collapse;
+            }
 
             //  Return the correct visibilty.
             return collapse ? Visibility.Collapsed : Visibility.Visible;

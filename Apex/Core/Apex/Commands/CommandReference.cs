@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
-using Apex.Consistency;
 
 namespace Apex.Commands
 {
@@ -28,7 +24,7 @@ namespace Apex.Commands
         public static readonly DependencyProperty CommandProperty =
           DependencyProperty.Register("Command",
           typeof(ICommand), typeof(CommandReference),
-          new PropertyMetadata(new PropertyChangedCallback(OnCommandChanged)));
+          new PropertyMetadata(OnCommandChanged));
 
         /// <summary>
         /// Gets or sets the command.
@@ -38,8 +34,8 @@ namespace Apex.Commands
         /// </value>
         public ICommand Command
         {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
+            get => (ICommand)this.GetValue(CommandProperty);
+            set => this.SetValue(CommandProperty, value);
         }
 
         #region ICommand Members
@@ -53,8 +49,11 @@ namespace Apex.Commands
         /// </returns>
         public bool CanExecute(object parameter)
         {
-            if (Command != null)
-                return Command.CanExecute(parameter);
+            if (this.Command != null)
+            {
+                return this.Command.CanExecute(parameter);
+            }
+
             return false;
         }
 
@@ -64,7 +63,7 @@ namespace Apex.Commands
         /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
         public void Execute(object parameter)
         {
-            Command.Execute(parameter);
+            this.Command.Execute(parameter);
         }
 
         /// <summary>
@@ -80,17 +79,20 @@ namespace Apex.Commands
         private static void OnCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             //  Get the reference to the CommandReference.
-            CommandReference me = d as CommandReference;
+            var me = d as CommandReference;
 
             //  Cast the data.
-            ICommand oldCommandValue = e.OldValue as ICommand;
-            ICommand newCommandValue = e.NewValue as ICommand;
+            var newCommandValue = e.NewValue as ICommand;
 
-            if (oldCommandValue != null)
+            if (e.OldValue is ICommand oldCommandValue)
+            {
                 oldCommandValue.CanExecuteChanged -= me.CanExecuteChanged;
+            }
 
             if (newCommandValue != null)
+            {
                 newCommandValue.CanExecuteChanged += me.CanExecuteChanged;
+            }
         }
 
         #endregion

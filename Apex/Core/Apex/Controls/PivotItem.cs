@@ -46,8 +46,8 @@ namespace Apex.Controls
         /// </value>
         public string Title
         {
-            get { return GetValue(TitleProperty) as string; }
-            set { SetValue(TitleProperty, value); }
+            get => this.GetValue(TitleProperty) as string;
+            set => this.SetValue(TitleProperty, value);
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace Apex.Controls
         /// </value>
         public object Content
         {
-            get { return GetValue(ContentProperty); }
-            set { SetValue(ContentProperty, value); }
+            get => this.GetValue(ContentProperty);
+            set => this.SetValue(ContentProperty, value);
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace Apex.Controls
         /// </value>
         public bool IsSelected
         {
-            get { return (bool) GetValue(IsSelectedProperty); }
-            set { SetValue(IsSelectedProperty, value); }
+            get => (bool)this.GetValue(IsSelectedProperty);
+            set => this.SetValue(IsSelectedProperty, value);
         }
 
 
@@ -90,8 +90,8 @@ namespace Apex.Controls
         /// </value>
         public bool IsInitialPage
         {
-            get { return (bool) GetValue(IsInitialPageProperty); }
-            set { SetValue(IsInitialPageProperty, value); }
+            get => (bool)this.GetValue(IsInitialPageProperty);
+            set => this.SetValue(IsInitialPageProperty, value);
         }
     }
 }

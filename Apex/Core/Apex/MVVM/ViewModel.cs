@@ -21,11 +21,13 @@ namespace Apex.MVVM
         {
             //  Store the event handler - in case it changes between
             //  the line to check it and the line to fire it.
-            PropertyChangedEventHandler propertyChanged = PropertyChanged;
+            var propertyChanged = this.PropertyChanged;
 
             //  If the event has been subscribed to, fire it.
             if (propertyChanged != null)
+            {
                 propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>
@@ -37,12 +39,14 @@ namespace Apex.MVVM
         public IEnumerable<NotifyingProperty> GetNotifyingProperties(bool declaredOnly = false)
         {
             //  Get my type.
-            var myType = GetType();
+            var myType = this.GetType();
 
             //  Go through all properties, yield notifying properties.
             var flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
             if(declaredOnly)
+            {
                 flags |= BindingFlags.DeclaredOnly;
+            }
 
             //  Return the properties that are notifying properties.
             return from field in myType.GetFields(flags)
@@ -58,14 +62,14 @@ namespace Apex.MVVM
         public void SaveInitialState()
         {
             //  Go through each notifying property.
-            foreach(var notifyingProperty in GetNotifyingProperties())
+            foreach(var notifyingProperty in this.GetNotifyingProperties())
             {
                 //  Save it's initial state.
                 notifyingProperty.SaveInitialState();
             }
 
             //  At this stage, we can clear the HasChanges flag.
-            HasChanges = false;
+            this.HasChanges = false;
         }
 
         /// <summary>
@@ -75,14 +79,14 @@ namespace Apex.MVVM
         public void RestoreInitialState()
         {
             //  Go through each notifying property.
-            foreach (var notifyingProperty in GetNotifyingProperties())
+            foreach (var notifyingProperty in this.GetNotifyingProperties())
             {
                 //  Restore it's initial state.
                 notifyingProperty.RestoreInitialState();
             }
 
             //  At this stage, we can clear the HasChanges flag.
-            HasChanges = false;
+            this.HasChanges = false;
         }
 
         /// <summary>
@@ -90,7 +94,7 @@ namespace Apex.MVVM
         /// </summary>
         public void ResetHasChangesFlag()
         {
-            HasChanges = false;
+            this.HasChanges = false;
         }
 
         /// <summary>
@@ -111,7 +115,7 @@ namespace Apex.MVVM
         protected void SetValue(NotifyingProperty notifyingProperty, object value)
         {
             //  Call SetValue without forcing an update.
-            SetValue(notifyingProperty, value, false);
+            this.SetValue(notifyingProperty, value, false);
         }
 
         /// <summary>
@@ -131,10 +135,10 @@ namespace Apex.MVVM
                 notifyingProperty.SetValue(value);
 
                 //  Notify that the property has changed.
-                NotifyPropertyChanged(notifyingProperty.Name);
+                this.NotifyPropertyChanged(notifyingProperty.Name);
 
                 //  We have changes.
-                HasChanges = true;
+                this.HasChanges = true;
             }
         }
 
@@ -152,9 +156,13 @@ namespace Apex.MVVM
 
             //  Use the dispatcher to invoke the action.
             if (dispatcher.CheckAccess())
+            {
                 action();
+            }
             else
+            {
                 dispatcher.BeginInvoke(action);
+            }
         }
 
         /// <summary>
@@ -176,13 +184,13 @@ namespace Apex.MVVM
         [XmlIgnore]
         public bool HasChanges
         {
-            get { return hasChanges; }
+            get => hasChanges;
             protected set
             {
                 if(hasChanges != value)
                 {
                     hasChanges = value;
-                    NotifyPropertyChanged("HasChanges");
+                    this.NotifyPropertyChanged("HasChanges");
                 }
             }
         }

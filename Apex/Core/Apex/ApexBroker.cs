@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Windows;
 using Apex.Helpers;
 using Apex.Shells;
@@ -25,7 +24,9 @@ namespace Apex
             {
                 //  We may have already been initialised.
                 if (isInitialised)
+                {
                     return;
+                }
 
                 //  Enumerate all types to search.
                 var typesToSearch = AssembliesHelper.GetTypesInDomain().ToList();
@@ -46,8 +47,10 @@ namespace Apex
                     var modelInstance = Activator.CreateInstance(modelType.ModelType);
 
                     //  If the model implements the IModel interface, notify it that it can be initialised.
-                    if(modelInstance is IModel)
-                        ((IModel)modelInstance).OnInitialised();
+                    if(modelInstance is IModel model)
+                    {
+                        model.OnInitialised();
+                    }
 
                     //  Store the model.
                     modelInstances.Add(modelInstance);
@@ -81,7 +84,7 @@ namespace Apex
         /// <returns>The model instance.</returns>
         public static TModel GetModel<TModel>()
         {
-            //  We must be initialised for this to work.
+            //  We must be initialized for this to work.
             EnsureInitialised();
 
             try
@@ -132,7 +135,10 @@ namespace Apex
             lock(syncLock)
             {
                 if(serviceTypesToInstances.ContainsKey(typeof(TService)))
+                {
                     throw new InvalidOperationException("A Service of this type has already been registered.");
+                }
+
                 serviceTypesToInstances[typeof (TService)] = serviceInstance;
             }
         }
@@ -159,12 +165,14 @@ namespace Apex
         /// <returns>The service instance.</returns>
         public static TService GetService<TService>()
         {
-            TService instance = default(TService);
+            var instance = default(TService);
 
             lock(syncLock)
             {
                 if(serviceTypesToInstances.ContainsKey(typeof(TService)))
+                {
                     instance = (TService)serviceTypesToInstances[typeof(TService)];
+                }
             }
 
             return instance;
@@ -181,7 +189,9 @@ namespace Apex
 
             //  Error check.
             if (shell == null)
+            {
                 throw new InvalidOperationException("No shell has been registered.");
+            }
 
             //  Return the application host.
             return shell;
@@ -213,7 +223,9 @@ namespace Apex
         {
             //  If we're initialised, we're done.
             if (isInitialised)
+            {
                 return;
+            }
 
             //  Initialise.
             Initialise();
@@ -238,7 +250,9 @@ namespace Apex
             if((bool)DependencyPropertyDescriptor
                 .FromProperty(prop, typeof(FrameworkElement))
                 .Metadata.DefaultValue == true)
+            {
                 return ExecutionContext.Design;
+            }
 #endif
             
             //  Test assemblies we know about.
@@ -250,7 +264,9 @@ namespace Apex
 
             //  If we're not in a unit test, we're in the designer.
             if (isUnitTest)
+            {
                 return ExecutionContext.Test;
+            }
 
             //  We're just running code.
             return ExecutionContext.Standard;
@@ -344,7 +360,9 @@ namespace Apex
             {
                 //  If the current execution context has not been set, determine it.
                 if (currentExecutionContext == null)
+                {
                     currentExecutionContext = DetermineExecutionContext();
+                }
 
                 //  Return the current execution context.
                 return currentExecutionContext.Value;

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -99,15 +96,10 @@ namespace Apex.Interop
         public static readonly RECT Empty = new RECT();
 
         /// <summary> Win32 </summary>
-        public int Width
-        {
-            get { return Math.Abs(right - left); }  // Abs needed for BIDI OS
-        }
+        public int Width => Math.Abs(right - left); // Abs needed for BIDI OS
+
         /// <summary> Win32 </summary>
-        public int Height
-        {
-            get { return bottom - top; }
-        }
+        public int Height => bottom - top;
 
         /// <summary> Win32 </summary>
         public RECT(int left, int top, int right, int bottom)
@@ -122,25 +114,21 @@ namespace Apex.Interop
         /// <summary> Win32 </summary>
         public RECT(RECT rcSrc)
         {
-            this.left = rcSrc.left;
-            this.top = rcSrc.top;
-            this.right = rcSrc.right;
-            this.bottom = rcSrc.bottom;
+            left = rcSrc.left;
+            top = rcSrc.top;
+            right = rcSrc.right;
+            bottom = rcSrc.bottom;
         }
 
         /// <summary> Win32 </summary>
-        public bool IsEmpty
-        {
-            get
-            {
-                // BUGBUG : On Bidi OS (hebrew arabic) left > right
-                return left >= right || top >= bottom;
-            }
-        }
+        public bool IsEmpty =>
+            // BUGBUG : On Bidi OS (hebrew arabic) left > right
+            left >= right || top >= bottom;
+
         /// <summary> Return a user friendly representation of this struct </summary>
         public override string ToString()
         {
-            if (this == RECT.Empty) { return "RECT {Empty}"; }
+            if (this == Empty) { return "RECT {Empty}"; }
             return "RECT { left : " + left + " / top : " + top + " / right : " + right + " / bottom : " + bottom + " }";
         }
 

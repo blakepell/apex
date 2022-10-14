@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Globalization;
 
 namespace Apex.Extensions
@@ -71,8 +68,16 @@ namespace Apex.Extensions
             double calcBusinessDays =
             1 + ((endD - startD).TotalDays * 5 -
             (startD.DayOfWeek - endD.DayOfWeek) * 2) / 7;
-            if ((int)endD.DayOfWeek == 6) calcBusinessDays--;
-            if ((int)startD.DayOfWeek == 0) calcBusinessDays--;
+            if ((int)endD.DayOfWeek == 6)
+            {
+                calcBusinessDays--;
+            }
+
+            if ((int)startD.DayOfWeek == 0)
+            {
+                calcBusinessDays--;
+            }
+
             return (int)calcBusinessDays;
         }
     }

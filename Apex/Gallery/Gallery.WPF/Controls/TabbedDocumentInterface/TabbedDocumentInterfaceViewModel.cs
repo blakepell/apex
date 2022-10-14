@@ -7,10 +7,10 @@ namespace Gallery.Controls.TabbedDocumentInterface
     {
         public TabbedDocumentInterfaceViewModel()
         {
-            Title = "TabbedDocumentInterface";
+            this.Title = "TabbedDocumentInterface";
 
             //  Create the AddDocument Command.
-            AddDocumentCommand = new Command(DoAddDocumentCommand);
+            this.AddDocumentCommand = new Command(this.DoAddDocumentCommand);
         }
 
         private int counter = 1;
@@ -21,7 +21,7 @@ namespace Gallery.Controls.TabbedDocumentInterface
         /// <param name="parameter">The AddDocument command parameter.</param>
         private void DoAddDocumentCommand(object parameter)
         {
-            Documents.Add(string.Format("Document {0}", counter++));
+            this.Documents.Add(string.Format("Document {0}", counter++));
         }
 
         /// <summary>
@@ -44,9 +44,6 @@ namespace Gallery.Controls.TabbedDocumentInterface
         /// Gets the Documents observable collection.
         /// </summary>
         /// <value>The Documents observable collection.</value>
-        public ObservableCollection<string> Documents
-        {
-            get { return DocumentsProperty; }
-        }
+        public ObservableCollection<string> Documents => DocumentsProperty;
     }
 }

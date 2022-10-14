@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Apex.MVVM;
 
 namespace Apex.Helpers.Popups
 {
@@ -22,8 +18,8 @@ namespace Apex.Helpers.Popups
         public FadeInOutPopupAnimationHelper()
         {
             //  Set default properties.
-            FadeInDuration = new Duration(TimeSpan.FromMilliseconds(250));
-            FadeOutDuration = new Duration(TimeSpan.FromMilliseconds(250));
+            this.FadeInDuration = new Duration(TimeSpan.FromMilliseconds(250));
+            this.FadeOutDuration = new Duration(TimeSpan.FromMilliseconds(250));
         }
 
         /// <summary>
@@ -49,8 +45,8 @@ namespace Apex.Helpers.Popups
             var storyboard = new Storyboard();
             
             //  Create an animation for the opacity.
-            var popupBackgroundOpacityAnimation = new DoubleAnimation() { From = 0, To = 0.5, Duration = FadeInDuration};
-            var popupOpacityAnimation = new DoubleAnimation() { From = 0, To = 1, Duration = FadeInDuration };
+            var popupBackgroundOpacityAnimation = new DoubleAnimation() { From = 0, To = 0.5, Duration = this.FadeInDuration};
+            var popupOpacityAnimation = new DoubleAnimation() { From = 0, To = 1, Duration = this.FadeInDuration };
 
             //  Set the targets for the animations
             Storyboard.SetTarget(popupBackgroundOpacityAnimation, popupBackground);
@@ -82,8 +78,8 @@ namespace Apex.Helpers.Popups
             var storyboard = new Storyboard();
             
             //  Create an animation for the opacity.
-            var popupBackgroundOpacityAnimation = new DoubleAnimation() { To = 0, Duration = FadeOutDuration };
-            var popupOpacityAnimation = new DoubleAnimation() { To = 0, Duration = FadeOutDuration };
+            var popupBackgroundOpacityAnimation = new DoubleAnimation() { To = 0, Duration = this.FadeOutDuration };
+            var popupOpacityAnimation = new DoubleAnimation() { To = 0, Duration = this.FadeOutDuration };
 
             //  Set the targets for the animations
             Storyboard.SetTarget(popupBackgroundOpacityAnimation, popupBackground);

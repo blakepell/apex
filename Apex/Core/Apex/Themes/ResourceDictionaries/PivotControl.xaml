@@ -35,8 +35,7 @@
                                                     
                                             apexCommands:ExtendedCommands.LeftClickCommand="{Binding SelectPivotItemCommand, RelativeSource={RelativeSource FindAncestor, 
                                              AncestorType={x:Type apexControls:PivotControl}}}" 
-                                                    apexCommands:ExtendedCommands.LeftClickCommandParameter="{Binding}">
-                                        </TextBlock>
+                                                    apexCommands:ExtendedCommands.LeftClickCommandParameter="{Binding}" />
 
                                         <DataTemplate.Resources>
                                             <Storyboard x:Key="FadeIn">

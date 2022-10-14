@@ -15,7 +15,7 @@ namespace Gallery.Controls.EnumComboBox
   {
         public EnumComboBoxViewModel()
         {
-            Title = "EnumComboBox";
+            this.Title = "EnumComboBox";
         }
 
     private NotifyingProperty ExampleEnumerationProperty =
@@ -23,8 +23,8 @@ namespace Gallery.Controls.EnumComboBox
 
     public ExampleEnumeration ExampleEnumeration
     {
-      get { return (ExampleEnumeration)GetValue(ExampleEnumerationProperty); }
-      set { SetValue(ExampleEnumerationProperty, value); }
+      get => (ExampleEnumeration)this.GetValue(ExampleEnumerationProperty);
+      set => this.SetValue(ExampleEnumerationProperty, value);
     }
   }
 }

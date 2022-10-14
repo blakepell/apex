@@ -29,8 +29,8 @@ namespace Gallery.MVVM.ViewBrokerSample
         /// </value>
         public string Name
         {
-            get { return (string)GetValue(NameProperty); }
-            set { SetValue(NameProperty, value); }
+            get => (string)this.GetValue(NameProperty);
+            set => this.SetValue(NameProperty, value);
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace Gallery.MVVM.ViewBrokerSample
         /// </value>
         public string Description
         {
-            get { return (string)GetValue(DescriptionProperty); }
-            set { SetValue(DescriptionProperty, value); }
+            get => (string)this.GetValue(DescriptionProperty);
+            set => this.SetValue(DescriptionProperty, value);
         }            
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Controls;
 using System.Windows;
 
@@ -73,7 +70,7 @@ namespace Apex.Controls
  	         base.OnLostFocus(e);
 
             //  Update the cue visibilty.
-            UpdateCueVisiblity();
+            this.UpdateCueVisiblity();
         }
 
         /// <summary>
@@ -86,7 +83,7 @@ namespace Apex.Controls
             base.OnGotFocus(e);
 
             //  Update the cue visibilty.
-            UpdateCueVisiblity();
+            this.UpdateCueVisiblity();
         }
 
         /// <summary>
@@ -100,7 +97,7 @@ namespace Apex.Controls
             try
             {
                 //  Get the cue labe.
-                cueLabel = (TextBlock)GetTemplateChild("PART_CueLabel");
+                cueLabel = (TextBlock)this.GetTemplateChild("PART_CueLabel");
             }
             catch
             {
@@ -108,7 +105,7 @@ namespace Apex.Controls
             }
 
             //  Initial visibility.
-            UpdateCueVisiblity();
+            this.UpdateCueVisiblity();
         }
 
 #if !SILVERLIGHT
@@ -122,7 +119,7 @@ namespace Apex.Controls
             base.OnTextChanged(e);
 
             //  Update the cue visibilty.
-            UpdateCueVisiblity();
+            this.UpdateCueVisiblity();
         }
 
 #endif
@@ -134,20 +131,22 @@ namespace Apex.Controls
         {
             //  If we don't have the cue label we can skip.
             if(cueLabel == null)
+            {
                 return;
-            
+            }
+
             //  We set the cue visibilty based on the cue display mode.
-            switch(CueDisplayMode)
+            switch(this.CueDisplayMode)
             {
                 case CueDisplayMode.HideWhenHasTextOrFocus:
 #if !SILVERLIGHT
-                    cueLabel.Visibility = (IsFocused || !string.IsNullOrEmpty(Text)) ? Visibility.Collapsed : Visibility.Visible;
+                    cueLabel.Visibility = (this.IsFocused || !string.IsNullOrEmpty(this.Text)) ? Visibility.Collapsed : Visibility.Visible;
 #else              
                     cueLabel.Visibility = !string.IsNullOrEmpty(Text) ? Visibility.Collapsed : Visibility.Visible;
 #endif
                     break;
                 case CueDisplayMode.HideWhenHasText:
-                    cueLabel.Visibility = string.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Collapsed;
+                    cueLabel.Visibility = string.IsNullOrEmpty(this.Text) ? Visibility.Visible : Visibility.Collapsed;
                     break;
             }
         }
@@ -170,8 +169,8 @@ namespace Apex.Controls
         /// <value>The value of CueText.</value>
         public string CueText
         {
-            get { return (string)GetValue(CueTextProperty); }
-            set { SetValue(CueTextProperty, value); }
+            get => (string)this.GetValue(CueTextProperty);
+            set => this.SetValue(CueTextProperty, value);
         }
         
         /// <summary>
@@ -179,7 +178,7 @@ namespace Apex.Controls
         /// </summary>
         public static readonly DependencyProperty CueDisplayModeProperty =
           DependencyProperty.Register("CueDisplayMode", typeof(CueDisplayMode), typeof(CueTextBox),
-          new PropertyMetadata(CueDisplayMode.HideWhenHasTextOrFocus, new PropertyChangedCallback(OnCueDisplayModeChanged)));
+          new PropertyMetadata(CueDisplayMode.HideWhenHasTextOrFocus, OnCueDisplayModeChanged));
 
         /// <summary>
         /// Gets or sets CueDisplayMode.
@@ -187,8 +186,8 @@ namespace Apex.Controls
         /// <value>The value of CueDisplayMode.</value>
         public CueDisplayMode CueDisplayMode
         {
-            get { return (CueDisplayMode)GetValue(CueDisplayModeProperty); }
-            set { SetValue(CueDisplayModeProperty, value); }
+            get => (CueDisplayMode)this.GetValue(CueDisplayModeProperty);
+            set => this.SetValue(CueDisplayModeProperty, value);
         }
 
         /// <summary>

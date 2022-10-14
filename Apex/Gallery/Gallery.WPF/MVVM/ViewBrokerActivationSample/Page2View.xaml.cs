@@ -11,7 +11,7 @@ namespace Gallery.MVVM.ViewBrokerActivationSample
     {
         public Page2View()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public void OnActivated()

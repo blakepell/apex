@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using Apex;
 using Apex.MVVM;
 
@@ -14,26 +12,26 @@ namespace Gallery.Popups.SimplePopup
     {
         public SimplePopupView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public void OnActivated()
         {
-            ViewModel.ShowPopupCommand.Executing += ShowPopupCommandOnExecuting;
+            this.ViewModel.ShowPopupCommand.Executing += this.ShowPopupCommandOnExecuting;
         }
 
         public void OnDeactivated()
         {
-            ViewModel.ShowPopupCommand.Executing -= ShowPopupCommandOnExecuting;
+            this.ViewModel.ShowPopupCommand.Executing -= this.ShowPopupCommandOnExecuting;
         }
 
         private void ShowPopupCommandOnExecuting(object sender, CancelCommandEventArgs args)
         {
             var shell = ApexBroker.GetShell();
-            ViewModel.PopupResult =
+            this.ViewModel.PopupResult =
                 shell.ShowPopup(new SimplePopup());
         }
 
-        public SimplePopupViewModel ViewModel { get { return (SimplePopupViewModel)DataContext; } }
+        public SimplePopupViewModel ViewModel => (SimplePopupViewModel)this.DataContext;
     }
 }

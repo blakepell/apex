@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Apex.MVVM;
+﻿using Apex.MVVM;
 
 namespace Gallery.Converters
 {
@@ -11,7 +7,7 @@ namespace Gallery.Converters
     {
         public ConvertersViewModel()
         {
-            Title = "Converters";
+            this.Title = "Converters";
         }
 
         
@@ -27,8 +23,8 @@ namespace Gallery.Converters
         /// <value>The value of ExampleBool1.</value>
         public bool ExampleBool1
         {
-            get { return (bool)GetValue(ExampleBool1Property); }
-            set { SetValue(ExampleBool1Property, value); }
+            get => (bool)this.GetValue(ExampleBool1Property);
+            set => this.SetValue(ExampleBool1Property, value);
         }
     }
 }

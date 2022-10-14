@@ -14,8 +14,8 @@ namespace Apex.MVVM
         /// <param name="newValue">The new value.</param>
         public NotifyingPropertyChangedArgs(object oldValue, object newValue)
         {
-            OldValue = oldValue;
-            NewValue = newValue;
+            this.OldValue = oldValue;
+            this.NewValue = newValue;
         }
 
         /// <summary>
@@ -50,9 +50,9 @@ namespace Apex.MVVM
         /// <param name="value">The value.</param>
         public NotifyingProperty(string name, Type type, object value)
         {
-            Name = name;
-            Type = type;
-            Value = value;
+            this.Name = name;
+            this.Type = type;
+            this.Value = value;
         }
 
         /// <summary>
@@ -62,16 +62,16 @@ namespace Apex.MVVM
         public void SetValue(object newValue)
         {
             //  Store the old value.
-            var oldValue = Value;
+            var oldValue = this.Value;
 
             //  Is the value different?
             if(oldValue != newValue)
             {
                 //  Set the new value.
-                Value = newValue;
+                this.Value = newValue;
 
                 //  Fire the property changed event.
-                FireNotifyingPropertyChanged(oldValue, newValue);
+                this.FireNotifyingPropertyChanged(oldValue, newValue);
             }
         }
 
@@ -81,7 +81,7 @@ namespace Apex.MVVM
         public void SaveInitialState()
         {
             //  Clone the value into the initial state.
-            initialState = Value;
+            initialState = this.Value;
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Apex.MVVM
         public void RestoreInitialState()
         {
             //  Clone the initial state into the value.
-            Value = initialState;
+            this.Value = initialState;
         }
 
         /// <summary>
@@ -101,9 +101,11 @@ namespace Apex.MVVM
         protected virtual void FireNotifyingPropertyChanged(object oldValue, object newValue)
         {
             //  Fire the event (thread safe).
-            var theEvent = NotifyingPropertyChanged;
+            var theEvent = this.NotifyingPropertyChanged;
             if(theEvent != null)
+            {
                 theEvent(this, new NotifyingPropertyChangedArgs(oldValue, newValue));
+            }
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace Gallery.MVVM.SimpleSample
     {
         public SimpleExampleView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

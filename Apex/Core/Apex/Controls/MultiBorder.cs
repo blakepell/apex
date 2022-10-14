@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Apex.Controls
 {
@@ -95,8 +85,8 @@ namespace Apex.Controls
         /// </value>
         public Brush BorderBrushLeft
         {
-            get { return (Brush) GetValue(BorderBrushLeftProperty); }
-            set { SetValue(BorderBrushLeftProperty, value); }
+            get => (Brush)this.GetValue(BorderBrushLeftProperty);
+            set => this.SetValue(BorderBrushLeftProperty, value);
         }
 
         /// <summary>
@@ -107,8 +97,8 @@ namespace Apex.Controls
         /// </value>
         public Brush BorderBrushTop
         {
-            get { return (Brush) GetValue(BorderBrushTopProperty); }
-            set { SetValue(BorderBrushTopProperty, value); }
+            get => (Brush)this.GetValue(BorderBrushTopProperty);
+            set => this.SetValue(BorderBrushTopProperty, value);
         }
 
         /// <summary>
@@ -119,8 +109,8 @@ namespace Apex.Controls
         /// </value>
         public Brush BorderBrushRight
         {
-            get { return (Brush) GetValue(BorderBrushRightProperty); }
-            set { SetValue(BorderBrushRightProperty, value); }
+            get => (Brush)this.GetValue(BorderBrushRightProperty);
+            set => this.SetValue(BorderBrushRightProperty, value);
         }
 
         /// <summary>
@@ -131,8 +121,8 @@ namespace Apex.Controls
         /// </value>
         public Brush BorderBrushBottom
         {
-            get { return (Brush) GetValue(BorderBrushBottomProperty); }
-            set { SetValue(BorderBrushBottomProperty, value); }
+            get => (Brush)this.GetValue(BorderBrushBottomProperty);
+            set => this.SetValue(BorderBrushBottomProperty, value);
         }
 
         /// <summary>
@@ -143,8 +133,8 @@ namespace Apex.Controls
         /// </value>
         public double BorderThicknessLeft
         {
-            get { return (double) GetValue(BorderThicknessLeftProperty); }
-            set { SetValue(BorderThicknessLeftProperty, value); }
+            get => (double)this.GetValue(BorderThicknessLeftProperty);
+            set => this.SetValue(BorderThicknessLeftProperty, value);
         }
 
         /// <summary>
@@ -155,8 +145,8 @@ namespace Apex.Controls
         /// </value>
         public double BorderThicknessTop
         {
-            get { return (double) GetValue(BorderThicknessTopProperty); }
-            set { SetValue(BorderThicknessTopProperty, value); }
+            get => (double)this.GetValue(BorderThicknessTopProperty);
+            set => this.SetValue(BorderThicknessTopProperty, value);
         }
 
         /// <summary>
@@ -167,8 +157,8 @@ namespace Apex.Controls
         /// </value>
         public double BorderThicknessRight
         {
-            get { return (double) GetValue(BorderThicknessRightProperty); }
-            set { SetValue(BorderThicknessRightProperty, value); }
+            get => (double)this.GetValue(BorderThicknessRightProperty);
+            set => this.SetValue(BorderThicknessRightProperty, value);
         }
 
         /// <summary>
@@ -179,8 +169,8 @@ namespace Apex.Controls
         /// </value>
         public double BorderThicknessBottom
         {
-            get { return (double) GetValue(BorderThicknessBottomProperty); }
-            set { SetValue(BorderThicknessBottomProperty, value); }
+            get => (double)this.GetValue(BorderThicknessBottomProperty);
+            set => this.SetValue(BorderThicknessBottomProperty, value);
         }
     }
 }

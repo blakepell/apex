@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Apex.MVVM;
+﻿using Apex.MVVM;
 using Apex.DragAndDrop;
-using System.Collections.ObjectModel;
 using Apex.Adorners;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
-using Apex;
 
 namespace Gallery.DragAndDrop.CanvasSample
 {
@@ -20,19 +15,19 @@ namespace Gallery.DragAndDrop.CanvasSample
     {
         public CanvasSampleView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             //var dragAndDropHost = ApexBroker.GetShell().DragAndDropHost;
 
-            dragAndDropHost.DragAndDropStart += new DragAndDropDelegate(Instance_DragAndDropStart);
-            dragAndDropHost.DragAndDropContinue += new DragAndDropDelegate(Instance_DragAndDropContinue);
-            dragAndDropHost.DragAndDropEnd += new DragAndDropDelegate(Instance_DragAndDropEnd);
+            dragAndDropHost.DragAndDropStart += this.Instance_DragAndDropStart;
+            dragAndDropHost.DragAndDropContinue += this.Instance_DragAndDropContinue;
+            dragAndDropHost.DragAndDropEnd += this.Instance_DragAndDropEnd;
         }
 
         void Instance_DragAndDropEnd(object sender, DragAndDropEventArgs args)
         {
             //var dragAndDropHost = ApexBroker.GetShell().DragAndDropHost;
-            Point point = Mouse.GetPosition(dragAndDropHost);
+            var point = Mouse.GetPosition(dragAndDropHost);
             point.Offset(-args.InitialElementOffset.X, -args.InitialElementOffset.Y);
 
             //  Set the position of the element.

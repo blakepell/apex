@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Documents;
 
 namespace Apex.DragAndDrop
 {
@@ -18,9 +14,9 @@ namespace Apex.DragAndDrop
         /// <value>
         ///   <c>true</c> if the operation is allowed; otherwise, <c>false</c>.
         /// </value>
-        public bool Allow 
-        { 
-            get; 
+        public bool Allow
+        {
+            get;
             set;
         }
 
@@ -30,9 +26,9 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The drag source.
         /// </value>
-        public FrameworkElement DragSource 
-        { 
-            get; 
+        public FrameworkElement DragSource
+        {
+            get;
             set;
         }
 
@@ -42,10 +38,10 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The drag element.
         /// </value>
-        public FrameworkElement DragElement 
-        { 
-            get; 
-            set; 
+        public FrameworkElement DragElement
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -54,9 +50,9 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The drag data.
         /// </value>
-        public object DragData 
-        { 
-            get; 
+        public object DragData
+        {
+            get;
             set;
         }
 
@@ -67,9 +63,9 @@ namespace Apex.DragAndDrop
         /// The drop target.
         /// </value>
         public FrameworkElement DropTarget
-        { 
-            get; 
-            set; 
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -78,7 +74,7 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The drag adorner.
         /// </value>
-        public Apex.Adorners.Adorner DragAdorner
+        public Adorners.Adorner DragAdorner
         {
             get;
             set;
@@ -90,10 +86,10 @@ namespace Apex.DragAndDrop
         /// <value>
         /// The initial element offset.
         /// </value>
-        public Point InitialElementOffset 
-        { 
+        public Point InitialElementOffset
+        {
             get;
-            set; 
+            set;
         }
     }
 }

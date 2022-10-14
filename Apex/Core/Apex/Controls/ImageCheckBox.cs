@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -32,7 +28,7 @@ namespace Apex.Controls
         /// </summary>
         public static readonly DependencyProperty CheckedImageSourceProperty =
           DependencyProperty.Register("CheckedImageSource", typeof(ImageSource), typeof(ImageCheckBox),
-          new PropertyMetadata(default(ImageSource), new PropertyChangedCallback(OnCheckedImageSourceChanged)));
+          new PropertyMetadata(default(ImageSource), OnCheckedImageSourceChanged));
 
         /// <summary>
         /// Gets or sets CheckedImageSource.
@@ -40,8 +36,8 @@ namespace Apex.Controls
         /// <value>The value of CheckedImageSource.</value>
         public ImageSource CheckedImageSource
         {
-            get { return (ImageSource)GetValue(CheckedImageSourceProperty); }
-            set { SetValue(CheckedImageSourceProperty, value); }
+            get => (ImageSource)this.GetValue(CheckedImageSourceProperty);
+            set => this.SetValue(CheckedImageSourceProperty, value);
         }
 
         /// <summary>
@@ -51,7 +47,7 @@ namespace Apex.Controls
         /// <param name="args">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnCheckedImageSourceChanged(DependencyObject o, DependencyPropertyChangedEventArgs args)
         {
-            ImageCheckBox me = o as ImageCheckBox;
+            var me = o as ImageCheckBox;
         }
 
         
@@ -60,7 +56,7 @@ namespace Apex.Controls
         /// </summary>
         public static readonly DependencyProperty UncheckedImageSourceProperty =
           DependencyProperty.Register("UncheckedImageSource", typeof(ImageSource), typeof(ImageCheckBox),
-          new PropertyMetadata(default(ImageSource), new PropertyChangedCallback(OnUncheckedImageSourceChanged)));
+          new PropertyMetadata(default(ImageSource), OnUncheckedImageSourceChanged));
 
         /// <summary>
         /// Gets or sets UncheckedImageSource.
@@ -68,8 +64,8 @@ namespace Apex.Controls
         /// <value>The value of UncheckedImageSource.</value>
         public ImageSource UncheckedImageSource
         {
-            get { return (ImageSource)GetValue(UncheckedImageSourceProperty); }
-            set { SetValue(UncheckedImageSourceProperty, value); }
+            get => (ImageSource)this.GetValue(UncheckedImageSourceProperty);
+            set => this.SetValue(UncheckedImageSourceProperty, value);
         }
 
         /// <summary>

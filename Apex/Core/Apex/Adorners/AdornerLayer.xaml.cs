@@ -15,9 +15,9 @@ namespace Apex.Adorners
         /// </summary>
         public AdornerLayer()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            IsHitTestVisible = false;
+            this.IsHitTestVisible = false;
         }
 
         /// <summary>
@@ -32,7 +32,9 @@ namespace Apex.Adorners
 
             //  Update the dictionary.
             if(adornerLayers.ContainsKey(tla) == false)
+            {
                 adornerLayers.Add(tla, this);
+            }
         }
 
         /// <summary>
@@ -43,9 +45,12 @@ namespace Apex.Adorners
         public static AdornerLayer GetAdornerLayer(DependencyObject obj)
         {
             //  Get the top level ancestor.
-            DependencyObject tla = obj.GetTopLevelParent();
+            var tla = obj.GetTopLevelParent();
             if (adornerLayers.ContainsKey(tla))
+            {
                 return adornerLayers[tla];
+            }
+
             return null;
         }
 

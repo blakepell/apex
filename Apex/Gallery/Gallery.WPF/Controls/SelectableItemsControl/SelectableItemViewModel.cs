@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Apex.Controls;
+﻿using Apex.Controls;
 using Apex.MVVM;
 
 namespace Gallery.Controls.SelectableItemsControl
@@ -26,8 +22,8 @@ namespace Gallery.Controls.SelectableItemsControl
         /// <value>The value of Title.</value>
         public string Title
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get => (string)this.GetValue(TitleProperty);
+            set => this.SetValue(TitleProperty, value);
         }
 
         
@@ -43,8 +39,8 @@ namespace Gallery.Controls.SelectableItemsControl
         /// <value>The value of Details.</value>
         public string Details
         {
-            get { return (string)GetValue(DetailsProperty); }
-            set { SetValue(DetailsProperty, value); }
+            get => (string)this.GetValue(DetailsProperty);
+            set => this.SetValue(DetailsProperty, value);
         }
 
         /// <summary>
@@ -59,8 +55,8 @@ namespace Gallery.Controls.SelectableItemsControl
         /// <value>The value of IsSelected.</value>
         public bool IsSelected
         {
-            get { return (bool)GetValue(IsSelectedProperty); }
-            set { SetValue(IsSelectedProperty, value); }
+            get => (bool)this.GetValue(IsSelectedProperty);
+            set => this.SetValue(IsSelectedProperty, value);
         }
     }
 }

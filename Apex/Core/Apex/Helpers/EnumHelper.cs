@@ -1,11 +1,8 @@
 ﻿
   using System;
-  using System.Collections.Generic;
   using System.Linq;
-  using System.Text;
-using System.Reflection;
 
-namespace Apex.Helpers
+  namespace Apex.Helpers
 {
 
     /// <summary>
@@ -22,7 +19,9 @@ namespace Apex.Helpers
         {
             //  Sanity check.
             if (!enumType.IsEnum)
+            {
                 throw new ArgumentException("Type '" + enumType.Name + "' is not an enum");
+            }
 
             //  Get the fields.
             var fields = from field in enumType.GetFields()

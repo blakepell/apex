@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.ComponentModel;
 
 namespace Apex.Controls
@@ -25,7 +16,7 @@ namespace Apex.Controls
         public PaddedGrid()
         {
             //  Add a loded event handler.
-            Loaded += new RoutedEventHandler(PaddedGrid_Loaded);
+            this.Loaded += this.PaddedGrid_Loaded;
         }
 
         /// <summary>
@@ -42,15 +33,17 @@ namespace Apex.Controls
             for (int i = 0; i < childCount; i++)
             {
                 //  Get the child.
-                DependencyObject child = VisualTreeHelper.GetChild(this, i);
+                var child = VisualTreeHelper.GetChild(this, i);
               
                 //  Create the binding.
-                Binding binding = new Binding();
-                binding.Source = this;
-                binding.Path = new PropertyPath("Padding");
+                var binding = new Binding
+                {
+                    Source = this,
+                    Path = new PropertyPath("Padding")
+                };
 
                 //  Bind the child's margin to the grid's padding.
-                BindingOperations.SetBinding(child, FrameworkElement.MarginProperty, binding);
+                BindingOperations.SetBinding(child, MarginProperty, binding);
             }
         }
       
@@ -62,8 +55,7 @@ namespace Apex.Controls
         private static void OnPaddingChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
           //  Get the padded grid that has had its padding changed.
-          PaddedGrid me = dependencyObject as PaddedGrid;
-          if (me != null)
+          if (dependencyObject is PaddedGrid me)
           {
             //  Use an explicit 'InvalidateArrange', rather than the AffectsMeasure FrameworkPropertyMetadataOptions flag
             //  as these flags aren't available in Silverlight - this method will work in SL and WPF.
@@ -78,7 +70,7 @@ namespace Apex.Controls
         private static readonly DependencyProperty PaddingProperty =
           DependencyProperty.Register("Padding", typeof(Thickness), typeof(PaddedGrid),
           new FrameworkPropertyMetadata(new Thickness(0.0), 
-              FrameworkPropertyMetadataOptions.AffectsArrange, new PropertyChangedCallback(OnPaddingChanged)));
+              FrameworkPropertyMetadataOptions.AffectsArrange, OnPaddingChanged));
 #else
         private static readonly DependencyProperty PaddingProperty =
           DependencyProperty.Register("Padding", typeof(Thickness), typeof(PaddedGrid),
@@ -92,8 +84,8 @@ namespace Apex.Controls
         [Description("The padding property."), Category("Common Properties")]
         public Thickness Padding
         {
-            get { return (Thickness)GetValue(PaddingProperty); }
-            set { SetValue(PaddingProperty, value); }
+            get => (Thickness)this.GetValue(PaddingProperty);
+            set => this.SetValue(PaddingProperty, value);
         }
     }
 }

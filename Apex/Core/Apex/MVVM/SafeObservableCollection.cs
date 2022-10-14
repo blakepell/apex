@@ -40,9 +40,13 @@ namespace Apex.MVVM
         public void Add(T item)
         {
             if (Thread.CurrentThread == dispatcher.Thread)
-                DoAdd(item);
+            {
+                this.DoAdd(item);
+            }
             else
-                dispatcher.BeginInvoke((Action)(() => DoAdd(item)));
+            {
+                dispatcher.BeginInvoke((Action)(() => this.DoAdd(item)));
+            }
         }
 
         /// <summary>
@@ -53,9 +57,12 @@ namespace Apex.MVVM
         {
             sync.AcquireWriterLock(Timeout.Infinite);
             collection.Add(item);
-            if (CollectionChanged != null)
-                CollectionChanged(this,
+            if (this.CollectionChanged != null)
+            {
+                this.CollectionChanged(this,
                     new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+            }
+
             sync.ReleaseWriterLock();
         }
 
@@ -68,9 +75,13 @@ namespace Apex.MVVM
         public void Clear()
         {
             if (Thread.CurrentThread == dispatcher.Thread)
-                DoClear();
+            {
+                this.DoClear();
+            }
             else
-                dispatcher.BeginInvoke((Action)(DoClear));
+            {
+                dispatcher.BeginInvoke((Action)(this.DoClear));
+            }
         }
 
         /// <summary>
@@ -80,9 +91,12 @@ namespace Apex.MVVM
         {
             sync.AcquireWriterLock(Timeout.Infinite);
             collection.Clear();
-            if (CollectionChanged != null)
-                CollectionChanged(this,
+            if (this.CollectionChanged != null)
+            {
+                this.CollectionChanged(this,
                     new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
+
             sync.ReleaseWriterLock();
         }
 
@@ -135,10 +149,7 @@ namespace Apex.MVVM
         /// </summary>
         /// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
         ///   </returns>
-        public bool IsReadOnly
-        {
-            get { return collection.IsReadOnly; }
-        }
+        public bool IsReadOnly => collection.IsReadOnly;
 
         /// <summary>
         /// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
@@ -153,11 +164,16 @@ namespace Apex.MVVM
         public bool Remove(T item)
         {
             if (Thread.CurrentThread == dispatcher.Thread)
-                return DoRemove(item);
+            {
+                return this.DoRemove(item);
+            }
 
-            var op = dispatcher.BeginInvoke(new Func<T, bool>(DoRemove), item);
+            var op = dispatcher.BeginInvoke(new Func<T, bool>(this.DoRemove), item);
             if (op.Result == null)
+            {
                 return false;
+            }
+
             return (bool)op.Result;
         }
 
@@ -176,9 +192,12 @@ namespace Apex.MVVM
                 return false;
             }
             var result = collection.Remove(item);
-            if (result && CollectionChanged != null)
-                CollectionChanged(this, new
+            if (result && this.CollectionChanged != null)
+            {
+                this.CollectionChanged(this, new
                     NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
+
             sync.ReleaseWriterLock();
             return result;
         }
@@ -234,9 +253,13 @@ namespace Apex.MVVM
         public void Insert(int index, T item)
         {
             if (Thread.CurrentThread == dispatcher.Thread)
-                DoInsert(index, item);
+            {
+                this.DoInsert(index, item);
+            }
             else
-                dispatcher.BeginInvoke((Action)(() => DoInsert(index, item)));
+            {
+                dispatcher.BeginInvoke((Action)(() => this.DoInsert(index, item)));
+            }
         }
 
         /// <summary>
@@ -248,9 +271,12 @@ namespace Apex.MVVM
         {
             sync.AcquireWriterLock(Timeout.Infinite);
             collection.Insert(index, item);
-            if (CollectionChanged != null)
-                CollectionChanged(this,
+            if (this.CollectionChanged != null)
+            {
+                this.CollectionChanged(this,
                     new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
+            }
+
             sync.ReleaseWriterLock();
         }
 
@@ -267,9 +293,13 @@ namespace Apex.MVVM
         public void RemoveAt(int index)
         {
             if (Thread.CurrentThread == dispatcher.Thread)
-                DoRemoveAt(index);
+            {
+                this.DoRemoveAt(index);
+            }
             else
-                dispatcher.BeginInvoke((Action)(() => DoRemoveAt(index)));
+            {
+                dispatcher.BeginInvoke((Action)(() => this.DoRemoveAt(index)));
+            }
         }
 
         /// <summary>
@@ -285,9 +315,12 @@ namespace Apex.MVVM
                 return;
             }
             collection.RemoveAt(index);
-            if (CollectionChanged != null)
-                CollectionChanged(this,
+            if (this.CollectionChanged != null)
+            {
+                this.CollectionChanged(this,
                     new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
+
             sync.ReleaseWriterLock();
 
         }

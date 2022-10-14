@@ -38,7 +38,7 @@ namespace Apex.MVVM
         public virtual void DoExecute()
         {
             //  Call the main command function.
-            DoExecute(null);
+            this.DoExecute(null);
         }
 
         /// <summary>
@@ -49,18 +49,20 @@ namespace Apex.MVVM
         {
             //  Invoke the executing command, allowing the command to be cancelled.
             var args = new CancelCommandEventArgs {Parameter = param, Cancel = false};
-            InvokeExecuting(args);
+            this.InvokeExecuting(args);
 
             //  If the event has been cancelled, bail now.
             if (args.Cancel)
+            {
                 return;
+            }
 
             //  Call the action or the parameterized action, whichever has been set.
             param = args.Parameter;
-            InvokeAction(param);
+            this.InvokeAction(param);
 
             //  Call the executed function.
-            InvokeExecuted(new CommandEventArgs {Parameter = param});
+            this.InvokeExecuted(new CommandEventArgs {Parameter = param});
         }
 
         /// <summary>
@@ -72,9 +74,13 @@ namespace Apex.MVVM
             var theAction = action;
             var theParameterizedAction = parameterizedAction;
             if (theAction != null)
+            {
                 theAction();
+            }
             else if (theParameterizedAction != null)
+            {
                 theParameterizedAction(param);
+            }
         }
 
         /// <summary>
@@ -84,11 +90,13 @@ namespace Apex.MVVM
         protected void InvokeExecuted(CommandEventArgs args)
         {
             //  Get the event.
-            var theEvent = Executed;
+            var theEvent = this.Executed;
 
             //  Call the executed event.
             if (theEvent != null)
+            {
                 theEvent(this, args);
+            }
         }
 
         /// <summary>
@@ -98,11 +106,13 @@ namespace Apex.MVVM
         protected void InvokeExecuting(CancelCommandEventArgs args)
         {
             //  Get the event.
-            var theEvent = Executing;
+            var theEvent = this.Executing;
 
             //  Call the executed event.
             if (theEvent != null)
+            {
                 theEvent(this, args);
+            }
         }
         
         /// <summary>
@@ -128,16 +138,21 @@ namespace Apex.MVVM
         /// </value>
         public bool CanExecute
         {
-            get { return canExecute; }
+            get => canExecute;
             set
             {
-                if (canExecute == value) 
+                if (canExecute == value)
+                {
                     return;
+                }
+
                 canExecute = value;
                     
-                var theEvent = CanExecuteChanged;
+                var theEvent = this.CanExecuteChanged;
                 if (theEvent != null)
+                {
                     theEvent(this, EventArgs.Empty);
+                }
             }
         }
 
@@ -161,7 +176,7 @@ namespace Apex.MVVM
         /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
         void ICommand.Execute(object parameter)
         {
-            DoExecute(parameter);
+            this.DoExecute(parameter);
         }
 
         #endregion
@@ -208,18 +223,20 @@ namespace Apex.MVVM
         {
             //  Invoke the executing command, allowing the command to be cancelled.
             var args = new CancelCommandEventArgs<TParameter> { Parameter = param, Cancel = false };
-            InvokeExecuting(args);
+            this.InvokeExecuting(args);
 
             //  If the event has been cancelled, bail now.
             if (args.Cancel)
+            {
                 return;
+            }
 
             //  Call the action or the parameterized action, whichever has been set.
             param = args.Parameter;
-            InvokeAction(param);
+            this.InvokeAction(param);
 
             //  Call the executed function.
-            InvokeExecuted(new CommandEventArgs<TParameter> { Parameter = param });
+            this.InvokeExecuted(new CommandEventArgs<TParameter> { Parameter = param });
         }
 
         /// <summary>
@@ -230,7 +247,9 @@ namespace Apex.MVVM
         {
             var theParameterizedAction = parameterizedAction;
             if (theParameterizedAction != null)
+            {
                 theParameterizedAction(param);
+            }
         }
 
         /// <summary>
@@ -240,11 +259,13 @@ namespace Apex.MVVM
         protected void InvokeExecuted(CommandEventArgs<TParameter> args)
         {
             //  Get the event.
-            var theEvent = Executed;
+            var theEvent = this.Executed;
 
             //  Call the executed event.
             if (theEvent != null)
+            {
                 theEvent(this, args);
+            }
         }
 
         /// <summary>
@@ -254,11 +275,13 @@ namespace Apex.MVVM
         protected void InvokeExecuting(CancelCommandEventArgs<TParameter> args)
         {
             //  Get the event.
-            var theEvent = Executing;
+            var theEvent = this.Executing;
 
             //  Call the executed event.
             if (theEvent != null)
+            {
                 theEvent(this, args);
+            }
         }
         
         /// <summary>
@@ -279,16 +302,21 @@ namespace Apex.MVVM
         /// </value>
         public bool CanExecute
         {
-            get { return canExecute; }
+            get => canExecute;
             set
             {
                 if (canExecute == value)
+                {
                     return;
+                }
+
                 canExecute = value;
 
-                var theEvent = CanExecuteChanged;
+                var theEvent = this.CanExecuteChanged;
                 if (theEvent != null)
+                {
                     theEvent(this, EventArgs.Empty);
+                }
             }
         }
 
@@ -324,7 +352,7 @@ namespace Apex.MVVM
             }
 
             //  Execute the command.
-            DoExecute((TParameter)parameter);
+            this.DoExecute((TParameter)parameter);
         }
 
         #endregion

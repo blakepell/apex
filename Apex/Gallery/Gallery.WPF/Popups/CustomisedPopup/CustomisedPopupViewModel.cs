@@ -6,11 +6,11 @@ namespace Gallery.Popups.CustomisedPopup
     {
         public CustomisedPopupViewModel()
         {
-            Title = "Customised Popup";
+            this.Title = "Customised Popup";
 
             //  Create the commands.
-            ShowBouncePopupCommand = new Command(DoShowBouncePopupCommand);
-            ShowFadePopupCommand = new Command(DoShowFadePopupCommand);
+            this.ShowBouncePopupCommand = new Command(this.DoShowBouncePopupCommand);
+            this.ShowFadePopupCommand = new Command(this.DoShowFadePopupCommand);
         }
         
         /// <summary>

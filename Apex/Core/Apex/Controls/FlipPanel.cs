@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.ComponentModel;
 using Apex.MVVM;
-using System.Windows.Media.Animation;
 
 namespace Apex.Controls
 {
@@ -38,10 +25,10 @@ namespace Apex.Controls
     public FlipPanel()
     {
       //  Keep track of size changed events.
-      SizeChanged += new SizeChangedEventHandler(FlipPanel_SizeChanged);
+      this.SizeChanged += this.FlipPanel_SizeChanged;
 
         //  Create the Flip command.
-      flipCommand = new Command(Flip, true);
+      flipCommand = new Command(this.Flip, true);
     }
       
     /// <summary>
@@ -52,7 +39,7 @@ namespace Apex.Controls
     void FlipPanel_SizeChanged(object sender, SizeChangedEventArgs e)
     {
       //  To make sure that the 3D model is not distorted when we resize, update the aspect ratio.
-      AspectRatio = (double)(ActualHeight / ActualWidth);
+      this.AspectRatio = this.ActualHeight / this.ActualWidth;
     }
 
     /// <summary>
@@ -60,17 +47,17 @@ namespace Apex.Controls
     /// </summary>
     private void Flip()
     {
-        if (IsFlipped)
+        if (this.IsFlipped)
         {
-            RoutedEventArgs args = new RoutedEventArgs(FlippedBackToFrontEvent);
-            RaiseEvent(args);
-            IsFlipped = false;
+            var args = new RoutedEventArgs(FlippedBackToFrontEvent);
+            this.RaiseEvent(args);
+            this.IsFlipped = false;
         }
         else
         {
-            RoutedEventArgs args = new RoutedEventArgs(FlippedFrontToBackEvent);
-            RaiseEvent(args);
-            IsFlipped = true;
+            var args = new RoutedEventArgs(FlippedFrontToBackEvent);
+            this.RaiseEvent(args);
+            this.IsFlipped = true;
         }
     }
 
@@ -115,8 +102,8 @@ namespace Apex.Controls
     /// <value>The front content.</value>
     public object ContentFront
     {
-      get { return GetValue(ContentFrontProperty); }
-      set { SetValue(ContentFrontProperty, value); }
+      get => this.GetValue(ContentFrontProperty);
+      set => this.SetValue(ContentFrontProperty, value);
     }
 
     /// <summary>
@@ -125,8 +112,8 @@ namespace Apex.Controls
     /// <value>The back content.</value>
     public object ContentBack
     {
-      get { return GetValue(ContentBackProperty); }
-      set { SetValue(ContentBackProperty, value); }
+      get => this.GetValue(ContentBackProperty);
+      set => this.SetValue(ContentBackProperty, value);
     }
 
     /// <summary>
@@ -135,8 +122,8 @@ namespace Apex.Controls
     /// <value>The aspect ratio.</value>
     public double AspectRatio
     {
-      get { return (float)GetValue(AspectRatioProperty); }
-      set { SetValue(AspectRatioProperty, value); }
+      get => (float)this.GetValue(AspectRatioProperty);
+      set => this.SetValue(AspectRatioProperty, value);
     }
 
     /// <summary>
@@ -147,26 +134,23 @@ namespace Apex.Controls
     /// </value>
     public bool IsFlipped
     {
-        get { return (bool)GetValue(IsFlippedProperty); }
-        set { SetValue(IsFlippedProperty, value); }
+        get => (bool)this.GetValue(IsFlippedProperty);
+        set => this.SetValue(IsFlippedProperty, value);
     }
 
     /// <summary>
     /// Gets the flip command.
     /// </summary>
     /// <value>The flip command.</value>
-    public Command FlipCommand
-    {
-        get { return flipCommand; }
-    }
+    public Command FlipCommand => flipCommand;
 
     /// <summary>
     /// Occurs when flipped front to back.
     /// </summary>
     public event RoutedEventHandler FlippedFrontToBack
     {
-        add { AddHandler(FlippedFrontToBackEvent, value); }
-        remove { RemoveHandler(FlippedFrontToBackEvent, value); }
+        add => this.AddHandler(FlippedFrontToBackEvent, value);
+        remove => this.RemoveHandler(FlippedFrontToBackEvent, value);
     }
 
     /// <summary>
@@ -174,8 +158,8 @@ namespace Apex.Controls
     /// </summary>
     public event RoutedEventHandler FlippedBackToFront
     {
-        add { AddHandler(FlippedBackToFrontEvent, value); }
-        remove { RemoveHandler(FlippedBackToFrontEvent, value); }
+        add => this.AddHandler(FlippedBackToFrontEvent, value);
+        remove => this.RemoveHandler(FlippedBackToFrontEvent, value);
     }
   }
 }

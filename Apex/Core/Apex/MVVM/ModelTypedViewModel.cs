@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows.Threading;
-using System;
-
-namespace Apex.MVVM
+﻿namespace Apex.MVVM
 {
     /// <summary>
     /// A Model-Typed ViewModel is a ViewModel designed to present data 

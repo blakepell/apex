@@ -12,7 +12,7 @@ namespace Apex.Consistency
         {
             if (string.IsNullOrEmpty(hexString))
             {
-                throw new ArgumentNullException("hexString");
+                throw new ArgumentNullException(nameof(hexString));
             }
 
             // remove any "#" characters

@@ -4,7 +4,7 @@
     {
         public ImageButtonViewModel()
         {
-            Title = "ImageButton";
+            this.Title = "ImageButton";
         }
     }
 }

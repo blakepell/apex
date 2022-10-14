@@ -1,11 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interactivity;
 using Apex.Extensions;
+using Microsoft.Xaml.Behaviors;
 
 namespace Apex.Behaviours
 {
@@ -25,7 +21,7 @@ namespace Apex.Behaviours
             base.OnAttached();
 
             //  Wire up the context menu.
-            WireUpContextMenu();
+            this.WireUpContextMenu();
         }
 
         /// <summary>
@@ -34,7 +30,7 @@ namespace Apex.Behaviours
         protected override void OnDetaching()
         {
             //  Unwire the context menu.
-            UnWireContextMenu();
+            this.UnWireContextMenu();
 
             //  Call the base.
             base.OnDetaching();
@@ -46,8 +42,10 @@ namespace Apex.Behaviours
         private void WireUpContextMenu()
         {
             //  If we have the listview, wait for the right mouse click.
-            if (AssociatedObject != null)
-                AssociatedObject.MouseRightButtonUp += listView_MouseRightButtonUp;
+            if (this.AssociatedObject != null)
+            {
+                this.AssociatedObject.MouseRightButtonUp += this.listView_MouseRightButtonUp;
+            }
         }
 
         /// <summary>
@@ -56,8 +54,10 @@ namespace Apex.Behaviours
         private void UnWireContextMenu()
         {
             //  If we have the listview, remove the event handler.
-            if (AssociatedObject != null)
-                AssociatedObject.MouseRightButtonUp -= listView_MouseRightButtonUp;
+            if (this.AssociatedObject != null)
+            {
+                this.AssociatedObject.MouseRightButtonUp -= this.listView_MouseRightButtonUp;
+            }
         }
 
         
@@ -66,7 +66,7 @@ namespace Apex.Behaviours
         /// </summary>
         public static readonly DependencyProperty ContextMenuProperty =
           DependencyProperty.Register("ContextMenu", typeof(ContextMenu), typeof(ListViewItemContextMenuBehaviour),
-          new PropertyMetadata(default(ContextMenu), new PropertyChangedCallback(OnContextMenuChanged)));
+          new PropertyMetadata(default(ContextMenu), OnContextMenuChanged));
 
         /// <summary>
         /// Gets or sets ContextMenu.
@@ -74,8 +74,8 @@ namespace Apex.Behaviours
         /// <value>The value of ContextMenu.</value>
         public ContextMenu ContextMenu
         {
-            get { return (ContextMenu)GetValue(ContextMenuProperty); }
-            set { SetValue(ContextMenuProperty, value); }
+            get => (ContextMenu)this.GetValue(ContextMenuProperty);
+            set => this.SetValue(ContextMenuProperty, value);
         }
 
         /// <summary>
@@ -100,23 +100,26 @@ namespace Apex.Behaviours
         private void listView_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             //  Make sure we have a dependency object.
-            var originalDependencyObject = e.OriginalSource as DependencyObject;
-            if (originalDependencyObject == null)
+            if (!(e.OriginalSource is DependencyObject originalDependencyObject))
+            {
                 return;
+            }
 
             //  Get the parent list view item.
             var listViewItem = originalDependencyObject.GetParent<ListViewItem>();
 
             //  If we don't have one, bail.
             if (listViewItem == null)
+            {
                 return;
+            }
 
             //  Show the context menu.
-            if (ContextMenu != null)
+            if (this.ContextMenu != null)
             {
-                ContextMenu.DataContext = listViewItem.DataContext;
-                ContextMenu.PlacementTarget = listViewItem;
-                ContextMenu.IsOpen = true;
+                this.ContextMenu.DataContext = listViewItem.DataContext;
+                this.ContextMenu.PlacementTarget = listViewItem;
+                this.ContextMenu.IsOpen = true;
             }
         }
     }

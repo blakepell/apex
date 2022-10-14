@@ -1,8 +1,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:shells="clr-namespace:Apex.Shells"
-    xmlns:dragAndDrop="clr-namespace:Apex.DragAndDrop">
+    xmlns:shells="clr-namespace:Apex.Shells">
 
     <Style TargetType="{x:Type shells:Shell}">
         <Setter Property="Template">

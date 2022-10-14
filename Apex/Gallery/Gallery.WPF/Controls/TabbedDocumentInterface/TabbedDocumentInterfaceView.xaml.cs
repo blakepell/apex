@@ -11,7 +11,7 @@ namespace Gallery.Controls.TabbedDocumentInterface
     {
         public TabbedDocumentInterfaceView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

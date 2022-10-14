@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Apex.MVVM;
+﻿using Apex.MVVM;
 
 namespace Gallery.Popups.SimplePopup
 {
@@ -10,10 +6,10 @@ namespace Gallery.Popups.SimplePopup
     {
         public SimplePopupViewModel()
         {
-            Title = "Simple Popup";
+            this.Title = "Simple Popup";
 
             //  Create the ShowPopup Command.
-            ShowPopupCommand = new Command(DoShowPopupCommand);
+            this.ShowPopupCommand = new Command(this.DoShowPopupCommand);
         }
         
         /// <summary>
@@ -28,8 +24,8 @@ namespace Gallery.Popups.SimplePopup
         /// <value>The value of PopupResult.</value>
         public object PopupResult
         {
-            get { return (object)GetValue(PopupResultProperty); }
-            set { SetValue(PopupResultProperty, value); }
+            get => this.GetValue(PopupResultProperty);
+            set => this.SetValue(PopupResultProperty, value);
         }
 
         /// <summary>
