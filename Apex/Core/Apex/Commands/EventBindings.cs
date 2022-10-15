@@ -50,11 +50,6 @@ namespace Apex.Commands
                 foreach (var binding in newEventBindings)
                 {
                     binding.Bind(o);
-#if SILVERLIGHT
-                    //  If we're in Silverlight we don't inherit the
-                    //  data context so we must set this helper variable.
-                    binding.ParentElement = o as FrameworkElement;
-#endif
                 }
             }
         }

@@ -94,11 +94,7 @@ namespace Apex.Helpers.Popups
             storyboard.Children.Add(popupOpacityAnimation);
 
             //  Start the storyboard.
-#if !SILVERLIGHT
             storyboard.Begin(popupHost);
-#else
-            storyboard.Begin();
-#endif
         }
 
         /// <summary>

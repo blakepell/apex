@@ -17,7 +17,6 @@ namespace Apex.Controls
     [ContentProperty("PivotItems")]
     public partial class PivotControl : ContentControl
     {
-#if !SILVERLIGHT
         /// <summary>
         /// Initializes the <see cref="PivotControl"/> class.
         /// </summary>
@@ -26,15 +25,6 @@ namespace Apex.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PivotControl),
                 new FrameworkPropertyMetadata(typeof(PivotControl)));
         }
-#else
-    /// <summary>
-    /// Initializes the <see cref="PivotControl"/> class.
-    /// </summary>
-        public PivotControl()
-        {
-            this.DefaultStyleKey = typeof(DragAndDropHost);
-        }
-#endif
 
         /// <summary>
         /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.

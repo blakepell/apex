@@ -89,7 +89,6 @@
     <Compile Include="Commands\CommandReference.cs" />
     <Compile Include="Commands\Commands.cs" />
     <Compile Include="Consistency\ColorConverter.cs" />
-    <Compile Include="Consistency\FrameworkPropertyMetadata.cs" />
     <Compile Include="Consistency\GridLengthConverter.cs" />
     <Compile Include="Consistency\HitTest.cs" />
     <Compile Include="Consistency\ItemsControl.cs" />

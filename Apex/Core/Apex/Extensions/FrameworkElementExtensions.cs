@@ -6,8 +6,6 @@ namespace Apex.Extensions
 {
     internal static class FrameworkElementExtensions
     {
-#if !SILVERLIGHT
-
         /// <summary>
         /// Get the window container of framework element.
         /// </summary>
@@ -30,8 +28,6 @@ namespace Apex.Extensions
             return null;
         }
 
-#endif
-
         public static FrameworkElement GetTopLevelParent(this FrameworkElement element)
         {
             var p = element;
@@ -50,18 +46,6 @@ namespace Apex.Extensions
 
         public static BitmapSource RenderBitmap(this FrameworkElement element)
         {
-#if SILVERLIGHT
-      //  We'll use the writable bitmap.
-      WriteableBitmap wb = new WriteableBitmap((int)element.ActualWidth, (int)element.ActualHeight);
-      wb.Render(element, new TranslateTransform());
-      wb.Invalidate();
-      return wb;
-
-#else
-
-            //  We're in WPF, so use the render bitmap.
-
-
             //  Create a visual brush from the element.
             var elementBrush = new VisualBrush(element);
 
@@ -88,7 +72,6 @@ namespace Apex.Extensions
 
             //  Return the bitmap.
             return bitmap;
-#endif
         }
     }
 }

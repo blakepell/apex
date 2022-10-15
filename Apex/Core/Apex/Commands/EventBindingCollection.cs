@@ -1,7 +1,4 @@
 ﻿using System.Windows;
-#if SILVERLIGHT
-using Apex.Consistency;
-#endif
 
 namespace Apex.Commands
 {

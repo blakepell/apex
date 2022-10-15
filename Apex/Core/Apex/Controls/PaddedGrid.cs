@@ -66,16 +66,10 @@ namespace Apex.Controls
         /// <summary>
         /// The internal dependency property object for the 'Padding' property.
         /// </summary>
-#if !SILVERLIGHT
         private static readonly DependencyProperty PaddingProperty =
             DependencyProperty.Register("Padding", typeof(Thickness), typeof(PaddedGrid),
                 new FrameworkPropertyMetadata(new Thickness(0.0),
                     FrameworkPropertyMetadataOptions.AffectsArrange, OnPaddingChanged));
-#else
-        private static readonly DependencyProperty PaddingProperty =
-          DependencyProperty.Register("Padding", typeof(Thickness), typeof(PaddedGrid),
-          new PropertyMetadata(new Thickness(0.0),  new PropertyChangedCallback(OnPaddingChanged)));
-#endif
 
         /// <summary>
         /// Gets or sets the padding.

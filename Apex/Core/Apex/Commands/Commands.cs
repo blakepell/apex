@@ -9,9 +9,6 @@ namespace Apex.Commands
     /// </summary>
     public static class ExtendedCommands
     {
-        //  Context menu operation are NOT available for silverlight.
-#if !SILVERLIGHT
-
         /// <summary>
         /// The ContextMenuDataContext dependency property.
         /// </summary>
@@ -60,8 +57,6 @@ namespace Apex.Commands
             }
         }
 
-#endif
-
         /// <summary>
         /// Handles the LeftClickMouseDown event of the Control object.
         /// </summary>
@@ -90,16 +85,11 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void Control_RightClickMouseDown(object sender, MouseButtonEventArgs e)
         {
-            //  Silverlight doesn't give us quite as much help here as WPF does.
-#if SILVERLIGHT
-            if (MouseClickDetector.IsDoubleClick(sender, e) || element == null /* TODO Ensure it's right button */)
-                return;
-#else
             if (e.ClickCount != 1 || e.RightButton != MouseButtonState.Pressed || !(sender is FrameworkElement element))
             {
                 return;
             }
-#endif
+
             var command = GetRightClickCommand(element);
             object param = GetRightClickCommandParameter(element);
             if (command != null && command.CanExecute(param))
@@ -116,16 +106,10 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void Control_LeftDoubleClickMouseDown(object sender, MouseButtonEventArgs e)
         {
-            //  Silverlight doesn't give us quite as much help here as WPF does.
-#if SILVERLIGHT
-            if (MouseClickDetector.IsDoubleClick(sender, e) == false || element == null /* TODO Ensure it's right button */)
-                return;
-#else
             if (e.ClickCount != 2 || e.LeftButton != MouseButtonState.Pressed || !(sender is FrameworkElement element))
             {
                 return;
             }
-#endif
 
             var command = GetLeftDoubleClickCommand(element);
             object param = GetLeftDoubleClickCommandParameter(element);
@@ -143,16 +127,10 @@ namespace Apex.Commands
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         private static void Control_RightDoubleClickMouseDown(object sender, MouseButtonEventArgs e)
         {
-            //  Silverlight doesn't give us quite as much help here as WPF does.
-#if SILVERLIGHT
-            if (MouseClickDetector.IsDoubleClick(sender, e) == false || element == null /* TODO Ensure it's right button */)
-                return;
-#else
             if (e.ClickCount != 2 || e.RightButton != MouseButtonState.Pressed || !(sender is FrameworkElement element))
             {
                 return;
             }
-#endif
 
             var command = GetRightDoubleClickCommand(element);
             object param = GetRightDoubleClickCommandParameter(element);

@@ -59,11 +59,7 @@ namespace Apex.Behaviours
             }
 
             //  Start the storyboard.
-#if !SILVERLIGHT
             storyboard.Begin(container);
-#else
-            storyboard.Begin();
-#endif
         }
 
         /// <summary>
